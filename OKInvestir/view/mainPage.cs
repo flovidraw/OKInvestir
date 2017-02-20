@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace OKInvestir
+namespace OKInvestir.View
 {
     public partial class MainPage : Form
     {

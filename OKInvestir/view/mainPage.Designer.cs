@@ -1,4 +1,4 @@
-﻿namespace OKInvestir
+﻿namespace OKInvestir.View
 {
     partial class MainPage
     {
