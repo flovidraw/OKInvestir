@@ -6,6 +6,7 @@
     using System.Linq;
     using System.Configuration;
     using System.ComponentModel.DataAnnotations;
+    using System.Collections.Generic;
 
     [DbConfigurationType(typeof(MySqlEFConfiguration))]
 
@@ -21,7 +22,7 @@
             : base(GetConnectionString())
             //: base("name=Context")
         {
-            Database.SetInitializer<Context>(new DropCreateDatabaseIfModelChanges<Context>());
+            Database.SetInitializer<Context>(new SeedingDataInitializer());
         }
 
         //为您要在模型中包含的每种实体类型都添加 DbSet。有关配置和使用 Code First  模型
@@ -35,8 +36,10 @@
         public DbSet<SillInterest> SillInterestDict { get; set; }
         public DbSet<Simulation> Simulations { get; set; }
         public DbSet<TimeInterest> TimeInterestDict { get; set; }
+        public DbSet<User> User { get; set; }
 
 
+        // generate connection string by parameters from DbParam.cs file
         public static string GetConnectionString()
         {
             var connString =
@@ -46,6 +49,25 @@
             return connString;
         }
     }
+
+    // Seeding initializer, add seed rows in db each creation of db.
+    public class SeedingDataInitializer : DropCreateDatabaseIfModelChanges<Context>
+    {
+        protected override void Seed(Context context)
+        {
+            var UsrList = new List<User>
+                                 {
+                                     new User { Username = "a", Password = "a", UserLevel = 1},
+                                     new User { Username = "bb", Password = "bb", UserLevel = 2},
+                                     new User { Username = "ccc", Password = "ccc", UserLevel = 2}
+                                 };
+            // TODO: other seed rows.
+            UsrList.ForEach(w => context.User.Add(w));
+            base.Seed(context);
+        }
+    }
+
+
     //public class MyEntity
     //{
     //    public int Id { get; set; }
