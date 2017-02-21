@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace OKInvestir.View
 {
-    public partial class VMainPage : extendedForm, IView
+    public partial class VMainPage : ExtendedForm, IView
     {
         private ViewModel.VMMainPage ViewModel;
 

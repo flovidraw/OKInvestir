@@ -118,13 +118,5 @@ namespace OKInvestir.View
         private System.Windows.Forms.Button btnSubmit;
         private System.Windows.Forms.Label lbTitle;
 
-        public string getTbIdText()
-        {
-            return tbId.Text;
-        }
-        public string getTbPwText()
-        {
-            return tbPw.Text;
-        }
     }
 }

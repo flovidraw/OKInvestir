@@ -116,7 +116,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\IView.cs" />
-    <Compile Include="View\extendedForm.cs">
+    <Compile Include="View\ExtendedForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">

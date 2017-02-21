@@ -11,7 +11,7 @@ using OKInvestir.ViewModel;
 
 namespace OKInvestir.View
 {
-    public partial class VLogin : extendedForm, IView
+    public partial class VLogin : ExtendedForm, IView
     {
         private ViewModel.VMLogin ViewModel;
         
@@ -37,6 +37,15 @@ namespace OKInvestir.View
             this.ViewModel.login();
         }
 
-        
+        public string getTbIdText()
+        {
+            return tbId.Text;
+        }
+
+        public string getTbPwText()
+        {
+            return tbPw.Text;
+        }
+
     }
 }

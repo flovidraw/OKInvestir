@@ -9,10 +9,10 @@ namespace OKInvestir.Model
 {
     public class User
     {
-        public int Id { get; set; } // 1 for employee, 2 for administrator(Can add/modify/delete product)
+        public int Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-        public int UserLevel { get; set; }
+        public int UserLevel { get; set; } // 1 for employee, 2 for administrator(Can add/modify/delete product)
 
         public User(int userLevel) // constructor for testing
         {

@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace OKInvestir.View
 {
-    public class extendedForm : Form
+    public class ExtendedForm : Form
     {
 
         public void genMsgBox(string msg, string caption, MessageBoxButtons buttons, MessageBoxIcon icon)
