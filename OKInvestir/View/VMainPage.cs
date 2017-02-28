@@ -18,7 +18,7 @@ namespace OKInvestir.View
         {
             InitializeComponent();
 
-            lbList.Hide();
+            lboxListClient.Hide();
         }
 
         public void setViewModel(ViewModel.IViewModel IViewModel)
@@ -52,7 +52,7 @@ namespace OKInvestir.View
         }
         private void searchClient_Click(object sender, EventArgs e)
         {
-            lbList.Show();
+            lboxListClient.Show();
             genMsgBox("search client", "Developping", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private void addProduct_Click(object sender, EventArgs e)
@@ -61,7 +61,7 @@ namespace OKInvestir.View
         }
         private void searchProduct_Click(object sender, EventArgs e)
         {
-            lbList.Show();
+            lboxListClient.Show();
             genMsgBox("search product", "Developping", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private void help_Click(object sender, EventArgs e)
@@ -71,6 +71,21 @@ namespace OKInvestir.View
 
 
         public void enableProductManage()
+        {
+
+        }
+
+        private void lbList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
         {
 
         }

@@ -101,6 +101,24 @@
     <Compile Include="Model\User.cs" />
     <Compile Include="ViewModel\VMMain.cs" />
     <Compile Include="ViewModel\VMMainPage.cs" />
+    <Compile Include="View\VSimulationResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\VSimulationResult.Designer.cs">
+      <DependentUpon>VSimulationResult.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\VSimulation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\VSimulation.Designer.cs">
+      <DependentUpon>VSimulation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\VClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\VClient.Designer.cs">
+      <DependentUpon>VClient.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\VLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -129,11 +147,20 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="View\VClient.resx">
+      <DependentUpon>VClient.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\VLogin.resx">
       <DependentUpon>VLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\VMainPage.resx">
       <DependentUpon>VMainPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\VSimulation.resx">
+      <DependentUpon>VSimulation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\VSimulationResult.resx">
+      <DependentUpon>VSimulationResult.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config">
       <SubType>Designer</SubType>
