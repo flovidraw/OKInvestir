@@ -7,24 +7,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using OKInvestir.ViewModel;
 
 namespace OKInvestir.View
 {
-    public partial class VSimulation : Form
+
+    public partial class VSimulation : ExtendedForm, IView
     {
+        private ViewModel.VMSimulation ViewModel;
+
         public VSimulation()
         {
             InitializeComponent();
         }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        public void setViewModel(IViewModel IViewModel)
         {
-
-        }
-
-        private void lbProductInformation_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
+            this.ViewModel = (VMSimulation)IViewModel;
         }
     }
 }

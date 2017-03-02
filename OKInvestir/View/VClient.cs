@@ -7,29 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using OKInvestir.ViewModel;
 
 namespace OKInvestir.View
 {
-    public partial class VClient : Form
+    public partial class VClient : ExtendedForm, IView
     {
+        private ViewModel.VMClient ViewModel;
+
         public VClient()
         {
             InitializeComponent();
         }
-
-        private void VClient_Load(object sender, EventArgs e)
+        public void setViewModel(IViewModel IViewModel)
         {
-
-        }
-
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
-        private void goToToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
+            this.ViewModel = (VMClient)IViewModel;
         }
     }
 }

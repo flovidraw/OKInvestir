@@ -121,7 +121,6 @@
             this.tmsiGoToMainPage.Name = "tmsiGoToMainPage";
             this.tmsiGoToMainPage.Size = new System.Drawing.Size(169, 22);
             this.tmsiGoToMainPage.Text = "Go to MainPage";
-            this.tmsiGoToMainPage.Click += new System.EventHandler(this.goToToolStripMenuItem_Click);
             // 
             // tmsiQuit
             // 
@@ -175,7 +174,6 @@
             this.Controls.Add(this.menuStrip1);
             this.Name = "VClient";
             this.Text = " OKInvestir-Client";
-            this.Load += new System.EventHandler(this.VClient_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

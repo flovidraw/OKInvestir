@@ -17,8 +17,6 @@ namespace OKInvestir.View
         public VMainPage()
         {
             InitializeComponent();
-
-            lboxListClient.Hide();
         }
 
         public void setViewModel(ViewModel.IViewModel IViewModel)
@@ -26,16 +24,10 @@ namespace OKInvestir.View
             this.ViewModel = (ViewModel.VMMainPage)IViewModel;
         }
 
-        private void MainPage_Load(object sender, EventArgs e)
-        {
-
-        }
-
-
         // buttons onclick functions
         private void logOut_Click(object sender, EventArgs e)
         {
-            ViewModel.VMMain.switchToLogin();
+            ViewModel.VMMain.switchToLogin(this);
         }
         private void quit_Click(object sender, EventArgs e)
         {
@@ -46,48 +38,34 @@ namespace OKInvestir.View
                 Application.Exit();
             }
         }
-        private void addClient_Click(object sender, EventArgs e)
-        {
-            genMsgBox("Add client", "Developping", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-        private void searchClient_Click(object sender, EventArgs e)
-        {
-            lboxListClient.Show();
-            genMsgBox("search client", "Developping", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-        private void addProduct_Click(object sender, EventArgs e)
-        {
-            genMsgBox("Add product", "Developping", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-        private void searchProduct_Click(object sender, EventArgs e)
-        {
-            lboxListClient.Show();
-            genMsgBox("search product", "Developping", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
         private void help_Click(object sender, EventArgs e)
         {
             genMsgBox("Help", "Developping", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-
         public void enableProductManage()
         {
 
         }
+        public ListView getListViewProductDetail() { return lviewProductDetail; }
+        public ListBox getListBoxClient() { return lboxListClient; }
+        public ListBox getListBoxProduct() { return lboxListProduct; }
+        public TextBox getTextBoxSearchClient() { return tbSearchClient; }
+        public TextBox getTextBoxSearchProduct() { return tbSearchProduct; }
 
-        private void lbList_SelectedIndexChanged(object sender, EventArgs e)
+        private void tbSearchClient_TextChanged(object sender, EventArgs e)
         {
-
+            ViewModel.serachClient(tbSearchClient.Text);
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void tbSearchProduct_TextChanged(object sender, EventArgs e)
         {
-
+            ViewModel.serachProduct(tbSearchProduct.Text);
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void lboxListProduct_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            ViewModel.loadProductDetail((Model.Product)lboxListProduct.SelectedValue);
         }
     }
 }

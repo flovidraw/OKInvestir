@@ -13,8 +13,8 @@ namespace OKInvestir.View
 {
     public partial class VLogin : ExtendedForm, IView
     {
-        private ViewModel.VMLogin ViewModel;
-        
+        public ViewModel.VMLogin ViewModel;
+
         public VLogin()
         {
             InitializeComponent();
@@ -25,11 +25,6 @@ namespace OKInvestir.View
         public void setViewModel(IViewModel IViewModel)
         {
             this.ViewModel = (VMLogin)IViewModel;
-        }
-
-        private void LoginPage_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void btnSubmit_Click(object sender, EventArgs e)

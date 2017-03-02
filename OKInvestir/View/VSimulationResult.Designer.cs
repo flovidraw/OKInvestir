@@ -71,7 +71,6 @@
             this.lbBoughtFrom.Size = new System.Drawing.Size(71, 12);
             this.lbBoughtFrom.TabIndex = 2;
             this.lbBoughtFrom.Text = "Bought from";
-            this.lbBoughtFrom.Click += new System.EventHandler(this.lbBoughtFrom_Click);
             // 
             // tbStartDate
             // 
@@ -88,7 +87,6 @@
             this.lbToEndDate.Size = new System.Drawing.Size(17, 12);
             this.lbToEndDate.TabIndex = 4;
             this.lbToEndDate.Text = "to";
-            this.lbToEndDate.Click += new System.EventHandler(this.lbToEndDate_Click);
             // 
             // tbEndDate
             // 

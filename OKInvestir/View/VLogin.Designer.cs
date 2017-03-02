@@ -103,7 +103,6 @@ namespace OKInvestir.View
             this.Controls.Add(this.lbId);
             this.Name = "VLogin";
             this.Text = "OKInvestir - Login";
-            this.Load += new System.EventHandler(this.LoginPage_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

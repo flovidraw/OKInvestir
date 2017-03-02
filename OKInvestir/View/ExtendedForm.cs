@@ -9,6 +9,7 @@ namespace OKInvestir.View
 {
     public class ExtendedForm : Form
     {
+        // public abstract ViewModel.IViewModel ViewModel { get; set; }
 
         public void genMsgBox(string msg, string caption, MessageBoxButtons buttons, MessageBoxIcon icon)
         {

@@ -113,7 +113,6 @@
             this.tbClientID.Name = "tbClientID";
             this.tbClientID.Size = new System.Drawing.Size(100, 21);
             this.tbClientID.TabIndex = 2;
-            this.tbClientID.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // lbTotalSum
             // 
@@ -148,7 +147,6 @@
             this.lboxProductInformation.Name = "lboxProductInformation";
             this.lboxProductInformation.Size = new System.Drawing.Size(189, 232);
             this.lboxProductInformation.TabIndex = 6;
-            this.lboxProductInformation.SelectedIndexChanged += new System.EventHandler(this.lbProductInformation_SelectedIndexChanged);
             // 
             // lbListProduct
             // 

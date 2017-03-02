@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OKInvestir.Model
 {
@@ -14,6 +15,8 @@ namespace OKInvestir.Model
         public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }
+
+        [NotMapped]
         public string FullName
         {
             get

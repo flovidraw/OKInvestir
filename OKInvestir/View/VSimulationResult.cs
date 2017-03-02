@@ -7,24 +7,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using OKInvestir.ViewModel;
 
 namespace OKInvestir.View
 {
-    public partial class VSimulationResult : Form
+
+    public partial class VSimulationResult : ExtendedForm, IView
     {
+        private ViewModel.VMSimulationResult ViewModel;
+
         public VSimulationResult()
         {
             InitializeComponent();
         }
-
-        private void lbToEndDate_Click(object sender, EventArgs e)
+        public void setViewModel(IViewModel IViewModel)
         {
-
-        }
-
-        private void lbBoughtFrom_Click(object sender, EventArgs e)
-        {
-
+            this.ViewModel = (VMSimulationResult)IViewModel;
         }
     }
 }
