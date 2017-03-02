@@ -15,7 +15,7 @@ namespace OKInvestir.Model
         [Required]
         public Product Product { get; set; }
         [Required]
-        public float Price { get; set; }
+        public decimal Price { get; set; }
         [Required]
         [Display(Name = "Start Date")]
         public DateTime StartDate { get; set; }

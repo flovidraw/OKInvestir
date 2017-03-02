@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using OKInvestir.Model;
 using System.ComponentModel;
+using System.Data.Entity;
 
 namespace OKInvestir.ViewModel
 {
@@ -39,9 +40,14 @@ namespace OKInvestir.ViewModel
             using (var context = new Model.Context())
             {
                 Cursor.Current = Cursors.WaitCursor;        // waiting animation cursor
-                context.Database.Initialize(force: false);   // connect to db, it takes time
-                Clients = context.Clients.ToList();
-                Products = context.Products.ToList();
+                context.Database.Initialize(force: false);  // connect to db, it takes time
+                Clients = context.Clients
+                    .Include(c => c.AccountList)            // get related entity
+                    .ToList();
+                Products = context.Products
+                    .Include(p => p.SillInterests)          // get related entities
+                    .Include(p => p.TimeInterests)
+                    .ToList();
                 ClientsForBinding = context.Clients.ToList();
                 ProductsForBinding = context.Products.ToList();
                 Cursor.Current = Cursors.Arrow;             // get back to normal cursor
@@ -105,7 +111,38 @@ namespace OKInvestir.ViewModel
             listView.Items.Add(new ListViewItem(new string[] { "Description", pdt.Description }));
             listView.Items.Add(new ListViewItem(new string[] { "Status", pdt.ProductStatus.ToString() }));
 
+            List<SillInterest> siList = pdt.SillInterests;
+            listView.Items.Add(new ListViewItem(new string[] { "", "" }));
+            listView.Items.Add(new ListViewItem(new string[] { "Sill", "Interest" }));
+            foreach (SillInterest si in siList)
+            {
+                listView.Items.Add(new ListViewItem(new string[] { si.Sill.ToString(), si.Interest.ToString() }));
+            }
+
+            List<TimeInterest> tiList = pdt.TimeInterests;
+            listView.Items.Add(new ListViewItem(new string[] { "", "" }));
+            listView.Items.Add(new ListViewItem(new string[] { "Time", "Interest" }));
+            foreach (TimeInterest ti in tiList)
+            {
+                listView.Items.Add(new ListViewItem(new string[] { ti.Time.ToString(), ti.Interest.ToString() }));
+            }
+
+
             listView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent); // resize columns width
+        }
+
+        public void addClient(string firstName, string lastName, string idCardNumber)
+        {
+            Client clt = new Client(firstName, lastName, idCardNumber);
+
+            using (var context = new Model.Context())
+            {
+                Cursor.Current = Cursors.WaitCursor;        // waiting animation cursor
+                context.Database.Initialize(force: false);  // connect to db
+                context.Clients.Add(clt);
+                context.SaveChanges();
+                Cursor.Current = Cursors.Arrow;             // get back to normal cursor
+            }
         }
 
     }

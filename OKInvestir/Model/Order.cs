@@ -17,7 +17,7 @@ namespace OKInvestir.Model
         [Required]
         public BoughtProduct BoughtProduct { get; set; }
         [Required]
-        public float FinalInterest { get; set; }
+        public decimal FinalInterest { get; set; }
         [Required]
         public DateTime Date { get; set; }
     }

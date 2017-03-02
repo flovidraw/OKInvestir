@@ -20,6 +20,7 @@ namespace OKInvestir.View
             InitializeComponent();
             this.ActiveControl = this.tbId;     // focus on id textbox
             this.AcceptButton = this.btnSubmit; // set enter key call submit button
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
 
         public void setViewModel(IViewModel IViewModel)

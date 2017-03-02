@@ -18,7 +18,7 @@ namespace OKInvestir.Model
         [Required]
         public int ProductStatus { get; set; }
 
-        public List<SillInterest> SillInterest { get; set; }
-        public List<TimeInterest> TimeInterest { get; set; }
+        public virtual List<TimeInterest> TimeInterests { get; set; }
+        public virtual List<SillInterest> SillInterests { get; set; }
     }
 }

@@ -148,6 +148,7 @@
             this.btAddClient.TabIndex = 9;
             this.btAddClient.Text = "Add client";
             this.btAddClient.UseVisualStyleBackColor = true;
+            this.btAddClient.Click += new System.EventHandler(this.btAddClient_Click);
             // 
             // btChooseClient
             // 

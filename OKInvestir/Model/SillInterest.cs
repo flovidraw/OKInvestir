@@ -11,10 +11,12 @@ namespace OKInvestir.Model
     {
         public int Id { get; set; }
         [Required]
-        public Product Product { get; set; }
+        public decimal Sill { get; set; }
         [Required]
-        public float Sill { get; set; }
+        public decimal Interest { get; set; }
         [Required]
-        public float Interest { get; set; }
+        public int ProductID { get; set; }
+        [Required]
+        public virtual Product Product { get; set; }
     }
 }

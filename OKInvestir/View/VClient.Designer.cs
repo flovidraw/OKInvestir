@@ -31,17 +31,23 @@
             this.lbIDClient = new System.Windows.Forms.Label();
             this.tbIDClient = new System.Windows.Forms.TextBox();
             this.tbTotalSum = new System.Windows.Forms.TextBox();
-            this.lbTotalSum = new System.Windows.Forms.Label();
+            this.lbBalance = new System.Windows.Forms.Label();
             this.lboxProductBought = new System.Windows.Forms.ListBox();
             this.lboxProductBoughtInfomation = new System.Windows.Forms.ListBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tmsiSimulation = new System.Windows.Forms.ToolStripMenuItem();
             this.tmsiGoToMainPage = new System.Windows.Forms.ToolStripMenuItem();
             this.tmsiQuit = new System.Windows.Forms.ToolStripMenuItem();
             this.tmsiHelpClient = new System.Windows.Forms.ToolStripMenuItem();
-            this.tmsiSimulation = new System.Windows.Forms.ToolStripMenuItem();
             this.lbListProductBought = new System.Windows.Forms.Label();
             this.lbProductBoughtInformation = new System.Windows.Forms.Label();
+            this.tbIdCardNumber = new System.Windows.Forms.TextBox();
+            this.tbLastName = new System.Windows.Forms.TextBox();
+            this.tbFirstName = new System.Windows.Forms.TextBox();
+            this.lbIdCartNumber = new System.Windows.Forms.Label();
+            this.lbLastName = new System.Windows.Forms.Label();
+            this.lbFirstName = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,26 +62,26 @@
             // 
             // tbIDClient
             // 
-            this.tbIDClient.Location = new System.Drawing.Point(83, 34);
+            this.tbIDClient.Location = new System.Drawing.Point(14, 52);
             this.tbIDClient.Name = "tbIDClient";
-            this.tbIDClient.Size = new System.Drawing.Size(100, 21);
+            this.tbIDClient.Size = new System.Drawing.Size(159, 21);
             this.tbIDClient.TabIndex = 2;
             // 
             // tbTotalSum
             // 
-            this.tbTotalSum.Location = new System.Drawing.Point(83, 78);
+            this.tbTotalSum.Location = new System.Drawing.Point(15, 208);
             this.tbTotalSum.Name = "tbTotalSum";
-            this.tbTotalSum.Size = new System.Drawing.Size(100, 21);
+            this.tbTotalSum.Size = new System.Drawing.Size(158, 21);
             this.tbTotalSum.TabIndex = 3;
             // 
-            // lbTotalSum
+            // lbBalance
             // 
-            this.lbTotalSum.AutoSize = true;
-            this.lbTotalSum.Location = new System.Drawing.Point(12, 81);
-            this.lbTotalSum.Name = "lbTotalSum";
-            this.lbTotalSum.Size = new System.Drawing.Size(65, 12);
-            this.lbTotalSum.TabIndex = 4;
-            this.lbTotalSum.Text = "Total Sum:";
+            this.lbBalance.AutoSize = true;
+            this.lbBalance.Location = new System.Drawing.Point(13, 193);
+            this.lbBalance.Name = "lbBalance";
+            this.lbBalance.Size = new System.Drawing.Size(53, 12);
+            this.lbBalance.TabIndex = 4;
+            this.lbBalance.Text = "Balance:";
             // 
             // lboxProductBought
             // 
@@ -102,7 +108,7 @@
             this.tmsiHelpClient});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(761, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(761, 25);
             this.menuStrip1.TabIndex = 7;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -113,32 +119,32 @@
             this.tmsiGoToMainPage,
             this.tmsiQuit});
             this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
-            this.menuToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.menuToolStripMenuItem.Size = new System.Drawing.Size(53, 21);
             this.menuToolStripMenuItem.Text = "Menu";
+            // 
+            // tmsiSimulation
+            // 
+            this.tmsiSimulation.Name = "tmsiSimulation";
+            this.tmsiSimulation.Size = new System.Drawing.Size(171, 22);
+            this.tmsiSimulation.Text = "Simulation";
             // 
             // tmsiGoToMainPage
             // 
             this.tmsiGoToMainPage.Name = "tmsiGoToMainPage";
-            this.tmsiGoToMainPage.Size = new System.Drawing.Size(169, 22);
+            this.tmsiGoToMainPage.Size = new System.Drawing.Size(171, 22);
             this.tmsiGoToMainPage.Text = "Go to MainPage";
             // 
             // tmsiQuit
             // 
             this.tmsiQuit.Name = "tmsiQuit";
-            this.tmsiQuit.Size = new System.Drawing.Size(169, 22);
+            this.tmsiQuit.Size = new System.Drawing.Size(171, 22);
             this.tmsiQuit.Text = "Quit";
             // 
             // tmsiHelpClient
             // 
             this.tmsiHelpClient.Name = "tmsiHelpClient";
-            this.tmsiHelpClient.Size = new System.Drawing.Size(46, 20);
+            this.tmsiHelpClient.Size = new System.Drawing.Size(47, 21);
             this.tmsiHelpClient.Text = "Help";
-            // 
-            // tmsiSimulation
-            // 
-            this.tmsiSimulation.Name = "tmsiSimulation";
-            this.tmsiSimulation.Size = new System.Drawing.Size(169, 22);
-            this.tmsiSimulation.Text = "Simulation";
             // 
             // lbListProductBought
             // 
@@ -158,16 +164,70 @@
             this.lbProductBoughtInformation.TabIndex = 9;
             this.lbProductBoughtInformation.Text = "Product Bought Information:";
             // 
+            // tbIdCardNumber
+            // 
+            this.tbIdCardNumber.Location = new System.Drawing.Point(15, 169);
+            this.tbIdCardNumber.Name = "tbIdCardNumber";
+            this.tbIdCardNumber.Size = new System.Drawing.Size(158, 21);
+            this.tbIdCardNumber.TabIndex = 15;
+            // 
+            // tbLastName
+            // 
+            this.tbLastName.Location = new System.Drawing.Point(14, 130);
+            this.tbLastName.Name = "tbLastName";
+            this.tbLastName.Size = new System.Drawing.Size(159, 21);
+            this.tbLastName.TabIndex = 14;
+            // 
+            // tbFirstName
+            // 
+            this.tbFirstName.Location = new System.Drawing.Point(15, 91);
+            this.tbFirstName.Name = "tbFirstName";
+            this.tbFirstName.Size = new System.Drawing.Size(158, 21);
+            this.tbFirstName.TabIndex = 13;
+            // 
+            // lbIdCartNumber
+            // 
+            this.lbIdCartNumber.AutoSize = true;
+            this.lbIdCartNumber.Location = new System.Drawing.Point(12, 154);
+            this.lbIdCartNumber.Name = "lbIdCartNumber";
+            this.lbIdCartNumber.Size = new System.Drawing.Size(95, 12);
+            this.lbIdCartNumber.TabIndex = 12;
+            this.lbIdCartNumber.Text = "ID card number:";
+            // 
+            // lbLastName
+            // 
+            this.lbLastName.AutoSize = true;
+            this.lbLastName.Location = new System.Drawing.Point(12, 115);
+            this.lbLastName.Name = "lbLastName";
+            this.lbLastName.Size = new System.Drawing.Size(65, 12);
+            this.lbLastName.TabIndex = 11;
+            this.lbLastName.Text = "Last name:";
+            // 
+            // lbFirstName
+            // 
+            this.lbFirstName.AutoSize = true;
+            this.lbFirstName.Location = new System.Drawing.Point(13, 76);
+            this.lbFirstName.Name = "lbFirstName";
+            this.lbFirstName.Size = new System.Drawing.Size(71, 12);
+            this.lbFirstName.TabIndex = 10;
+            this.lbFirstName.Text = "First name:";
+            // 
             // VClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(761, 370);
+            this.Controls.Add(this.tbIdCardNumber);
+            this.Controls.Add(this.tbLastName);
+            this.Controls.Add(this.tbFirstName);
+            this.Controls.Add(this.lbIdCartNumber);
+            this.Controls.Add(this.lbLastName);
+            this.Controls.Add(this.lbFirstName);
             this.Controls.Add(this.lbProductBoughtInformation);
             this.Controls.Add(this.lbListProductBought);
             this.Controls.Add(this.lboxProductBoughtInfomation);
             this.Controls.Add(this.lboxProductBought);
-            this.Controls.Add(this.lbTotalSum);
+            this.Controls.Add(this.lbBalance);
             this.Controls.Add(this.tbTotalSum);
             this.Controls.Add(this.tbIDClient);
             this.Controls.Add(this.lbIDClient);
@@ -185,7 +245,7 @@
         private System.Windows.Forms.Label lbIDClient;
         private System.Windows.Forms.TextBox tbIDClient;
         private System.Windows.Forms.TextBox tbTotalSum;
-        private System.Windows.Forms.Label lbTotalSum;
+        private System.Windows.Forms.Label lbBalance;
         private System.Windows.Forms.ListBox lboxProductBought;
         private System.Windows.Forms.ListBox lboxProductBoughtInfomation;
         private System.Windows.Forms.MenuStrip menuStrip1;
@@ -196,5 +256,11 @@
         private System.Windows.Forms.ToolStripMenuItem tmsiSimulation;
         private System.Windows.Forms.Label lbListProductBought;
         private System.Windows.Forms.Label lbProductBoughtInformation;
+        private System.Windows.Forms.TextBox tbIdCardNumber;
+        private System.Windows.Forms.TextBox tbLastName;
+        private System.Windows.Forms.TextBox tbFirstName;
+        private System.Windows.Forms.Label lbIdCartNumber;
+        private System.Windows.Forms.Label lbLastName;
+        private System.Windows.Forms.Label lbFirstName;
     }
 }

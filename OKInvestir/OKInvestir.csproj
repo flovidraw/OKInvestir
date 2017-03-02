@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{2EFDFC19-8B6A-443F-8308-DB638049F9FA}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>OKInvestir</RootNamespace>
     <AssemblyName>OKInvestir</AssemblyName>
@@ -85,6 +85,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\ForDropDb.cs" />
     <Compile Include="ViewModel\VMClient.cs" />
     <Compile Include="ViewModel\VMLogin.cs" />
     <Compile Include="ViewModel\IViewModel.cs" />
@@ -104,6 +105,18 @@
     <Compile Include="ViewModel\VMMainPage.cs" />
     <Compile Include="ViewModel\VMSimulation.cs" />
     <Compile Include="ViewModel\VMSimulationResult.cs" />
+    <Compile Include="View\DialogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\DialogForm.Designer.cs">
+      <DependentUpon>DialogForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\VDClientDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\VDClientDetail.Designer.cs">
+      <DependentUpon>VDClientDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\VSimulationResult.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -150,6 +163,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="View\VDClientDetail.resx">
+      <DependentUpon>VDClientDetail.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\VClient.resx">
       <DependentUpon>VClient.cs</DependentUpon>
     </EmbeddedResource>

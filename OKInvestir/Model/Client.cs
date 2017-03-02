@@ -15,7 +15,10 @@ namespace OKInvestir.Model
         public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }
-
+        [Required]
+        [StringLength(30)]
+        [Index(IsUnique = true)]
+        public string IdCardNumber { get; set; }
         [NotMapped]
         public string FullName
         {
@@ -27,5 +30,14 @@ namespace OKInvestir.Model
         }
 
         public List<Account> AccountList { get; set; }
+
+        public Client() { }
+
+        public Client(string firstName, string lastName, string idCardNumber)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            IdCardNumber = idCardNumber;
+        }
     }
 }

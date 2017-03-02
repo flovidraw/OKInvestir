@@ -13,10 +13,12 @@ namespace OKInvestir.Model
         [Required]
         public int Number { get; set; }
         [Required]
-        public float Balance { get; set; }
-        [Required]
-        public virtual Client Client { get; set; }
+        public decimal Balance { get; set; }
         [Required]
         public int status { get; set; }
+        [Required]
+        public int ClientId { get; set; }
+        [Required]
+        public virtual Client Client { get; set; }
     }
 }

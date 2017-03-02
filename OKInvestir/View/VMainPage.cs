@@ -12,11 +12,12 @@ namespace OKInvestir.View
 {
     public partial class VMainPage : ExtendedForm, IView
     {
-        private ViewModel.VMMainPage ViewModel;
+        public ViewModel.VMMainPage ViewModel { get; private set; }
 
         public VMainPage()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
 
         public void setViewModel(ViewModel.IViewModel IViewModel)
@@ -66,6 +67,13 @@ namespace OKInvestir.View
         private void lboxListProduct_SelectedIndexChanged(object sender, EventArgs e)
         {
             ViewModel.loadProductDetail((Model.Product)lboxListProduct.SelectedValue);
+        }
+
+        private void btAddClient_Click(object sender, EventArgs e)
+        {
+            VDClientIDetail dialogClientDetail = new VDClientIDetail();
+            //dialogClientDetail.setOwner(this);
+            dialogClientDetail.ShowDialog(this);
         }
     }
 }
