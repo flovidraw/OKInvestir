@@ -30,7 +30,7 @@
         {
             this.lbIDClient = new System.Windows.Forms.Label();
             this.tbIDClient = new System.Windows.Forms.TextBox();
-            this.tbTotalSum = new System.Windows.Forms.TextBox();
+            this.tbBalance = new System.Windows.Forms.TextBox();
             this.lbBalance = new System.Windows.Forms.Label();
             this.lboxProductBought = new System.Windows.Forms.ListBox();
             this.lboxProductBoughtInfomation = new System.Windows.Forms.ListBox();
@@ -43,18 +43,17 @@
             this.lbListProductBought = new System.Windows.Forms.Label();
             this.lbProductBoughtInformation = new System.Windows.Forms.Label();
             this.tbIdCardNumber = new System.Windows.Forms.TextBox();
-            this.tbLastName = new System.Windows.Forms.TextBox();
-            this.tbFirstName = new System.Windows.Forms.TextBox();
             this.lbIdCartNumber = new System.Windows.Forms.Label();
-            this.lbLastName = new System.Windows.Forms.Label();
-            this.lbFirstName = new System.Windows.Forms.Label();
+            this.tbClientName = new System.Windows.Forms.TextBox();
+            this.btModify = new System.Windows.Forms.Button();
+            this.btReturn = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbIDClient
             // 
             this.lbIDClient.AutoSize = true;
-            this.lbIDClient.Location = new System.Drawing.Point(12, 37);
+            this.lbIDClient.Location = new System.Drawing.Point(13, 68);
             this.lbIDClient.Name = "lbIDClient";
             this.lbIDClient.Size = new System.Drawing.Size(65, 12);
             this.lbIDClient.TabIndex = 1;
@@ -62,22 +61,32 @@
             // 
             // tbIDClient
             // 
-            this.tbIDClient.Location = new System.Drawing.Point(14, 52);
+            this.tbIDClient.BackColor = System.Drawing.SystemColors.Control;
+            this.tbIDClient.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbIDClient.Location = new System.Drawing.Point(15, 108);
             this.tbIDClient.Name = "tbIDClient";
-            this.tbIDClient.Size = new System.Drawing.Size(159, 21);
+            this.tbIDClient.ReadOnly = true;
+            this.tbIDClient.Size = new System.Drawing.Size(159, 14);
             this.tbIDClient.TabIndex = 2;
+            this.tbIDClient.TabStop = false;
+            this.tbIDClient.Text = "id";
             // 
-            // tbTotalSum
+            // tbBalance
             // 
-            this.tbTotalSum.Location = new System.Drawing.Point(15, 208);
-            this.tbTotalSum.Name = "tbTotalSum";
-            this.tbTotalSum.Size = new System.Drawing.Size(158, 21);
-            this.tbTotalSum.TabIndex = 3;
+            this.tbBalance.BackColor = System.Drawing.SystemColors.Control;
+            this.tbBalance.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbBalance.Location = new System.Drawing.Point(15, 268);
+            this.tbBalance.Name = "tbBalance";
+            this.tbBalance.ReadOnly = true;
+            this.tbBalance.Size = new System.Drawing.Size(158, 14);
+            this.tbBalance.TabIndex = 3;
+            this.tbBalance.TabStop = false;
+            this.tbBalance.Text = "balance";
             // 
             // lbBalance
             // 
             this.lbBalance.AutoSize = true;
-            this.lbBalance.Location = new System.Drawing.Point(13, 193);
+            this.lbBalance.Location = new System.Drawing.Point(13, 228);
             this.lbBalance.Name = "lbBalance";
             this.lbBalance.Size = new System.Drawing.Size(53, 12);
             this.lbBalance.TabIndex = 4;
@@ -166,69 +175,72 @@
             // 
             // tbIdCardNumber
             // 
-            this.tbIdCardNumber.Location = new System.Drawing.Point(15, 169);
+            this.tbIdCardNumber.BackColor = System.Drawing.SystemColors.Control;
+            this.tbIdCardNumber.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbIdCardNumber.Location = new System.Drawing.Point(12, 188);
             this.tbIdCardNumber.Name = "tbIdCardNumber";
-            this.tbIdCardNumber.Size = new System.Drawing.Size(158, 21);
+            this.tbIdCardNumber.ReadOnly = true;
+            this.tbIdCardNumber.Size = new System.Drawing.Size(158, 14);
             this.tbIdCardNumber.TabIndex = 15;
-            // 
-            // tbLastName
-            // 
-            this.tbLastName.Location = new System.Drawing.Point(14, 130);
-            this.tbLastName.Name = "tbLastName";
-            this.tbLastName.Size = new System.Drawing.Size(159, 21);
-            this.tbLastName.TabIndex = 14;
-            // 
-            // tbFirstName
-            // 
-            this.tbFirstName.Location = new System.Drawing.Point(15, 91);
-            this.tbFirstName.Name = "tbFirstName";
-            this.tbFirstName.Size = new System.Drawing.Size(158, 21);
-            this.tbFirstName.TabIndex = 13;
+            this.tbIdCardNumber.TabStop = false;
+            this.tbIdCardNumber.Text = "id card number";
             // 
             // lbIdCartNumber
             // 
             this.lbIdCartNumber.AutoSize = true;
-            this.lbIdCartNumber.Location = new System.Drawing.Point(12, 154);
+            this.lbIdCartNumber.Location = new System.Drawing.Point(13, 148);
             this.lbIdCartNumber.Name = "lbIdCartNumber";
             this.lbIdCartNumber.Size = new System.Drawing.Size(95, 12);
             this.lbIdCartNumber.TabIndex = 12;
             this.lbIdCartNumber.Text = "ID card number:";
             // 
-            // lbLastName
+            // tbClientName
             // 
-            this.lbLastName.AutoSize = true;
-            this.lbLastName.Location = new System.Drawing.Point(12, 115);
-            this.lbLastName.Name = "lbLastName";
-            this.lbLastName.Size = new System.Drawing.Size(65, 12);
-            this.lbLastName.TabIndex = 11;
-            this.lbLastName.Text = "Last name:";
+            this.tbClientName.BackColor = System.Drawing.SystemColors.Control;
+            this.tbClientName.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbClientName.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbClientName.Location = new System.Drawing.Point(15, 28);
+            this.tbClientName.Name = "tbClientName";
+            this.tbClientName.ReadOnly = true;
+            this.tbClientName.Size = new System.Drawing.Size(218, 22);
+            this.tbClientName.TabIndex = 16;
+            this.tbClientName.TabStop = false;
+            this.tbClientName.Text = "client name";
             // 
-            // lbFirstName
+            // btModify
             // 
-            this.lbFirstName.AutoSize = true;
-            this.lbFirstName.Location = new System.Drawing.Point(13, 76);
-            this.lbFirstName.Name = "lbFirstName";
-            this.lbFirstName.Size = new System.Drawing.Size(71, 12);
-            this.lbFirstName.TabIndex = 10;
-            this.lbFirstName.Text = "First name:";
+            this.btModify.Location = new System.Drawing.Point(15, 306);
+            this.btModify.Name = "btModify";
+            this.btModify.Size = new System.Drawing.Size(75, 23);
+            this.btModify.TabIndex = 17;
+            this.btModify.Text = "Modify";
+            this.btModify.UseVisualStyleBackColor = true;
+            // 
+            // btReturn
+            // 
+            this.btReturn.Location = new System.Drawing.Point(99, 307);
+            this.btReturn.Name = "btReturn";
+            this.btReturn.Size = new System.Drawing.Size(75, 23);
+            this.btReturn.TabIndex = 18;
+            this.btReturn.Text = "Return";
+            this.btReturn.UseVisualStyleBackColor = true;
             // 
             // VClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(761, 370);
+            this.Controls.Add(this.btReturn);
+            this.Controls.Add(this.btModify);
+            this.Controls.Add(this.tbClientName);
             this.Controls.Add(this.tbIdCardNumber);
-            this.Controls.Add(this.tbLastName);
-            this.Controls.Add(this.tbFirstName);
             this.Controls.Add(this.lbIdCartNumber);
-            this.Controls.Add(this.lbLastName);
-            this.Controls.Add(this.lbFirstName);
             this.Controls.Add(this.lbProductBoughtInformation);
             this.Controls.Add(this.lbListProductBought);
             this.Controls.Add(this.lboxProductBoughtInfomation);
             this.Controls.Add(this.lboxProductBought);
             this.Controls.Add(this.lbBalance);
-            this.Controls.Add(this.tbTotalSum);
+            this.Controls.Add(this.tbBalance);
             this.Controls.Add(this.tbIDClient);
             this.Controls.Add(this.lbIDClient);
             this.Controls.Add(this.menuStrip1);
@@ -244,7 +256,7 @@
         #endregion
         private System.Windows.Forms.Label lbIDClient;
         private System.Windows.Forms.TextBox tbIDClient;
-        private System.Windows.Forms.TextBox tbTotalSum;
+        private System.Windows.Forms.TextBox tbBalance;
         private System.Windows.Forms.Label lbBalance;
         private System.Windows.Forms.ListBox lboxProductBought;
         private System.Windows.Forms.ListBox lboxProductBoughtInfomation;
@@ -257,10 +269,9 @@
         private System.Windows.Forms.Label lbListProductBought;
         private System.Windows.Forms.Label lbProductBoughtInformation;
         private System.Windows.Forms.TextBox tbIdCardNumber;
-        private System.Windows.Forms.TextBox tbLastName;
-        private System.Windows.Forms.TextBox tbFirstName;
         private System.Windows.Forms.Label lbIdCartNumber;
-        private System.Windows.Forms.Label lbLastName;
-        private System.Windows.Forms.Label lbFirstName;
+        private System.Windows.Forms.TextBox tbClientName;
+        private System.Windows.Forms.Button btModify;
+        private System.Windows.Forms.Button btReturn;
     }
 }

@@ -158,6 +158,7 @@
             this.btChooseClient.TabIndex = 10;
             this.btChooseClient.Text = "Choose";
             this.btChooseClient.UseVisualStyleBackColor = true;
+            this.btChooseClient.Click += new System.EventHandler(this.btChooseClient_Click);
             // 
             // tbSearchProduct
             // 

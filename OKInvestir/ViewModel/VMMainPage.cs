@@ -14,6 +14,7 @@ namespace OKInvestir.ViewModel
     {
         private View.VMainPage View;
         public VMMain VMMain { get; set; }
+        public User User { get; set; }
     
         public string tbSearchClientText { get; set; }
         public string tbSearchProductText { get; set; }
@@ -24,11 +25,12 @@ namespace OKInvestir.ViewModel
         public BindingList<Client> blClients { get; set; }
         public BindingList<Product> blProducts { get; set; }
 
-        public VMMainPage(VMMain VMMain, View.VMainPage View, Model.User User)
+        public VMMainPage(VMMain VMMain, View.VMainPage View, User user)
         {
             this.View = View;
             this.View.setViewModel(this);
             this.VMMain = VMMain;
+            this.User = user;
 
             // user level control
             if(User.UserLevel == 2)
@@ -37,32 +39,7 @@ namespace OKInvestir.ViewModel
             }
 
             // load clients and products in lists
-            using (var context = new Model.Context())
-            {
-                Cursor.Current = Cursors.WaitCursor;        // waiting animation cursor
-                context.Database.Initialize(force: false);  // connect to db, it takes time
-                Clients = context.Clients
-                    .Include(c => c.AccountList)            // get related entity
-                    .ToList();
-                Products = context.Products
-                    .Include(p => p.SillInterests)          // get related entities
-                    .Include(p => p.TimeInterests)
-                    .ToList();
-                ClientsForBinding = context.Clients.ToList();
-                ProductsForBinding = context.Products.ToList();
-                Cursor.Current = Cursors.Arrow;             // get back to normal cursor
-            }
-
-            // bind list to listBoxes
-            ClientsForBinding = new List<Client>(Clients);      // clone for binding list
-            ProductsForBinding = new List<Product>(Products);
-            blClients = new BindingList<Client>(ClientsForBinding);
-            blProducts = new BindingList<Product>(ProductsForBinding);
-
-            View.getListBoxClient().DataSource = blClients;
-            View.getListBoxClient().DisplayMember = "FullName";
-            View.getListBoxProduct().DataSource = blProducts;
-            View.getListBoxProduct().DisplayMember = "Name";
+            getDataFromDb();
             
             // load selected product detail to listView
             loadProductDetail((Product)View.getListBoxProduct().SelectedValue);
@@ -96,6 +73,43 @@ namespace OKInvestir.ViewModel
                 View.getListBoxProduct().SetSelected(0, true);
         }
 
+        public void getDataFromDb()
+        {
+            using (var context = new Model.Context())
+            {
+                Cursor.Current = Cursors.WaitCursor;        // waiting animation cursor
+                context.Database.Initialize(force: false);  // connect to db, it takes time
+                Clients = context.Clients
+                    .Include(c => c.AccountList)            // get related entity
+                    .ToList();
+                Products = context.Products
+                    .Include(p => p.SillInterests)          // get related entities
+                    .Include(p => p.TimeInterests)
+                    .ToList();
+                Cursor.Current = Cursors.Arrow;             // get back to normal cursor
+            }
+            ClientsForBinding = new List<Client>(Clients);   // clone for binding list
+            ProductsForBinding = new List<Product>(Products);
+
+            // bind list to listBoxes
+            blClients = new BindingList<Client>(ClientsForBinding);
+            blProducts = new BindingList<Product>(ProductsForBinding);
+
+            View.getListBoxClient().DataSource = blClients;
+            View.getListBoxClient().DisplayMember = "FullName";
+            View.getListBoxProduct().DataSource = blProducts;
+            View.getListBoxProduct().DisplayMember = "Name";
+        }
+
+        public void loadDataFromDb2()
+        {
+            using (var context = new Model.Context())
+            {
+                ClientsForBinding.Clear();
+                ProductsForBinding.Clear();
+            }
+        }
+
         public void loadProductDetail(Product pdt)
         {
             var listView = View.getListViewProductDetail();
@@ -126,24 +140,45 @@ namespace OKInvestir.ViewModel
             {
                 listView.Items.Add(new ListViewItem(new string[] { ti.Time.ToString(), ti.Interest.ToString() }));
             }
-
-
+            
             listView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent); // resize columns width
         }
 
-        public void addClient(string firstName, string lastName, string idCardNumber)
+        public bool addClient(string firstName, string lastName, string idCardNumber)
         {
             Client clt = new Client(firstName, lastName, idCardNumber);
+            bool isSuccess = true;
 
             using (var context = new Model.Context())
             {
                 Cursor.Current = Cursors.WaitCursor;        // waiting animation cursor
                 context.Database.Initialize(force: false);  // connect to db
                 context.Clients.Add(clt);
-                context.SaveChanges();
+                try
+                {
+                    context.SaveChanges();
+                    getDataFromDb();
+                } catch (Exception e)
+                {
+                    VMMain.HandleException(e, this.View);
+                    isSuccess = false;
+                }
                 Cursor.Current = Cursors.Arrow;             // get back to normal cursor
             }
+            return isSuccess;
         }
 
+        public void chooseClient()
+        {
+            if (View.getListBoxClient().SelectedValue != null)
+            {
+                Client selectedClt = (Client)View.getListBoxClient().SelectedValue;
+                VMMain.switchToClient(View, User, selectedClt);
+            }
+            else
+            {
+                View.genMsgBox("Please choose a client.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

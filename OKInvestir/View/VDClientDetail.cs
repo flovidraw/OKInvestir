@@ -27,12 +27,11 @@ namespace OKInvestir.View
         private void btOK_Click(object sender, EventArgs e)
         {
             VMainPage owner = (VMainPage)Owner;
-            owner.ViewModel.addClient(tbFirstName.Text, tbLastName.Text, tbIdCardNumber.Text);
-        }
-
-        private void btCancel_Click(object sender, EventArgs e)
-        {
-
+            if(owner.ViewModel.addClient(tbFirstName.Text, tbLastName.Text, tbIdCardNumber.Text))
+            {
+                DialogResult = DialogResult.OK;
+                Dispose();
+            }
         }
     }
 }

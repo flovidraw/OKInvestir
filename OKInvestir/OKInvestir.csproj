@@ -85,7 +85,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\ForDropDb.cs" />
     <Compile Include="ViewModel\VMClient.cs" />
     <Compile Include="ViewModel\VMLogin.cs" />
     <Compile Include="ViewModel\IViewModel.cs" />

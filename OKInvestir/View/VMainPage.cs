@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OKInvestir.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -74,6 +75,11 @@ namespace OKInvestir.View
             VDClientIDetail dialogClientDetail = new VDClientIDetail();
             //dialogClientDetail.setOwner(this);
             dialogClientDetail.ShowDialog(this);
+        }
+
+        private void btChooseClient_Click(object sender, EventArgs e)
+        {
+            ViewModel.chooseClient();
         }
     }
 }

@@ -23,5 +23,10 @@ namespace OKInvestir.View
         {
             this.ViewModel = (VMClient)IViewModel;
         }
+
+        public TextBox getTbClientName() { return tbClientName; }
+        public TextBox getTbIDClient() { return tbIDClient; }
+        public TextBox getTbIdCardNumber() { return tbIdCardNumber; }
+        public TextBox getTbBalance() { return tbBalance; }
     }
 }
