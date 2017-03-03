@@ -11,7 +11,8 @@ namespace OKInvestir.Model
     {
         public int Id { get; set; }
         [Required]
-        public int Number { get; set; }
+        [StringLength(15)]
+        public string Number { get; set; }
         [Required]
         public decimal Balance { get; set; }
         [Required]

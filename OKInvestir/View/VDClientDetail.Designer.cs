@@ -1,6 +1,6 @@
 ﻿namespace OKInvestir.View
 {
-    partial class VDClientIDetail
+    partial class VDClientDetail
     {
         /// <summary>
         /// Required designer variable.
@@ -46,7 +46,6 @@
             this.btOK.TabIndex = 0;
             this.btOK.Text = "OK";
             this.btOK.UseVisualStyleBackColor = true;
-            this.btOK.Click += new System.EventHandler(this.btOK_Click);
             // 
             // btCancel
             // 

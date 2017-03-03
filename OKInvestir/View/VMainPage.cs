@@ -72,8 +72,7 @@ namespace OKInvestir.View
 
         private void btAddClient_Click(object sender, EventArgs e)
         {
-            VDClientIDetail dialogClientDetail = new VDClientIDetail();
-            //dialogClientDetail.setOwner(this);
+            VDClientDetail dialogClientDetail = new VDClientDetail(null);
             dialogClientDetail.ShowDialog(this);
         }
 
