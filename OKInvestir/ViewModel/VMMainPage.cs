@@ -56,6 +56,7 @@ namespace OKInvestir.ViewModel
 
             // select automatically the first item after searching
             if (blClients.Count > 0)
+                //View.getListBoxClient().SelectedIndex = 0;
                 View.getListBoxClient().SetSelected(0, true);
         }
 
@@ -70,6 +71,7 @@ namespace OKInvestir.ViewModel
 
             // select automatically the first item after searching
             if (blProducts.Count > 0)
+                //View.getListBoxProduct().SelectedIndex = 0;
                 View.getListBoxProduct().SetSelected(0, true);
         }
 
@@ -99,15 +101,6 @@ namespace OKInvestir.ViewModel
             View.getListBoxClient().DisplayMember = "FullName";
             View.getListBoxProduct().DataSource = blProducts;
             View.getListBoxProduct().DisplayMember = "Name";
-        }
-
-        public void loadDataFromDb2()
-        {
-            using (var context = new Model.Context())
-            {
-                ClientsForBinding.Clear();
-                ProductsForBinding.Clear();
-            }
         }
 
         public void loadProductDetail(Product pdt)
@@ -146,7 +139,19 @@ namespace OKInvestir.ViewModel
 
         public bool addClient(string firstName, string lastName, string idCardNumber)
         {
+            // creaete a client by input
             Client clt = new Client(firstName, lastName, idCardNumber);
+
+            // create a default account
+            Account acc = new Account();
+            acc.Client = clt;
+            acc.ClientId = clt.Id;
+            acc.Number = DateTime.Now.ToString("yyyyMMddHHmmssf");
+            acc.status = 1;
+            acc.Balance = 0M;
+            clt.AccountList = new List<Account>();
+            clt.AccountList.Add(acc);
+
             bool isSuccess = true;
 
             using (var context = new Model.Context())
@@ -156,8 +161,8 @@ namespace OKInvestir.ViewModel
                 context.Clients.Add(clt);
                 try
                 {
-                    context.SaveChanges();
-                    getDataFromDb();
+                    context.SaveChanges();  // save change
+                    getDataFromDb();        // refresh the list
                 } catch (Exception e)
                 {
                     VMMain.HandleException(e, this.View);
@@ -167,6 +172,8 @@ namespace OKInvestir.ViewModel
             }
             return isSuccess;
         }
+
+        
 
         public void chooseClient()
         {

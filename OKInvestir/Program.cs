@@ -21,8 +21,8 @@ namespace OKInvestir
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            VMMain VMMain = new VMMain();
-            Application.Run();
+            //VMMain VMMain = new VMMain();
+            Application.Run(new VMainForm());
         }
     }
 }

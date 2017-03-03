@@ -215,6 +215,7 @@
             this.btModify.TabIndex = 17;
             this.btModify.Text = "Modify";
             this.btModify.UseVisualStyleBackColor = true;
+            this.btModify.Click += new System.EventHandler(this.btModify_Click);
             // 
             // btReturn
             // 
@@ -224,6 +225,7 @@
             this.btReturn.TabIndex = 18;
             this.btReturn.Text = "Return";
             this.btReturn.UseVisualStyleBackColor = true;
+            this.btReturn.Click += new System.EventHandler(this.btReturn_Click);
             // 
             // VClient
             // 

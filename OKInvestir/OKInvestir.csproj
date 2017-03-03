@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{2EFDFC19-8B6A-443F-8308-DB638049F9FA}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>OKInvestir</RootNamespace>
     <AssemblyName>OKInvestir</AssemblyName>
@@ -85,6 +85,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UI\UIClient.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UIClient.Designer.cs">
+      <DependentUpon>UIClient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UIDashboard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UIDashboard.Designer.cs">
+      <DependentUpon>UIDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UIProduct.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UIProduct.Designer.cs">
+      <DependentUpon>UIProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UISimulation.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UISimulation.Designer.cs">
+      <DependentUpon>UISimulation.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\VMClient.cs" />
     <Compile Include="ViewModel\VMLogin.cs" />
     <Compile Include="ViewModel\IViewModel.cs" />
@@ -115,6 +139,12 @@
     </Compile>
     <Compile Include="View\VDClientDetail.Designer.cs">
       <DependentUpon>VDClientDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\VSimulationResult.cs">
       <SubType>Form</SubType>
@@ -162,6 +192,18 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UI\UIClient.resx">
+      <DependentUpon>UIClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UIDashboard.resx">
+      <DependentUpon>UIDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UIProduct.resx">
+      <DependentUpon>UIProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UISimulation.resx">
+      <DependentUpon>UISimulation.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\VDClientDetail.resx">
       <DependentUpon>VDClientDetail.cs</DependentUpon>
     </EmbeddedResource>
@@ -170,6 +212,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\VLogin.resx">
       <DependentUpon>VLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\VMainPage.resx">
       <DependentUpon>VMainPage.cs</DependentUpon>
