@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace OKInvestir.View
+namespace OKInvestir.UI
 {
-    partial class VMainForm
+    partial class UIMainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -41,13 +41,19 @@ namespace OKInvestir.View
             this.btClient = new System.Windows.Forms.Button();
             this.btDashboard = new System.Windows.Forms.Button();
             this.pnHead = new System.Windows.Forms.Panel();
+            this.pbClearClient = new System.Windows.Forms.PictureBox();
+            this.pbLogout = new System.Windows.Forms.PictureBox();
+            this.lbClientName = new System.Windows.Forms.Label();
+            this.lbClient = new System.Windows.Forms.Label();
+            this.lbUserName = new System.Windows.Forms.Label();
+            this.lbUser = new System.Windows.Forms.Label();
             this.lbTitle = new System.Windows.Forms.Label();
             this.pnUserControl = new System.Windows.Forms.Panel();
-            this.uiLogin1 = new OKInvestir.UI.UILogin();
             this.pnLogo.SuspendLayout();
             this.pnMenu.SuspendLayout();
             this.pnHead.SuspendLayout();
-            this.pnUserControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbClearClient)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLogout)).BeginInit();
             this.SuspendLayout();
             // 
             // lbMin
@@ -191,6 +197,12 @@ namespace OKInvestir.View
             // pnHead
             // 
             this.pnHead.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(169)))), ((int)(((byte)(168)))));
+            this.pnHead.Controls.Add(this.pbClearClient);
+            this.pnHead.Controls.Add(this.pbLogout);
+            this.pnHead.Controls.Add(this.lbClientName);
+            this.pnHead.Controls.Add(this.lbClient);
+            this.pnHead.Controls.Add(this.lbUserName);
+            this.pnHead.Controls.Add(this.lbUser);
             this.pnHead.Controls.Add(this.lbTitle);
             this.pnHead.Controls.Add(this.lbX);
             this.pnHead.Controls.Add(this.lbMin);
@@ -199,34 +211,93 @@ namespace OKInvestir.View
             this.pnHead.Size = new System.Drawing.Size(824, 76);
             this.pnHead.TabIndex = 4;
             // 
+            // pbClearClient
+            // 
+            this.pbClearClient.Cursor = System.Windows.Forms.Cursors.UpArrow;
+            this.pbClearClient.Image = global::OKInvestir.Properties.Resources.cancel;
+            this.pbClearClient.InitialImage = global::OKInvestir.Properties.Resources.cancel;
+            this.pbClearClient.Location = new System.Drawing.Point(331, 41);
+            this.pbClearClient.Name = "pbClearClient";
+            this.pbClearClient.Size = new System.Drawing.Size(18, 18);
+            this.pbClearClient.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbClearClient.TabIndex = 7;
+            this.pbClearClient.TabStop = false;
+            this.pbClearClient.Click += new System.EventHandler(this.pbClearClient_Click);
+            // 
+            // pbLogout
+            // 
+            this.pbLogout.Cursor = System.Windows.Forms.Cursors.UpArrow;
+            this.pbLogout.Image = global::OKInvestir.Properties.Resources.logout;
+            this.pbLogout.InitialImage = global::OKInvestir.Properties.Resources.logout;
+            this.pbLogout.Location = new System.Drawing.Point(330, 13);
+            this.pbLogout.Name = "pbLogout";
+            this.pbLogout.Size = new System.Drawing.Size(20, 20);
+            this.pbLogout.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbLogout.TabIndex = 6;
+            this.pbLogout.TabStop = false;
+            this.pbLogout.Click += new System.EventHandler(this.pbLogout_Click);
+            // 
+            // lbClientName
+            // 
+            this.lbClientName.AutoSize = true;
+            this.lbClientName.Font = new System.Drawing.Font("mononoki", 12F, System.Drawing.FontStyle.Bold);
+            this.lbClientName.ForeColor = System.Drawing.Color.White;
+            this.lbClientName.Location = new System.Drawing.Point(424, 41);
+            this.lbClientName.Name = "lbClientName";
+            this.lbClientName.Size = new System.Drawing.Size(0, 18);
+            this.lbClientName.TabIndex = 5;
+            // 
+            // lbClient
+            // 
+            this.lbClient.AutoSize = true;
+            this.lbClient.Font = new System.Drawing.Font("mononoki", 12F, System.Drawing.FontStyle.Bold);
+            this.lbClient.ForeColor = System.Drawing.Color.White;
+            this.lbClient.Location = new System.Drawing.Point(356, 41);
+            this.lbClient.Name = "lbClient";
+            this.lbClient.Size = new System.Drawing.Size(71, 18);
+            this.lbClient.TabIndex = 4;
+            this.lbClient.Text = "Client:";
+            // 
+            // lbUserName
+            // 
+            this.lbUserName.AutoSize = true;
+            this.lbUserName.Font = new System.Drawing.Font("mononoki", 12F, System.Drawing.FontStyle.Bold);
+            this.lbUserName.ForeColor = System.Drawing.Color.White;
+            this.lbUserName.Location = new System.Drawing.Point(424, 15);
+            this.lbUserName.Name = "lbUserName";
+            this.lbUserName.Size = new System.Drawing.Size(0, 18);
+            this.lbUserName.TabIndex = 3;
+            // 
+            // lbUser
+            // 
+            this.lbUser.AutoSize = true;
+            this.lbUser.Font = new System.Drawing.Font("mononoki", 12F, System.Drawing.FontStyle.Bold);
+            this.lbUser.ForeColor = System.Drawing.Color.White;
+            this.lbUser.Location = new System.Drawing.Point(356, 15);
+            this.lbUser.Name = "lbUser";
+            this.lbUser.Size = new System.Drawing.Size(53, 18);
+            this.lbUser.TabIndex = 2;
+            this.lbUser.Text = "User:";
+            // 
             // lbTitle
             // 
             this.lbTitle.AutoSize = true;
             this.lbTitle.Font = new System.Drawing.Font("mononoki", 20F, System.Drawing.FontStyle.Bold);
             this.lbTitle.ForeColor = System.Drawing.Color.White;
-            this.lbTitle.Location = new System.Drawing.Point(126, 23);
+            this.lbTitle.Location = new System.Drawing.Point(94, 23);
             this.lbTitle.Name = "lbTitle";
-            this.lbTitle.Size = new System.Drawing.Size(149, 31);
+            this.lbTitle.Size = new System.Drawing.Size(89, 31);
             this.lbTitle.TabIndex = 1;
-            this.lbTitle.Text = "Dashboard";
+            this.lbTitle.Text = "Login";
             // 
             // pnUserControl
             // 
-            this.pnUserControl.Controls.Add(this.uiLogin1);
             this.pnUserControl.Location = new System.Drawing.Point(200, 76);
             this.pnUserControl.Name = "pnUserControl";
             this.pnUserControl.Size = new System.Drawing.Size(824, 500);
             this.pnUserControl.TabIndex = 5;
             // 
-            // uiLogin1
-            // 
-            this.uiLogin1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(202)))), ((int)(((byte)(240)))));
-            this.uiLogin1.Location = new System.Drawing.Point(0, 0);
-            this.uiLogin1.Name = "uiLogin1";
-            this.uiLogin1.Size = new System.Drawing.Size(824, 500);
-            this.uiLogin1.TabIndex = 0;
-            // 
-            // VMainForm
+            // UIMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -238,14 +309,15 @@ namespace OKInvestir.View
             this.Controls.Add(this.pnLogo);
             this.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "VMainForm";
+            this.Name = "UIMainForm";
             this.Text = "VMainForm";
             this.pnLogo.ResumeLayout(false);
             this.pnLogo.PerformLayout();
             this.pnMenu.ResumeLayout(false);
             this.pnHead.ResumeLayout(false);
             this.pnHead.PerformLayout();
-            this.pnUserControl.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbClearClient)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLogout)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -264,6 +336,11 @@ namespace OKInvestir.View
         private Label lbLogo;
         private Label lbTitle;
         private Panel pnUserControl;
-        private UI.UILogin uiLogin1;
+        private PictureBox pbLogout;
+        private Label lbClientName;
+        private Label lbClient;
+        private Label lbUserName;
+        private Label lbUser;
+        private PictureBox pbClearClient;
     }
 }

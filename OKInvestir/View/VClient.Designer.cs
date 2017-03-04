@@ -225,7 +225,7 @@
             this.btReturn.TabIndex = 18;
             this.btReturn.Text = "Return";
             this.btReturn.UseVisualStyleBackColor = true;
-            this.btReturn.Click += new System.EventHandler(this.btReturn_Click);
+            //this.btReturn.Click += new System.EventHandler(this.btReturn_Click);
             // 
             // VClient
             // 

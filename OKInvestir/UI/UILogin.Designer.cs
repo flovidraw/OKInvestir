@@ -56,10 +56,10 @@
             this.tbId.Name = "tbId";
             this.tbId.Size = new System.Drawing.Size(200, 22);
             this.tbId.TabIndex = 1;
-            this.tbId.TextChanged += new System.EventHandler(this.tbId_TextChanged);
             this.tbId.Click += new System.EventHandler(this.tbId_Click);
+            this.tbId.TextChanged += new System.EventHandler(this.tbId_TextChanged);
             this.tbId.LostFocus += new System.EventHandler(this.tbId_LostFocus);
-            //
+            // 
             // tbPw
             // 
             this.tbPw.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -68,12 +68,13 @@
             this.tbPw.Name = "tbPw";
             this.tbPw.Size = new System.Drawing.Size(200, 22);
             this.tbPw.TabIndex = 2;
-            this.tbPw.TextChanged += new System.EventHandler(this.tbPw_TextChanged);
             this.tbPw.Click += new System.EventHandler(this.tbPw_Click);
+            this.tbPw.TextChanged += new System.EventHandler(this.tbPw_TextChanged);
             this.tbPw.LostFocus += new System.EventHandler(this.tbPw_LostFocus);
             // 
             // btSubmit
             // 
+            this.btSubmit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(202)))), ((int)(((byte)(240)))));
             this.btSubmit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btSubmit.FlatAppearance.BorderSize = 0;
             this.btSubmit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(180)))), ((int)(((byte)(237)))));
@@ -85,7 +86,8 @@
             this.btSubmit.Size = new System.Drawing.Size(200, 35);
             this.btSubmit.TabIndex = 3;
             this.btSubmit.Text = "Sign in";
-            this.btSubmit.UseVisualStyleBackColor = true;
+            this.btSubmit.UseVisualStyleBackColor = false;
+            this.btSubmit.Click += new System.EventHandler(this.btSubmit_Click);
             // 
             // pnTbId
             // 
@@ -109,7 +111,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(202)))), ((int)(((byte)(240)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(232)))), ((int)(((byte)(250)))));
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pnTbId);
             this.Controls.Add(this.btSubmit);

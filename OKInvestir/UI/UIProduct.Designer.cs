@@ -28,18 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.product = new System.Windows.Forms.Label();
             this.SuspendLayout();
+            // 
+            // product
+            // 
+            this.product.AutoSize = true;
+            this.product.Location = new System.Drawing.Point(218, 293);
+            this.product.Name = "product";
+            this.product.Size = new System.Drawing.Size(47, 12);
+            this.product.TabIndex = 0;
+            this.product.Text = "product";
             // 
             // UIProduct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.product);
             this.Name = "UIProduct";
             this.Size = new System.Drawing.Size(824, 500);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Label product;
     }
 }

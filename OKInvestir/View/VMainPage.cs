@@ -29,7 +29,7 @@ namespace OKInvestir.View
         // buttons onclick functions
         private void logOut_Click(object sender, EventArgs e)
         {
-            ViewModel.VMMain.switchToLogin(this);
+            ///ViewModel.VMMain.switchToLogin(this);
         }
         private void quit_Click(object sender, EventArgs e)
         {

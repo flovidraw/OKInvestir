@@ -116,6 +116,7 @@
       <DependentUpon>UISimulation.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\VMClient.cs" />
+    <Compile Include="ViewModel\VMDashboard.cs" />
     <Compile Include="ViewModel\VMLogin.cs" />
     <Compile Include="ViewModel\IViewModel.cs" />
     <Compile Include="Model\Account.cs" />
@@ -132,6 +133,7 @@
     <Compile Include="Model\User.cs" />
     <Compile Include="ViewModel\VMMain.cs" />
     <Compile Include="ViewModel\VMMainPage.cs" />
+    <Compile Include="ViewModel\VMProduct.cs" />
     <Compile Include="ViewModel\VMSimulation.cs" />
     <Compile Include="ViewModel\VMSimulationResult.cs" />
     <Compile Include="View\DialogForm.cs">
@@ -146,11 +148,11 @@
     <Compile Include="View\VDClientDetail.Designer.cs">
       <DependentUpon>VDClientDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\MainForm.cs">
+    <Compile Include="UI\UIMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <Compile Include="UI\UIMainForm.Designer.cs">
+      <DependentUpon>UIMainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\VSimulationResult.cs">
       <SubType>Form</SubType>
@@ -222,8 +224,8 @@
     <EmbeddedResource Include="View\VLogin.resx">
       <DependentUpon>VLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <EmbeddedResource Include="UI\UIMainForm.resx">
+      <DependentUpon>UIMainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\VMainPage.resx">
       <DependentUpon>VMainPage.cs</DependentUpon>
@@ -264,7 +266,12 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="src\cancel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\logout.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

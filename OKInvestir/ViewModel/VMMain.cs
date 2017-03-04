@@ -3,74 +3,154 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OKInvestir.View;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using MySql.Data.MySqlClient;
+using System.Windows.Forms;
+using OKInvestir.View;
+using OKInvestir.UI;
+using OKInvestir.Model;
 
 namespace OKInvestir.ViewModel
 {
     public class VMMain
     {
+        public UIMainForm UIMainForm { get; set; }
+
         public VMLogin VMLogin { get; set; }
-        public VClient VClient { get; set; }
+        public UILogin UILogin { get; set; }
 
-        public VLogin VLogin { get; set; }
-        public VMainPage VMainPage { get; set; }
+        public VMDashboard VMDashboard { get; set; }
+        public UIDashboard UIDashboard { get; set; }
 
-        public VMMainPage VMMainPage { get; set; }
         public VMClient VMClient { get; set; }
+        public UIClient UIClient { get; set; }
+
+        public VMProduct VMProduct { get; set; }
+        public UIProduct UIProduct { get; set; }
+
+        public VMSimulation VMSimulation { get; set; }
+        public UISimulation UISimulation { get; set; }
+
+        public User User { get; set; }
+        public Client Client { get; set; }
 
         public VMMain()
         {
-            //switchToLogin(null); // App start page
-            switchToMainPage(null, new Model.User(1));
+            UIMainForm = new UIMainForm();
+            UIMainForm.VMMain = this;
+            switchToLogin(); // App start page
+            //switchToMainPage(null, new Model.User(1));
         }
 
 
-        public void switchToLogin(ExtendedForm owner)
+        /**
+         * Function to logout
+         */
+         public void logout()
         {
-            if (owner != null)
-            {
-                owner.Dispose();
-            }
-
-            VLogin = new View.VLogin();
-            VMLogin = new VMLogin(this, VLogin);
-            VLogin.Show();
+            User = null;
+            switchToLogin();
         }
 
 
-        public void switchToMainPage(ExtendedForm owner, Model.User user)
+        /**
+         * Functions to switch between UserControls
+         */
+        public void switchToLogin()
         {
-            if (owner != null)
-            {
-                owner.Dispose();
-            }
+            UILogin = new UILogin();
+            VMLogin = new VMLogin(this, UILogin);
 
-            VMainPage = new View.VMainPage();
-            VMMainPage = new VMMainPage(this, VMainPage, user);
-            VMainPage.Show();
+            //remove whatever control is currently in the Panel
+            UIMainForm.getPnUserControl().Controls.Clear();
+            //add the other control, the HomePage control instead now
+            UIMainForm.getPnUserControl().Controls.Add(UILogin);
         }
 
-        public void switchToClient(ExtendedForm owner, Model.User user, Model.Client client)
+
+        public void switchToDashboard()
         {
-            if (owner != null)
+            if(User != null)
             {
-                owner.Dispose();
-            }
+                if(UIDashboard == null)
+                {
+                    UIDashboard = new UIDashboard();
+                    VMDashboard = new VMDashboard(this, UIDashboard);
 
-            VClient = new View.VClient();
-            VMClient = new VMClient(this, VClient, user, client);
-            VClient.Show();
+                }
+                UIMainForm.getPnUserControl().Controls.Clear();
+                UIMainForm.getPnUserControl().Controls.Add(UIDashboard);
+            } else
+            {
+                switchToLogin();
+            }
+        }
+
+        public void switchToClient()
+        {
+            if (User != null)
+            {
+                if (UIClient == null)
+                {
+                    UIClient = new UIClient();
+                    VMClient = new VMClient(this, UIClient);
+
+                }
+                UIMainForm.getPnUserControl().Controls.Clear();
+                UIMainForm.getPnUserControl().Controls.Add(UIClient);
+            }
+            else
+            {
+                switchToLogin();
+            }
+        }
+
+        public void switchToProduct()
+        {
+            if (User != null)
+            {
+                if (UIProduct == null)
+                {
+                    UIProduct = new UIProduct();
+                    VMProduct = new VMProduct(this, UIProduct);
+
+                }
+                UIMainForm.getPnUserControl().Controls.Clear();
+                UIMainForm.getPnUserControl().Controls.Add(UIProduct);
+            }
+            else
+            {
+                switchToLogin();
+            }
+        }
+
+        public void switchToSimulation()
+        {
+            if (User != null)
+            {
+                if (UISimulation == null)
+                {
+                    UISimulation = new UISimulation();
+                    VMSimulation = new VMSimulation(this, UISimulation);
+
+                }
+                UIMainForm.getPnUserControl().Controls.Clear();
+                UIMainForm.getPnUserControl().Controls.Add(UISimulation);
+            }
+            else
+            {
+                switchToLogin();
+            }
         }
 
 
 
 
-
-        // http://stackoverflow.com/questions/31515776/how-can-i-catch-uniquekey-violation-exceptions-with-ef6-and-sql-server
-        public virtual void HandleException(Exception exception, ExtendedForm form)
+        /**
+         * Functions to handle mysql exception
+         */
+        public virtual void HandleException(Exception exception, UIMainForm form)
         {
             DbUpdateException dbUpdateEx = exception as DbUpdateException;
             if (dbUpdateEx != null)
@@ -91,7 +171,7 @@ namespace OKInvestir.ViewModel
             }
         }
 
-        public void DatabaseAccessException(ExtendedForm form, string dbUpdateExMessage, string dbUpdateExInnerException, int sqlExceptionNumber)
+        public void DatabaseAccessException(UIMainForm form, string dbUpdateExMessage, string dbUpdateExInnerException, int sqlExceptionNumber)
         {
             switch (sqlExceptionNumber)
             {
@@ -109,7 +189,7 @@ namespace OKInvestir.ViewModel
             
         }
 
-        public void DatabaseAccessException(ExtendedForm form, string dbUpdateExMessage, string dbUpdateExInnerException)
+        public void DatabaseAccessException(UIMainForm form, string dbUpdateExMessage, string dbUpdateExInnerException)
         {
             form.genMsgBox("Message = " + dbUpdateExMessage + "\nInnerException = " + dbUpdateExInnerException,
                 "DataBase Access Exception", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);

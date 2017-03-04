@@ -7,6 +7,7 @@
     using System.Configuration;
     using System.ComponentModel.DataAnnotations;
     using System.Collections.Generic;
+    using System.Globalization;
 
     [DbConfigurationType(typeof(MySqlEFConfiguration))]
 
@@ -143,6 +144,29 @@
                 new TimeInterest { Product = PdtList[2], Time = 96, Interest = 0.50M },
                 new TimeInterest { Product = PdtList[3], Time = 233, Interest = 0.233M }
             };
+            var BoughtPdtList = new List<BoughtProduct>
+            {
+                new BoughtProduct { FinalInterest = 0.05M, BoughtStatus = 1,
+                    StartDate = DateTime.ParseExact("24/01/2013", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                    EndDate = DateTime.ParseExact("24/01/2015", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                    BuyingDate = DateTime.ParseExact("23/01/2013", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                    Client = CltList[0], Product = PdtList[0]},
+                new BoughtProduct { FinalInterest = 0.05M, BoughtStatus = 1,
+                    StartDate = DateTime.ParseExact("02/02/2014", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                    EndDate = DateTime.ParseExact("02/01/2015", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                    BuyingDate = DateTime.ParseExact("31/12/2013", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                    Client = CltList[0], Product = PdtList[1]},
+                new BoughtProduct { FinalInterest = 0.05M, BoughtStatus = 1,
+                    StartDate = DateTime.ParseExact("03/11/2016", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                    EndDate = DateTime.ParseExact("03/11/2018", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                    BuyingDate = DateTime.ParseExact("02/11/2016", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                    Client = CltList[1], Product = PdtList[2]},
+                new BoughtProduct { FinalInterest = 0.05M, BoughtStatus = 1,
+                    StartDate = DateTime.ParseExact("10/07/2010", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                    EndDate = DateTime.ParseExact("10/07/2020", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                    BuyingDate = DateTime.ParseExact("10/07/2010", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                    Client = CltList[1], Product = PdtList[3]}
+            };
 
             // TODO: other models seed
             UsrList.ForEach(w => context.Users.Add(w));
@@ -151,6 +175,7 @@
             SillInterestList.ForEach(w => context.SillInterests.Add(w));
             TimeInterestList.ForEach(w => context.TimeInterests.Add(w));
             AccountList.ForEach(w => context.Accounts.Add(w));
+            BoughtPdtList.ForEach(w => context.BoughtProducts.Add(w));
             base.Seed(context);
         }
     }

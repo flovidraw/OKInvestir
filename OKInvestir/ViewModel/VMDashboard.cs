@@ -8,16 +8,20 @@ using OKInvestir.UI;
 
 namespace OKInvestir.ViewModel
 {
-    public class VMSimulation
+    public class VMDashboard
     {
-        private UISimulation View;
-        public VMMain VMMain { get; set; }
+        private UIDashboard View;
+        private VMMain VMMain;
 
-        public VMSimulation(VMMain VMMain, UISimulation View)
+        public VMDashboard(VMMain VMMain, UIDashboard View)
         {
             this.View = View;
             this.View.ViewModel = this;
             this.VMMain = VMMain;
+
         }
+
+
+
     }
 }

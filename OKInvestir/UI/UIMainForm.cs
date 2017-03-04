@@ -8,14 +8,17 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using OKInvestir.ViewModel;
 
-namespace OKInvestir.View
+namespace OKInvestir.UI
 {
-    public partial class VMainForm : Form
+    public partial class UIMainForm : Form
     {
+        public VMMain VMMain { get; set; }
+
         List<Button> btnList;
 
-        public VMainForm()
+        public UIMainForm()
         {
             InitializeComponent();
             CenterToScreen();
@@ -33,39 +36,88 @@ namespace OKInvestir.View
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
         }
 
+        /**
+         * Getters
+         */
+        public Panel getPnUserControl() { return this.pnUserControl; }
+
+        public Button getBtDashboard() { return btDashboard; }
+
+        public Label getLbUserName() { return lbUserName; }
+
+        public Label getLbClientName() { return lbClientName; }
+
 
         /**
-         * Functions for change buttons colors
+         * Buttons onclick functions
          */
-        // buttons onclick events
         private void btDashboard_Click(object sender, EventArgs e)
         {
             btnOnClickColorChanger(btDashboard);
 
-            pnUserControl.Controls.Clear();
-            pnUserControl.Controls.Add(new UI.UIDashboard());
+            if (VMMain.User != null)
+            {
+                VMMain.switchToDashboard();
+            }
+            else
+            {
+                VMMain.switchToLogin();
+            }
         }
 
         private void btClient_Click(object sender, EventArgs e)
         {
             btnOnClickColorChanger(btClient);
+
+            if (VMMain.User != null)
+            {
+                VMMain.switchToClient();
+            }
+            else
+            {
+                VMMain.switchToLogin();
+            }
         }
 
         private void btProduct_Click(object sender, EventArgs e)
         {
             btnOnClickColorChanger(btProduct);
+
+            if (VMMain.User != null)
+            {
+                VMMain.switchToProduct();
+            }
+            else
+            {
+                VMMain.switchToLogin();
+            }
         }
 
         private void btSimulation_Click(object sender, EventArgs e)
         {
             btnOnClickColorChanger(btSimulation);
+
+            if (VMMain.User != null)
+            {
+                VMMain.switchToSimulation();
+            }
+            else
+            {
+                VMMain.switchToLogin();
+            }
         }
 
 
+        /**
+         * Functions for change buttons colors
+         */
         // change buttons back color and title when a button onclick
         private void btnOnClickColorChanger(Button btn)
         {
-            lbTitle.Text = btn.Text;
+            if(VMMain.User != null) // if not in the login page
+            {
+                lbTitle.Text = btn.Text;
+            }
 
             switch (btn.Name)
             {
@@ -79,6 +131,7 @@ namespace OKInvestir.View
                     btClient.ForeColor = Color.FromArgb(255, 255, 255);
                     btProduct.ForeColor = Color.FromArgb(255, 255, 255);
                     btSimulation.ForeColor = Color.FromArgb(255, 255, 255);
+                        
                     break;
 
                 case "btClient":
@@ -229,6 +282,51 @@ namespace OKInvestir.View
                 cp.Style = cp.Style | WS_MINIMIZEBOX;   // 允许最小化操作        
                 return cp;
             }
+        }
+
+
+        /**
+         * Function to generate a message box
+         */
+        public void genMsgBox(string msg, string caption, MessageBoxButtons buttons, MessageBoxIcon icon)
+        {
+            MessageBox.Show(msg, caption, buttons, icon);
+        }
+
+
+        /**
+         * Function to disable and enable menu buttons
+         */
+        public void disableButtons()
+        {
+            btClient.Enabled = false;
+            btDashboard.Enabled = false;
+            btProduct.Enabled = false;
+            btSimulation.Enabled = false;
+            pbLogout.Enabled = false;
+            pbClearClient.Enabled = false;
+        }
+
+        public void enableButtons()
+        {
+            btClient.Enabled = true;
+            btDashboard.Enabled = true;
+            btProduct.Enabled = true;
+            btSimulation.Enabled = true;
+            pbLogout.Enabled = true;
+            pbClearClient.Enabled = true;
+        }
+
+        private void pbLogout_Click(object sender, EventArgs e)
+        {
+            VMMain.logout();
+            lbUserName.Text = "";
+        }
+
+        private void pbClearClient_Click(object sender, EventArgs e)
+        {
+            VMMain.Client = null;
+            lbClientName.Text = "";
         }
     }
 }

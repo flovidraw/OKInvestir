@@ -11,7 +11,7 @@ namespace OKInvestir.Model
     {
         public int Id { get; set; }
         [Required]
-        public decimal Time { get; set; }
+        public int Time { get; set; }
         [Required]
         public decimal Interest { get; set; }
         [Required]

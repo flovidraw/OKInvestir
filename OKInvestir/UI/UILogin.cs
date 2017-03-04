@@ -7,11 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using OKInvestir.ViewModel;
 
 namespace OKInvestir.UI
 {
     public partial class UILogin : UserControl
     {
+        public VMLogin ViewModel { get; set; }
+
         private bool hasTbIdTextBeenTyped = false;
         private bool hasTbPwTextBeenTyped = false;
 
@@ -19,12 +22,49 @@ namespace OKInvestir.UI
         {
             InitializeComponent();
 
+            this.ActiveControl = this.tbId;     // focus on id textbox
 
             // for showing hint
             tbId.ForeColor = Color.LightGray;
             tbId.Text = "User name                   ";
             tbPw.ForeColor = Color.LightGray;
             tbPw.Text = "Password                   ";
+        }
+        
+        /**
+         * Functions for button onclick
+         */
+        private void btSubmit_Click(object sender, EventArgs e)
+        {
+            this.ViewModel.login();
+        }
+
+
+        /**
+         * Getters
+         */
+        public string getTbIdText()
+        {
+            return tbId.Text;
+        }
+
+        public string getTbPwText()
+        {
+            return tbPw.Text;
+        }
+
+
+        /**
+         * Function allow pressing enter call btSubmit
+         */
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Enter)
+            {
+                btSubmit.PerformClick();
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
 
 
@@ -97,6 +137,5 @@ namespace OKInvestir.UI
                 tbPw.Text = "";
             }
         }
-
     }
 }
