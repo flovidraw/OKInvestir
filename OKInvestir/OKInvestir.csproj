@@ -97,6 +97,12 @@
     <Compile Include="UI\UIDashboard.Designer.cs">
       <DependentUpon>UIDashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\UILogin.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UILogin.Designer.cs">
+      <DependentUpon>UILogin.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\UIProduct.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -197,6 +203,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UIDashboard.resx">
       <DependentUpon>UIDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UILogin.resx">
+      <DependentUpon>UILogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UIProduct.resx">
       <DependentUpon>UIProduct.cs</DependentUpon>

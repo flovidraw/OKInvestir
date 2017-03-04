@@ -34,6 +34,9 @@ namespace OKInvestir.View
         }
 
 
+        /**
+         * Functions for change buttons colors
+         */
         // buttons onclick events
         private void btDashboard_Click(object sender, EventArgs e)
         {
@@ -163,20 +166,25 @@ namespace OKInvestir.View
         }
 
 
+
+        /**
+         * Functions allow minimize and close form
+         */
         // close window when x label onclick
         private void lbX_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-
         // minimize window when - label onclick
         private void lbMin_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
-        
 
+        /**
+         * Functions allow drag windows
+         */
         // allow drag window by draging the head panel
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
@@ -195,8 +203,9 @@ namespace OKInvestir.View
             }
         }
 
-
-        // rounded corner
+        /**
+         * Functions allow rounded corner
+         */
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
         (
@@ -208,8 +217,9 @@ namespace OKInvestir.View
             int nHeightEllipse // width of ellipse
         );
 
-
-        // allow minimize form when click on taskbar icon
+        /**
+         * Functions allow minimize form when click on taskbar icon
+         */
         protected override CreateParams CreateParams
         {
             get

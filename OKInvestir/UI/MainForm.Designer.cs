@@ -43,9 +43,11 @@ namespace OKInvestir.View
             this.pnHead = new System.Windows.Forms.Panel();
             this.lbTitle = new System.Windows.Forms.Label();
             this.pnUserControl = new System.Windows.Forms.Panel();
+            this.uiLogin1 = new OKInvestir.UI.UILogin();
             this.pnLogo.SuspendLayout();
             this.pnMenu.SuspendLayout();
             this.pnHead.SuspendLayout();
+            this.pnUserControl.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbMin
@@ -210,10 +212,19 @@ namespace OKInvestir.View
             // 
             // pnUserControl
             // 
+            this.pnUserControl.Controls.Add(this.uiLogin1);
             this.pnUserControl.Location = new System.Drawing.Point(200, 76);
             this.pnUserControl.Name = "pnUserControl";
             this.pnUserControl.Size = new System.Drawing.Size(824, 500);
             this.pnUserControl.TabIndex = 5;
+            // 
+            // uiLogin1
+            // 
+            this.uiLogin1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(202)))), ((int)(((byte)(240)))));
+            this.uiLogin1.Location = new System.Drawing.Point(0, 0);
+            this.uiLogin1.Name = "uiLogin1";
+            this.uiLogin1.Size = new System.Drawing.Size(824, 500);
+            this.uiLogin1.TabIndex = 0;
             // 
             // VMainForm
             // 
@@ -234,6 +245,7 @@ namespace OKInvestir.View
             this.pnMenu.ResumeLayout(false);
             this.pnHead.ResumeLayout(false);
             this.pnHead.PerformLayout();
+            this.pnUserControl.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -252,5 +264,6 @@ namespace OKInvestir.View
         private Label lbLogo;
         private Label lbTitle;
         private Panel pnUserControl;
+        private UI.UILogin uiLogin1;
     }
 }
