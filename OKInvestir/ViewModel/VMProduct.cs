@@ -33,36 +33,38 @@ namespace OKInvestir.ViewModel
 
         public void loadProductDetail(Product pdt)
         {
-            /*var listView = View.getListViewProductDetail();
-            listView.View = System.Windows.Forms.View.Details;  // set view to details mode sothat it show added item
+            var lviewSillInterest = View.getLviewSillInterest();
+            var lviewTimeInterest = View.getLviewTimeInterest();
 
             // clear the list and readd headers
-            listView.Clear();
-            listView.Columns.Add("Proprety");
-            listView.Columns.Add("Value");
+            lviewSillInterest.Clear();
+            lviewTimeInterest.Clear();
 
-            // add data in listView
-            listView.Items.Add(new ListViewItem(new string[] { "Name", pdt.Product.Name }));
-            listView.Items.Add(new ListViewItem(new string[] { "Description", pdt.Product.Description }));
-            listView.Items.Add(new ListViewItem(new string[] { "Status", pdt.Product.ProductStatus.ToString() }));
+            lviewSillInterest.Columns.Add("Sill");
+            lviewSillInterest.Columns.Add("Interest");
+            lviewTimeInterest.Columns.Add("Months");
+            lviewTimeInterest.Columns.Add("Interest");
 
-            List<SillInterest> siList = pdt.Product.SillInterests;
-            listView.Items.Add(new ListViewItem(new string[] { "", "" }));
-            listView.Items.Add(new ListViewItem(new string[] { "Sill", "Interest" }));
-            foreach (SillInterest si in siList)
+            // change labels and textbox of product info
+            View.getLbName().Text =  pdt.Name;
+            View.getTbDescription().Text = pdt.Description;
+            View.getLbId().Text = pdt.Id.ToString();
+            // TODO: change int to text of status
+            View.getLbStatus().Text = pdt.ProductStatus.ToString();
+
+            // add data in listviews
+            foreach (SillInterest si in pdt.SillInterests)
             {
-                listView.Items.Add(new ListViewItem(new string[] { si.Sill.ToString(), si.Interest.ToString() }));
+                lviewSillInterest.Items.Add(new ListViewItem(new string[] { si.Sill.ToString(), si.Interest.ToString() }));
+            }
+            foreach (TimeInterest ti in pdt.TimeInterests)
+            {
+                lviewTimeInterest.Items.Add(new ListViewItem(new string[] { ti.Time.ToString(), ti.Interest.ToString() }));
             }
 
-            List<TimeInterest> tiList = pdt.Product.TimeInterests;
-            listView.Items.Add(new ListViewItem(new string[] { "", "" }));
-            listView.Items.Add(new ListViewItem(new string[] { "Time", "Interest" }));
-            foreach (TimeInterest ti in tiList)
-            {
-                listView.Items.Add(new ListViewItem(new string[] { ti.Time.ToString(), ti.Interest.ToString() }));
-            }
-
-            listView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent); // resize columns width*/
+            // resize columns width
+            lviewSillInterest.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            lviewTimeInterest.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
         }
 
     }
