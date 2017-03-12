@@ -12,7 +12,7 @@ namespace OKInvestir.Model
     {
         public int Id { get; set; }
         [Required]
-        [StringLength(50, ErrorMessage = "Product name cannot be longer than 50 characters.")]
+        [StringLength(20, ErrorMessage = "Product name cannot be longer than 20 characters.")]
         public string Name { get; set; }
         public string Description { get; set; }
         [Required]

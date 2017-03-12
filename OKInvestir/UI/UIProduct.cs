@@ -20,6 +20,10 @@ namespace OKInvestir.UI
             InitializeComponent();
         }
 
+        private void lboxProduct_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ViewModel.loadProductDetail((Model.Product)lboxProduct.SelectedValue);
+        }
 
         /**
          * Functions for button onclick
@@ -33,7 +37,14 @@ namespace OKInvestir.UI
         /**
          * Getters
          */
-
+        public ListBox getLboxProduct() { return lboxProduct; }
+        public ListView getLviewSillInterest() { return lviewSillInterest; }
+        public ListView getLviewTimeInterest() { return lviewTimeInterest; }
+        public Label getLbName() { return lbName; }
+        public Label getLbStatus() { return lbStatus; }
+        public Label getLbId() { return lbId; }
+        public TextBox getTbDescription() { return tbDescription; }
+        public TextBox getTbSearchProduct() { return tbSearchProduct; }
 
 
 

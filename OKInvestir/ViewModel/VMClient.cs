@@ -239,7 +239,6 @@ namespace OKInvestir.ViewModel
             // load bought product
             if(clt.BoughtProductList != null)
             {
-                ListBox lb = View.getLBoxProduct();
                 ProductsForBinding.Clear();
                 foreach (BoughtProduct bp in clt.BoughtProductList)
                 {
