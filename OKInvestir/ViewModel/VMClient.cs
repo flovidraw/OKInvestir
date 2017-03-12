@@ -332,6 +332,7 @@ namespace OKInvestir.ViewModel
                     // set indicate labels text to void
                     View.getLbFirstName().Text = "";
                     View.getLbLastName().Text = "";
+                    View.getlbEscIndicator().Text = "";
 
                     // reload data
                     getDataFromDb();
@@ -365,6 +366,7 @@ namespace OKInvestir.ViewModel
                 // show indicate labels text
                 View.getLbFirstName().Text = "First name:";
                 View.getLbLastName().Text = "Last name:";
+                View.getlbEscIndicator().Text = "Press Esc to exit.";
 
                 // Limite textbox width because there will be 2 indicate label show up
                 if (View.getTbLastName().Width > 140)
@@ -412,6 +414,7 @@ namespace OKInvestir.ViewModel
                     // set indicate labels text to void
                     View.getLbFirstName().Text = "";
                     View.getLbLastName().Text = "";
+                    View.getlbEscIndicator().Text = "";
 
                     // reload data
                     getDataFromDb();
@@ -454,7 +457,54 @@ namespace OKInvestir.ViewModel
                 // show indicate labels text
                 View.getLbFirstName().Text = "First name:";
                 View.getLbLastName().Text = "Last name:";
+                View.getlbEscIndicator().Text = "Press Esc to exit.";
             }
         }
+
+        public void escEdit()
+        {
+            View.isEditing = false;
+
+            // enable all buttons
+            VMMain.UIMainForm.enableButtons();
+            View.getBtAddClient().Enabled = true;
+            View.getBtChoose().Enabled = true;
+            View.getBtModify().Enabled = true;
+
+            // enable lists
+            View.getLBoxClient().Enabled = true;
+            View.getLBoxProduct().Enabled = true;
+            View.getListViewProductDetail().Enabled = true;
+
+            // change back the text
+            if(View.getBtAddClient().Text == "Confirm")
+            {
+                View.getBtAddClient().Text = "Add client";
+            } else
+            {
+                View.getBtModify().Text = "Modify";
+            }
+            
+
+            // change back to origin color
+            View.getTbFirstName().BackColor = System.Drawing.Color.FromArgb(196, 232, 250);
+            View.getTbLastName().BackColor = System.Drawing.Color.FromArgb(196, 232, 250);
+            View.getTbIdCardNumber().BackColor = System.Drawing.Color.FromArgb(166, 202, 240);
+
+            // set read only
+            View.getTbFirstName().ReadOnly = true;
+            View.getTbLastName().ReadOnly = true;
+            View.getTbIdCardNumber().ReadOnly = true;
+
+            // set indicate labels text to void
+            View.getLbFirstName().Text = "";
+            View.getLbLastName().Text = "";
+            View.getlbEscIndicator().Text = "";
+
+            // reload data
+            getDataFromDb();
+        }
+
+        
     }
 }

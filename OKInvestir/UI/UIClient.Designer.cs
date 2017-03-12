@@ -53,6 +53,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.lbEscIndicator = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -350,11 +351,21 @@
             this.panel4.Size = new System.Drawing.Size(181, 66);
             this.panel4.TabIndex = 41;
             // 
+            // lbEscIndicator
+            // 
+            this.lbEscIndicator.AutoSize = true;
+            this.lbEscIndicator.ForeColor = System.Drawing.Color.Red;
+            this.lbEscIndicator.Location = new System.Drawing.Point(250, 356);
+            this.lbEscIndicator.Name = "lbEscIndicator";
+            this.lbEscIndicator.Size = new System.Drawing.Size(0, 12);
+            this.lbEscIndicator.TabIndex = 42;
+            // 
             // UIClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(232)))), ((int)(((byte)(250)))));
+            this.Controls.Add(this.lbEscIndicator);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.flowLayoutPanel1);
@@ -413,5 +424,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label lbEscIndicator;
     }
 }

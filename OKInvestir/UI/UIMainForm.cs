@@ -328,5 +328,28 @@ namespace OKInvestir.UI
             VMMain.Client = null;
             lbClientName.Text = "";
         }
+
+
+
+        /**
+         * Fonction that define key press event.
+         * 
+         * 1. Allow pressing esc to end add/modify client
+         */
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Escape)
+            {
+                if(VMMain.UIClient != null)
+                {
+                    if (VMMain.UIClient.isEditing == true)
+                    {
+                        VMMain.VMClient.escEdit();
+                    }
+                    return true;
+                }
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
     }
 }

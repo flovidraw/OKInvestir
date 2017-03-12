@@ -65,6 +65,7 @@ namespace OKInvestir.UI
         public Button getBtAddClient() { return btAddClient; }
         public Label getLbFirstName() { return lbFirstName; }
         public Label getLbLastName() { return lbLastName; }
+        public Label getlbEscIndicator() { return lbEscIndicator; }
 
 
         /**
