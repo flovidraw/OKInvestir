@@ -34,13 +34,20 @@ namespace OKInvestir.ViewModel
 
         public User User { get; set; }
         public Client Client { get; set; }
+        public Product Product { get; set; }
 
         public VMMain()
         {
             UIMainForm = new UIMainForm();
             UIMainForm.VMMain = this;
-            switchToLogin(); // App start page
+            //switchToLogin(); // App start page
             //switchToMainPage(null, new Model.User(1));
+
+
+
+            UIProduct = new UIProduct();
+            VMProduct = new VMProduct(this, UIProduct);
+            UIMainForm.getPnUserControl().Controls.Add(new UISubProduct(UIProduct));
         }
 
 
@@ -123,6 +130,12 @@ namespace OKInvestir.ViewModel
             {
                 switchToLogin();
             }
+        }
+        
+        public void switchToSubProduct(UISubProduct sub)
+        {
+            UIMainForm.getPnUserControl().Controls.Clear();
+            UIMainForm.getPnUserControl().Controls.Add(sub);
         }
 
         public void switchToSimulation()

@@ -22,6 +22,7 @@ namespace OKInvestir.UI
             InitializeComponent();
 
             isEditing = false;
+            lbEscIndicator.Text = "";
         }
 
         /**
@@ -145,6 +146,11 @@ namespace OKInvestir.UI
             }
             
             
+        }
+
+        private void UIClient_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

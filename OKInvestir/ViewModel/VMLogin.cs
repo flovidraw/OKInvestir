@@ -34,22 +34,23 @@ namespace OKInvestir.ViewModel
                 VMMain.UIMainForm.genMsgBox("Please enter your password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             } else
             {
-                Boolean isUsrFound = false;
+                bool isUsrFound = false;
                 User UsrFound = null;
+
                 using (var context = new Model.Context())
                 {
                     Cursor.Current = Cursors.WaitCursor;        // waiting animation cursor
                     //context.Database.Initialize(force: true);   // connect to db, it takes time
                     context.Database.Initialize(force: true);   // connect to db, it takes time
-                    Cursor.Current = Cursors.Arrow;             // get back to normal cursor
                     var Usr = context.Users.Where(u => u.Username == Id && u.Password == Pw);
                     if (Usr.Any())
                     {
                         isUsrFound = true;
                         UsrFound = Usr.First();
                     }
-                    
+                    Cursor.Current = Cursors.Arrow;             // get back to normal cursor
                 }
+
                 if (isUsrFound)   // login successful
                 {
                     VMMain.User = UsrFound;

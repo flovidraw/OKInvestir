@@ -115,6 +115,12 @@
     <Compile Include="UI\UISimulation.Designer.cs">
       <DependentUpon>UISimulation.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\UISubProduct.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UISubProduct.Designer.cs">
+      <DependentUpon>UISubProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\VMClient.cs" />
     <Compile Include="ViewModel\VMDashboard.cs" />
     <Compile Include="ViewModel\VMLogin.cs" />
@@ -215,6 +221,9 @@
     <EmbeddedResource Include="UI\UISimulation.resx">
       <DependentUpon>UISimulation.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\UISubProduct.resx">
+      <DependentUpon>UISubProduct.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\VDClientDetail.resx">
       <DependentUpon>VDClientDetail.cs</DependentUpon>
     </EmbeddedResource>
@@ -271,6 +280,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="src\logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\return.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\save.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

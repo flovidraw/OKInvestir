@@ -74,9 +74,9 @@
             // 
             // btSubmit
             // 
-            this.btSubmit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(202)))), ((int)(((byte)(240)))));
             this.btSubmit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btSubmit.FlatAppearance.BorderSize = 0;
+            this.btSubmit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(202)))), ((int)(((byte)(240)))));
             this.btSubmit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(180)))), ((int)(((byte)(237)))));
             this.btSubmit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(216)))), ((int)(((byte)(249)))));
             this.btSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;

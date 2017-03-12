@@ -17,8 +17,6 @@ namespace OKInvestir.ViewModel
         private UIClient View { get; set; }
         public VMMain VMMain { get; set; }
         
-        public string tbSearchClientText { get; set; }
-        public string tbSearchProductText { get; set; }
         public List<Client> Clients { get; set; }
         public List<Client> ClientsForBinding { get; set; }
         public List<BoughtProduct> ProductsForBinding { get; set; }

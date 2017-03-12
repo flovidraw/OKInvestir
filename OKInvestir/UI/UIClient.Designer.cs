@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lboxListClient = new System.Windows.Forms.ListBox();
             this.btChooseClient = new System.Windows.Forms.Button();
             this.btAddClient = new System.Windows.Forms.Button();
             this.tbSearchClient = new System.Windows.Forms.TextBox();
@@ -54,25 +53,13 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.lbEscIndicator = new System.Windows.Forms.Label();
+            this.lboxListClient = new System.Windows.Forms.ListBox();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // lboxListClient
-            // 
-            this.lboxListClient.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lboxListClient.Font = new System.Drawing.Font("Arial", 11F);
-            this.lboxListClient.FormattingEnabled = true;
-            this.lboxListClient.ItemHeight = 25;
-            this.lboxListClient.Location = new System.Drawing.Point(30, 134);
-            this.lboxListClient.Margin = new System.Windows.Forms.Padding(4);
-            this.lboxListClient.Name = "lboxListClient";
-            this.lboxListClient.Size = new System.Drawing.Size(290, 375);
-            this.lboxListClient.TabIndex = 22;
-            this.lboxListClient.SelectedIndexChanged += new System.EventHandler(this.lboxListClient_SelectedIndexChanged);
             // 
             // btChooseClient
             // 
@@ -82,10 +69,10 @@
             this.btChooseClient.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(216)))), ((int)(((byte)(249)))));
             this.btChooseClient.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btChooseClient.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btChooseClient.Location = new System.Drawing.Point(30, 556);
-            this.btChooseClient.Margin = new System.Windows.Forms.Padding(4);
+            this.btChooseClient.ForeColor = System.Drawing.Color.Black;
+            this.btChooseClient.Location = new System.Drawing.Point(20, 371);
             this.btChooseClient.Name = "btChooseClient";
-            this.btChooseClient.Size = new System.Drawing.Size(290, 45);
+            this.btChooseClient.Size = new System.Drawing.Size(193, 30);
             this.btChooseClient.TabIndex = 21;
             this.btChooseClient.TabStop = false;
             this.btChooseClient.Text = "Choose";
@@ -100,10 +87,10 @@
             this.btAddClient.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(216)))), ((int)(((byte)(249)))));
             this.btAddClient.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btAddClient.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btAddClient.Location = new System.Drawing.Point(30, 609);
-            this.btAddClient.Margin = new System.Windows.Forms.Padding(4);
+            this.btAddClient.ForeColor = System.Drawing.Color.Black;
+            this.btAddClient.Location = new System.Drawing.Point(20, 406);
             this.btAddClient.Name = "btAddClient";
-            this.btAddClient.Size = new System.Drawing.Size(290, 45);
+            this.btAddClient.Size = new System.Drawing.Size(193, 30);
             this.btAddClient.TabIndex = 20;
             this.btAddClient.TabStop = false;
             this.btAddClient.Text = "Add client";
@@ -114,10 +101,9 @@
             // 
             this.tbSearchClient.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbSearchClient.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbSearchClient.Location = new System.Drawing.Point(0, 8);
-            this.tbSearchClient.Margin = new System.Windows.Forms.Padding(4);
+            this.tbSearchClient.Location = new System.Drawing.Point(0, 5);
             this.tbSearchClient.Name = "tbSearchClient";
-            this.tbSearchClient.Size = new System.Drawing.Size(290, 30);
+            this.tbSearchClient.Size = new System.Drawing.Size(193, 20);
             this.tbSearchClient.TabIndex = 19;
             this.tbSearchClient.TextChanged += new System.EventHandler(this.tbSearchClient_TextChanged);
             // 
@@ -125,10 +111,9 @@
             // 
             this.lbListClient.AutoSize = true;
             this.lbListClient.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbListClient.Location = new System.Drawing.Point(24, 38);
-            this.lbListClient.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbListClient.Location = new System.Drawing.Point(16, 25);
             this.lbListClient.Name = "lbListClient";
-            this.lbListClient.Size = new System.Drawing.Size(93, 31);
+            this.lbListClient.Size = new System.Drawing.Size(58, 19);
             this.lbListClient.TabIndex = 18;
             this.lbListClient.Text = "Clients";
             // 
@@ -140,10 +125,10 @@
             this.btModify.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(216)))), ((int)(((byte)(249)))));
             this.btModify.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btModify.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btModify.Location = new System.Drawing.Point(30, 663);
-            this.btModify.Margin = new System.Windows.Forms.Padding(4);
+            this.btModify.ForeColor = System.Drawing.Color.Black;
+            this.btModify.Location = new System.Drawing.Point(20, 442);
             this.btModify.Name = "btModify";
-            this.btModify.Size = new System.Drawing.Size(290, 45);
+            this.btModify.Size = new System.Drawing.Size(193, 30);
             this.btModify.TabIndex = 34;
             this.btModify.TabStop = false;
             this.btModify.Text = "Modify";
@@ -155,11 +140,10 @@
             this.tbFirstName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(232)))), ((int)(((byte)(250)))));
             this.tbFirstName.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbFirstName.Font = new System.Drawing.Font("Arial Black", 13F, System.Drawing.FontStyle.Bold);
-            this.tbFirstName.Location = new System.Drawing.Point(12, 4);
-            this.tbFirstName.Margin = new System.Windows.Forms.Padding(4);
+            this.tbFirstName.Location = new System.Drawing.Point(9, 3);
             this.tbFirstName.Name = "tbFirstName";
             this.tbFirstName.ReadOnly = true;
-            this.tbFirstName.Size = new System.Drawing.Size(171, 37);
+            this.tbFirstName.Size = new System.Drawing.Size(114, 25);
             this.tbFirstName.TabIndex = 33;
             this.tbFirstName.TabStop = false;
             this.tbFirstName.Text = "fname";
@@ -170,11 +154,10 @@
             this.tbIdCardNumber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(202)))), ((int)(((byte)(240)))));
             this.tbIdCardNumber.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbIdCardNumber.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbIdCardNumber.Location = new System.Drawing.Point(10, 63);
-            this.tbIdCardNumber.Margin = new System.Windows.Forms.Padding(4);
+            this.tbIdCardNumber.Location = new System.Drawing.Point(7, 42);
             this.tbIdCardNumber.Name = "tbIdCardNumber";
             this.tbIdCardNumber.ReadOnly = true;
-            this.tbIdCardNumber.Size = new System.Drawing.Size(292, 30);
+            this.tbIdCardNumber.Size = new System.Drawing.Size(195, 20);
             this.tbIdCardNumber.TabIndex = 32;
             this.tbIdCardNumber.TabStop = false;
             this.tbIdCardNumber.Text = "id card number";
@@ -183,10 +166,9 @@
             // 
             this.lbIdCartNumber.AutoSize = true;
             this.lbIdCartNumber.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbIdCartNumber.Location = new System.Drawing.Point(4, 9);
-            this.lbIdCartNumber.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbIdCartNumber.Location = new System.Drawing.Point(3, 6);
             this.lbIdCartNumber.Name = "lbIdCartNumber";
-            this.lbIdCartNumber.Size = new System.Drawing.Size(192, 31);
+            this.lbIdCartNumber.Size = new System.Drawing.Size(124, 19);
             this.lbIdCartNumber.TabIndex = 31;
             this.lbIdCartNumber.Text = "ID card number";
             // 
@@ -194,10 +176,9 @@
             // 
             this.lbProductBoughtInformation.AutoSize = true;
             this.lbProductBoughtInformation.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbProductBoughtInformation.Location = new System.Drawing.Point(784, 38);
-            this.lbProductBoughtInformation.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbProductBoughtInformation.Location = new System.Drawing.Point(523, 25);
             this.lbProductBoughtInformation.Name = "lbProductBoughtInformation";
-            this.lbProductBoughtInformation.Size = new System.Drawing.Size(172, 31);
+            this.lbProductBoughtInformation.Size = new System.Drawing.Size(109, 19);
             this.lbProductBoughtInformation.TabIndex = 30;
             this.lbProductBoughtInformation.Text = "Product detail";
             // 
@@ -205,10 +186,9 @@
             // 
             this.lbListProductBought.AutoSize = true;
             this.lbListProductBought.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbListProductBought.Location = new System.Drawing.Point(380, 38);
-            this.lbListProductBought.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbListProductBought.Location = new System.Drawing.Point(253, 25);
             this.lbListProductBought.Name = "lbListProductBought";
-            this.lbListProductBought.Size = new System.Drawing.Size(202, 31);
+            this.lbListProductBought.Size = new System.Drawing.Size(128, 19);
             this.lbListProductBought.TabIndex = 29;
             this.lbListProductBought.Text = "Bought products";
             // 
@@ -217,11 +197,10 @@
             this.lboxProductBought.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lboxProductBought.Font = new System.Drawing.Font("Arial", 11F);
             this.lboxProductBought.FormattingEnabled = true;
-            this.lboxProductBought.ItemHeight = 25;
-            this.lboxProductBought.Location = new System.Drawing.Point(376, 84);
-            this.lboxProductBought.Margin = new System.Windows.Forms.Padding(4);
+            this.lboxProductBought.ItemHeight = 17;
+            this.lboxProductBought.Location = new System.Drawing.Point(257, 53);
             this.lboxProductBought.Name = "lboxProductBought";
-            this.lboxProductBought.Size = new System.Drawing.Size(345, 425);
+            this.lboxProductBought.Size = new System.Drawing.Size(230, 289);
             this.lboxProductBought.TabIndex = 27;
             this.lboxProductBought.SelectedIndexChanged += new System.EventHandler(this.lboxProductBought_SelectedIndexChanged);
             // 
@@ -229,10 +208,9 @@
             // 
             this.lbBalance.AutoSize = true;
             this.lbBalance.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbBalance.Location = new System.Drawing.Point(4, 9);
-            this.lbBalance.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbBalance.Location = new System.Drawing.Point(3, 6);
             this.lbBalance.Name = "lbBalance";
-            this.lbBalance.Size = new System.Drawing.Size(106, 31);
+            this.lbBalance.Size = new System.Drawing.Size(68, 19);
             this.lbBalance.TabIndex = 26;
             this.lbBalance.Text = "Balance";
             // 
@@ -241,11 +219,10 @@
             this.tbBalance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(202)))), ((int)(((byte)(240)))));
             this.tbBalance.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbBalance.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbBalance.Location = new System.Drawing.Point(10, 63);
-            this.tbBalance.Margin = new System.Windows.Forms.Padding(4);
+            this.tbBalance.Location = new System.Drawing.Point(7, 42);
             this.tbBalance.Name = "tbBalance";
             this.tbBalance.ReadOnly = true;
-            this.tbBalance.Size = new System.Drawing.Size(237, 30);
+            this.tbBalance.Size = new System.Drawing.Size(158, 20);
             this.tbBalance.TabIndex = 25;
             this.tbBalance.TabStop = false;
             this.tbBalance.Text = "balance";
@@ -255,11 +232,10 @@
             this.tbIDClient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(202)))), ((int)(((byte)(240)))));
             this.tbIDClient.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbIDClient.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbIDClient.Location = new System.Drawing.Point(10, 63);
-            this.tbIDClient.Margin = new System.Windows.Forms.Padding(4);
+            this.tbIDClient.Location = new System.Drawing.Point(7, 42);
             this.tbIDClient.Name = "tbIDClient";
             this.tbIDClient.ReadOnly = true;
-            this.tbIDClient.Size = new System.Drawing.Size(158, 30);
+            this.tbIDClient.Size = new System.Drawing.Size(105, 20);
             this.tbIDClient.TabIndex = 24;
             this.tbIDClient.TabStop = false;
             this.tbIDClient.Text = "id";
@@ -268,10 +244,9 @@
             // 
             this.lbIDClient.AutoSize = true;
             this.lbIDClient.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbIDClient.Location = new System.Drawing.Point(4, 9);
-            this.lbIDClient.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbIDClient.Location = new System.Drawing.Point(3, 6);
             this.lbIDClient.Name = "lbIDClient";
-            this.lbIDClient.Size = new System.Drawing.Size(112, 31);
+            this.lbIDClient.Size = new System.Drawing.Size(72, 19);
             this.lbIDClient.TabIndex = 23;
             this.lbIDClient.Text = "Client ID";
             // 
@@ -279,20 +254,18 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.tbSearchClient);
-            this.panel1.Location = new System.Drawing.Point(30, 80);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4);
+            this.panel1.Location = new System.Drawing.Point(20, 53);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(290, 45);
+            this.panel1.Size = new System.Drawing.Size(193, 30);
             this.panel1.TabIndex = 35;
             // 
             // lviewProductDetail
             // 
             this.lviewProductDetail.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lviewProductDetail.Font = new System.Drawing.Font("Arial", 11F);
-            this.lviewProductDetail.Location = new System.Drawing.Point(790, 80);
-            this.lviewProductDetail.Margin = new System.Windows.Forms.Padding(4);
+            this.lviewProductDetail.Location = new System.Drawing.Point(527, 53);
             this.lviewProductDetail.Name = "lviewProductDetail";
-            this.lviewProductDetail.Size = new System.Drawing.Size(400, 429);
+            this.lviewProductDetail.Size = new System.Drawing.Size(267, 286);
             this.lviewProductDetail.TabIndex = 36;
             this.lviewProductDetail.UseCompatibleStateImageBehavior = false;
             // 
@@ -302,30 +275,27 @@
             this.flowLayoutPanel1.Controls.Add(this.tbFirstName);
             this.flowLayoutPanel1.Controls.Add(this.lbLastName);
             this.flowLayoutPanel1.Controls.Add(this.tbLastName);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(364, 556);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(243, 371);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(867, 45);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(578, 30);
             this.flowLayoutPanel1.TabIndex = 38;
             // 
             // lbFirstName
             // 
             this.lbFirstName.AutoSize = true;
             this.lbFirstName.Font = new System.Drawing.Font("Arial Black", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbFirstName.Location = new System.Drawing.Point(4, 0);
-            this.lbFirstName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbFirstName.Location = new System.Drawing.Point(3, 0);
             this.lbFirstName.Name = "lbFirstName";
-            this.lbFirstName.Size = new System.Drawing.Size(0, 37);
+            this.lbFirstName.Size = new System.Drawing.Size(0, 24);
             this.lbFirstName.TabIndex = 35;
             // 
             // lbLastName
             // 
             this.lbLastName.AutoSize = true;
             this.lbLastName.Font = new System.Drawing.Font("Arial Black", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbLastName.Location = new System.Drawing.Point(191, 0);
-            this.lbLastName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbLastName.Location = new System.Drawing.Point(129, 0);
             this.lbLastName.Name = "lbLastName";
-            this.lbLastName.Size = new System.Drawing.Size(0, 37);
+            this.lbLastName.Size = new System.Drawing.Size(0, 24);
             this.lbLastName.TabIndex = 36;
             // 
             // tbLastName
@@ -333,11 +303,10 @@
             this.tbLastName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(232)))), ((int)(((byte)(250)))));
             this.tbLastName.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbLastName.Font = new System.Drawing.Font("Arial Black", 13F, System.Drawing.FontStyle.Bold);
-            this.tbLastName.Location = new System.Drawing.Point(199, 4);
-            this.tbLastName.Margin = new System.Windows.Forms.Padding(4);
+            this.tbLastName.Location = new System.Drawing.Point(135, 3);
             this.tbLastName.Name = "tbLastName";
             this.tbLastName.ReadOnly = true;
-            this.tbLastName.Size = new System.Drawing.Size(171, 37);
+            this.tbLastName.Size = new System.Drawing.Size(114, 25);
             this.tbLastName.TabIndex = 34;
             this.tbLastName.TabStop = false;
             this.tbLastName.Text = "lname";
@@ -348,10 +317,9 @@
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(202)))), ((int)(((byte)(240)))));
             this.panel2.Controls.Add(this.lbIDClient);
             this.panel2.Controls.Add(this.tbIDClient);
-            this.panel2.Location = new System.Drawing.Point(375, 609);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4);
+            this.panel2.Location = new System.Drawing.Point(250, 406);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(183, 99);
+            this.panel2.Size = new System.Drawing.Size(122, 66);
             this.panel2.TabIndex = 39;
             // 
             // panel3
@@ -359,10 +327,9 @@
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(202)))), ((int)(((byte)(240)))));
             this.panel3.Controls.Add(this.lbIdCartNumber);
             this.panel3.Controls.Add(this.tbIdCardNumber);
-            this.panel3.Location = new System.Drawing.Point(582, 609);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4);
+            this.panel3.Location = new System.Drawing.Point(388, 406);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(315, 99);
+            this.panel3.Size = new System.Drawing.Size(210, 66);
             this.panel3.TabIndex = 40;
             // 
             // panel4
@@ -370,24 +337,37 @@
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(202)))), ((int)(((byte)(240)))));
             this.panel4.Controls.Add(this.lbBalance);
             this.panel4.Controls.Add(this.tbBalance);
-            this.panel4.Location = new System.Drawing.Point(920, 609);
-            this.panel4.Margin = new System.Windows.Forms.Padding(4);
+            this.panel4.Location = new System.Drawing.Point(613, 406);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(272, 99);
+            this.panel4.Size = new System.Drawing.Size(181, 66);
             this.panel4.TabIndex = 41;
             // 
             // lbEscIndicator
             // 
             this.lbEscIndicator.AutoSize = true;
             this.lbEscIndicator.ForeColor = System.Drawing.Color.Red;
-            this.lbEscIndicator.Location = new System.Drawing.Point(250, 356);
+            this.lbEscIndicator.Location = new System.Drawing.Point(248, 356);
+            this.lbEscIndicator.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbEscIndicator.Name = "lbEscIndicator";
-            this.lbEscIndicator.Size = new System.Drawing.Size(0, 12);
+            this.lbEscIndicator.Size = new System.Drawing.Size(89, 12);
             this.lbEscIndicator.TabIndex = 42;
+            this.lbEscIndicator.Text = "exit indicator";
+            // 
+            // lboxListClient
+            // 
+            this.lboxListClient.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lboxListClient.Font = new System.Drawing.Font("Arial", 11F);
+            this.lboxListClient.FormattingEnabled = true;
+            this.lboxListClient.ItemHeight = 17;
+            this.lboxListClient.Location = new System.Drawing.Point(20, 101);
+            this.lboxListClient.Name = "lboxListClient";
+            this.lboxListClient.Size = new System.Drawing.Size(193, 238);
+            this.lboxListClient.TabIndex = 22;
+            this.lboxListClient.SelectedIndexChanged += new System.EventHandler(this.lboxListClient_SelectedIndexChanged);
             // 
             // UIClient
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(232)))), ((int)(((byte)(250)))));
             this.Controls.Add(this.lbEscIndicator);
@@ -405,9 +385,9 @@
             this.Controls.Add(this.btChooseClient);
             this.Controls.Add(this.btAddClient);
             this.Controls.Add(this.lbListClient);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "UIClient";
-            this.Size = new System.Drawing.Size(1236, 750);
+            this.Size = new System.Drawing.Size(824, 500);
+            this.Load += new System.EventHandler(this.UIClient_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
@@ -424,8 +404,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ListBox lboxListClient;
         private System.Windows.Forms.Button btChooseClient;
         private System.Windows.Forms.Button btAddClient;
         private System.Windows.Forms.TextBox tbSearchClient;
@@ -451,5 +429,6 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label lbEscIndicator;
+        private System.Windows.Forms.ListBox lboxListClient;
     }
 }

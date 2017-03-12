@@ -29,6 +29,7 @@ namespace OKInvestir.UI
             tbId.Text = "User name                   ";
             tbPw.ForeColor = Color.LightGray;
             tbPw.Text = "Password                   ";
+            tbPw.UseSystemPasswordChar = false;
         }
         
         /**
@@ -78,14 +79,6 @@ namespace OKInvestir.UI
                 hasTbIdTextBeenTyped = false;
             else
                 hasTbIdTextBeenTyped = true;
-            // add some space at the end to avoid user has a password which is "Password"
-            if (tbId.Text == "User name                   ") 
-            {
-                tbId.ForeColor = Color.LightGray;
-            } else
-            {
-                tbId.ForeColor = Color.Black;
-            }
         }
         // show hint
         private void tbId_LostFocus(object sender, EventArgs e)
@@ -93,6 +86,7 @@ namespace OKInvestir.UI
             if (tbId.Text == "")
             {
                 tbId.Text = "User name                   ";
+                tbId.ForeColor = Color.LightGray;
             }
         }
         // clear hint text
@@ -101,6 +95,7 @@ namespace OKInvestir.UI
             if (!hasTbIdTextBeenTyped)
             {
                 tbId.Text = "";
+                tbId.ForeColor = Color.Black;
             }
         }
 
@@ -111,22 +106,15 @@ namespace OKInvestir.UI
                 hasTbPwTextBeenTyped = false;
             else
                 hasTbPwTextBeenTyped = true;
-
-            if (tbPw.Text == "Password                   ")
-            {
-                tbPw.ForeColor = Color.LightGray;
-            }
-            else
-            {
-                tbPw.ForeColor = Color.Black;
-            }
         }
         // show hint
         private void tbPw_LostFocus(object sender, EventArgs e)
         {
             if (tbPw.Text == "")
             {
+                tbPw.UseSystemPasswordChar = false;
                 tbPw.Text = "Password                   ";
+                tbPw.ForeColor = Color.LightGray;
             }
         }
         // clear hint text
@@ -134,6 +122,8 @@ namespace OKInvestir.UI
         {
             if (!hasTbPwTextBeenTyped)
             {
+                tbPw.UseSystemPasswordChar = true;
+                tbPw.ForeColor = Color.Black;
                 tbPw.Text = "";
             }
         }

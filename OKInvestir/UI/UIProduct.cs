@@ -8,29 +8,57 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OKInvestir.ViewModel;
+using OKInvestir.Model;
 
 namespace OKInvestir.UI
 {
     public partial class UIProduct : UserControl
     {
         public VMProduct ViewModel { get; set; }
+        public UISubProduct sub { get; set; }
 
         public UIProduct()
         {
             InitializeComponent();
         }
-
-        private void lboxProduct_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ViewModel.loadProductDetail((Model.Product)lboxProduct.SelectedValue);
-        }
-
         /**
          * Functions for button onclick
          */
+        private void btChoose_Click(object sender, EventArgs e)
+        {
+            ViewModel.chooseProduct((Product)lboxProduct.SelectedValue);
+        }
+
+        private void btAddProduct_Click(object sender, EventArgs e)
+        {
+            sub = new UISubProduct(this);
+            ViewModel.VMMain.switchToSubProduct(sub);
+            ViewModel.VMMain.UIMainForm.disableButtons();
+        }
+
+        private void btModify_Click(object sender, EventArgs e)
+        {
+            sub = new UISubProduct(this, (Product)lboxProduct.SelectedValue);
+            ViewModel.VMMain.switchToSubProduct(sub);
+            ViewModel.VMMain.UIMainForm.disableButtons();
+        }
 
 
+        /**
+         * Product list selected index changed
+         */
+        private void lboxProduct_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ViewModel.loadProductDetail((Product)lboxProduct.SelectedValue);
+        }
 
+        /**
+         * Search text box text changed
+         */
+        private void tbSearchProduct_TextChanged(object sender, EventArgs e)
+        {
+            ViewModel.searchProduct(tbSearchProduct.Text);
+        }
 
 
 
@@ -45,9 +73,6 @@ namespace OKInvestir.UI
         public Label getLbId() { return lbId; }
         public TextBox getTbDescription() { return tbDescription; }
         public TextBox getTbSearchProduct() { return tbSearchProduct; }
-
-
-
 
     }
 }

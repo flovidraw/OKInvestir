@@ -43,6 +43,12 @@ namespace OKInvestir.UI
 
         public Button getBtDashboard() { return btDashboard; }
 
+        public Button getBtClient() { return btClient; }
+
+        public Button getBtProduct() { return btProduct; }
+
+        public Button getBtSimulation() { return btSimulation; }
+
         public Label getLbUserName() { return lbUserName; }
 
         public Label getLbClientName() { return lbClientName; }
