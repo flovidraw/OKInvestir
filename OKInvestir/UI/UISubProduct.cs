@@ -26,6 +26,7 @@ namespace OKInvestir.UI
             flpSI.AutoScroll = true;
             flpTI.AutoScroll = true;
 
+            pdtId = 0;
             this.owner = owner;
             sillInterestCount = 0;
             timeInterestCount = 0;
@@ -236,7 +237,14 @@ namespace OKInvestir.UI
 
         private void pbSave_Click(object sender, EventArgs e)
         {
-            owner.ViewModel.saveProduct();
+            if (owner.ViewModel.saveProduct())
+            {
+                owner.ViewModel.VMMain.UIMainForm.genMsgBox("OK", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                owner.ViewModel.VMMain.UIMainForm.genMsgBox("Failed", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

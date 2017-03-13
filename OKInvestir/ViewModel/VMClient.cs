@@ -264,32 +264,35 @@ namespace OKInvestir.ViewModel
             listView.Columns.Add("Proprety");
             listView.Columns.Add("Value");
 
-            // add data in listView
-            listView.Items.Add(new ListViewItem(new string[] { "Name", pdt.Product.Name }));
-            listView.Items.Add(new ListViewItem(new string[] { "Description", pdt.Product.Description }));
-            listView.Items.Add(new ListViewItem(new string[] { "Final interest", pdt.FinalInterest.ToString() }));
-            listView.Items.Add(new ListViewItem(new string[] { "Start date", pdt.StartDate.ToString("dd/MM/yyyy") }));
-            listView.Items.Add(new ListViewItem(new string[] { "End date", pdt.EndDate.ToString("dd/MM/yyyy") }));
-            listView.Items.Add(new ListViewItem(new string[] { "Buying date", pdt.BuyingDate.ToString("dd/MM/yyyy") }));
-            listView.Items.Add(new ListViewItem(new string[] { "Status", pdt.Product.ProductStatus.ToString() }));
-
-            List<SillInterest> siList = pdt.Product.SillInterests;
-            listView.Items.Add(new ListViewItem(new string[] { "", "" }));
-            listView.Items.Add(new ListViewItem(new string[] { "Sill(Euro)", "Interest" }));
-            foreach (SillInterest si in siList)
+            if (pdt != null)
             {
-                listView.Items.Add(new ListViewItem(new string[] { si.Sill.ToString(), si.Interest.ToString() }));
-            }
+                // add data in listView
+                listView.Items.Add(new ListViewItem(new string[] { "Name", pdt.Product.Name }));
+                listView.Items.Add(new ListViewItem(new string[] { "Description", pdt.Product.Description }));
+                listView.Items.Add(new ListViewItem(new string[] { "Final interest", pdt.FinalInterest.ToString() }));
+                listView.Items.Add(new ListViewItem(new string[] { "Start date", pdt.StartDate.ToString("dd/MM/yyyy") }));
+                listView.Items.Add(new ListViewItem(new string[] { "End date", pdt.EndDate.ToString("dd/MM/yyyy") }));
+                listView.Items.Add(new ListViewItem(new string[] { "Buying date", pdt.BuyingDate.ToString("dd/MM/yyyy") }));
+                listView.Items.Add(new ListViewItem(new string[] { "Status", pdt.Product.ProductStatus.ToString() }));
 
-            List<TimeInterest> tiList = pdt.Product.TimeInterests;
-            listView.Items.Add(new ListViewItem(new string[] { "", "" }));
-            listView.Items.Add(new ListViewItem(new string[] { "Time(Month)", "Interest" }));
-            foreach (TimeInterest ti in tiList)
-            {
-                listView.Items.Add(new ListViewItem(new string[] { ti.Time.ToString(), ti.Interest.ToString() }));
-            }
+                List<SillInterest> siList = pdt.Product.SillInterests;
+                listView.Items.Add(new ListViewItem(new string[] { "", "" }));
+                listView.Items.Add(new ListViewItem(new string[] { "Sill(Euro)", "Interest" }));
+                foreach (SillInterest si in siList)
+                {
+                    listView.Items.Add(new ListViewItem(new string[] { si.Sill.ToString(), si.Interest.ToString() }));
+                }
 
-            listView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent); // resize columns width
+                List<TimeInterest> tiList = pdt.Product.TimeInterests;
+                listView.Items.Add(new ListViewItem(new string[] { "", "" }));
+                listView.Items.Add(new ListViewItem(new string[] { "Time(Month)", "Interest" }));
+                foreach (TimeInterest ti in tiList)
+                {
+                    listView.Items.Add(new ListViewItem(new string[] { ti.Time.ToString(), ti.Interest.ToString() }));
+                }
+
+                listView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent); // resize columns width
+            }
         }
 
 

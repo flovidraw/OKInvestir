@@ -32,7 +32,7 @@ namespace OKInvestir.ViewModel
 
             // load selected client detail to listView and textboxes
             loadProductDetail((Product)View.getLboxProduct().SelectedValue);
-            
+
         }
 
 
@@ -40,13 +40,14 @@ namespace OKInvestir.ViewModel
         /**
          * Choose product and go to simulation
          */
-         public void chooseProduct(Product pdt)
+        public void chooseProduct(Product pdt)
         {
             VMMain.Product = pdt;
-            if(VMMain.Client != null)
+            if (VMMain.Client != null)
             {
                 VMMain.UIMainForm.getBtSimulation().PerformClick();
-            } else
+            }
+            else
             {
                 VMMain.UIMainForm.genMsgBox("Please choose a client first.", "No client chose", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -117,7 +118,7 @@ namespace OKInvestir.ViewModel
             lviewTimeInterest.Columns.Add("Interest");
 
             // change labels and textbox of product info
-            View.getLbName().Text =  pdt.Name;
+            View.getLbName().Text = pdt.Name;
             View.getTbDescription().Text = pdt.Description;
             View.getLbId().Text = "ID: " + pdt.Id.ToString();
             // TODO: change int to text of status
@@ -143,10 +144,14 @@ namespace OKInvestir.ViewModel
         /**
          * Save product in database. Call by UISunProduct
          */
-         public bool saveProduct()
+        public bool saveProduct()
         {
             Product pdt = new Product();
-            pdt.Id = View.sub.pdtId;
+            if (View.sub.pdtId != 0)
+            {
+                pdt.Id = View.sub.pdtId;
+            }
+            
             pdt.Name = View.sub.getTbName().Text;
             pdt.Description = View.sub.getTbDescription().Text;
 
@@ -157,6 +162,7 @@ namespace OKInvestir.ViewModel
             Dictionary<int, decimal> tiDict = new Dictionary<int, decimal>();
 
             decimal tempSill = 0;
+
             int tempTime = 0;
             decimal tempInterest = 0;
             bool isTwoTbFilled = true;
@@ -190,12 +196,15 @@ namespace OKInvestir.ViewModel
 
                 if (isTwoTbFilled)
                 {
-                    siDict.Add(tempSill, tempInterest);
+                    SillInterest si = new SillInterest();
+                    si.Sill = tempSill;
+                    si.Interest = tempInterest;
+                    si.Product = pdt;
+                    pdt.SillInterests.Add(si);
                 }
             }
 
-            // extract all filled time-interest
-            for (int i = 1; i <= timeInterestCount; i++)
+            // find all filled pair of time-interest textboxes             for (int i = 1; i <= timeInterestCount; i++)
             {
                 isTwoTbFilled = true;
 
@@ -221,53 +230,46 @@ namespace OKInvestir.ViewModel
                     isTwoTbFilled = false;
                 }
 
+                // convert to SillInterest, and add to list
                 if (isTwoTbFilled)
                 {
-                    tiDict.Add(tempTime, tempInterest);
+                    TimeInterest ti = new TimeInterest();
+                    ti.Time = tempTime;
+                    ti.Interest = tempInterest;
+                    ti.Product = pdt;
+                    pdt.TimeInterests.Add(ti);
                 }
             }
 
-            foreach (KeyValuePair<decimal, decimal> pair in siDict)
-            {
-                decimal sill = pair.Key;
-                decimal interest = pair.Value;
-                SillInterest si = new SillInterest();
-                si.Sill = sill;
-                si.Interest = interest;
-                si.Product = pdt;
-                si.ProductID = pdt.Id;
-                pdt.SillInterests.Add(si);
-            }
-
-            foreach (KeyValuePair<int, decimal> pair in tiDict)
-            {
-                int time = pair.Key;
-                decimal interest = pair.Value;
-                TimeInterest ti = new TimeInterest();
-                ti.Time = time;
-                ti.Interest = interest;
-                ti.Product = pdt;
-                ti.ProductID = pdt.Id;
-                pdt.TimeInterests.Add(ti);
-            }
-
+            // connect to db
             bool isSuccess = true;
             using (var context = new Model.Context())
             {
                 Cursor.Current = Cursors.WaitCursor;        // waiting animation cursor
-                context.Database.Initialize(force: true);   // connect to db, it takes time
-                var pdtOld = context.Products.Where(p => p.Id == pdt.Id);
-                // there should be only one product in the list
-                pdtOld.First().Name = pdt.Name;
-                pdtOld.First().Description = pdt.Description;
-                pdtOld.First().SillInterests = new List<SillInterest>(pdt.SillInterests);
-                pdtOld.First().TimeInterests = new List<TimeInterest>(pdt.TimeInterests);
+                context.Database.Initialize(force: false);   // connect to db, it takes time
 
+                if (View.sub.pdtId != 0) // if modified a product
+                {
+                    var pdtOld = context.Products.Where(p => p.Id == pdt.Id);
+                    // there should be only one product in the list
+                    // modify product
+                    pdtOld.First().Name = pdt.Name;
+                    pdtOld.First().Description = pdt.Description;
+                    pdtOld.First().SillInterests = new List<SillInterest>(pdt.SillInterests);
+                    pdtOld.First().TimeInterests = new List<TimeInterest>(pdt.TimeInterests);
+                }
+                else // if add a new product
+                {
+                    // add product
+                    context.Products.Add(pdt);
+                }
+
+                // save change
                 try
                 {
                     context.SaveChanges();
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     VMMain.HandleException(e, VMMain.UIMainForm);
                     isSuccess = false;

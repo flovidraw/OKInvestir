@@ -20,5 +20,11 @@ namespace OKInvestir.Model
 
         public virtual List<TimeInterest> TimeInterests { get; set; }
         public virtual List<SillInterest> SillInterests { get; set; }
+
+        public Product()
+        {
+            TimeInterests = new List<TimeInterest>();
+            SillInterests = new List<SillInterest>();
+        }
     }
 }
