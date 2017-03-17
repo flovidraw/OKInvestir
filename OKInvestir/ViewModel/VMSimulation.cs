@@ -41,9 +41,9 @@ namespace OKInvestir.ViewModel
             return time;
         }
 
-        public Model.SillInterest FindSillInterestSection()
+        public Model.SillInterest FindSillInterestSection(decimal Amount)
         {
-            decimal amount = View.getTbAmount();
+            decimal amount = Amount;
             Model.SillInterest sill = new Model.SillInterest ();
             sill.Sill = 0;
             foreach(Model.SillInterest sillI in VMMain.Product.SillInterests)
@@ -62,27 +62,24 @@ namespace OKInvestir.ViewModel
 
         public void resultSimulation()
         {
+
             decimal amountSimulation = View.getTbAmount();
             DateTime StartDateSimulation = View.getValueStartDate();
             DateTime EndDateSimulation = View.getValueEndDate();
             int periodeSimulation = (int)(EndDateSimulation - StartDateSimulation).TotalDays / 30;
             decimal InterestRateTime = FindTimeInterestSection().Interest;
-            decimal InterestRateSill = FindSillInterestSection().Interest;
+            decimal InterestRateSill = FindSillInterestSection(amountSimulation).Interest;
             decimal InterestRateSimulation = ((InterestRateSill + 1) * (InterestRateTime + 1)) - 1;
             decimal SettlementPriceSimulation = amountSimulation * (1 + InterestRateSimulation);
-
 
             if (amountSimulation!= 0)
             {
                 View.getLbValueAmount().Text = amountSimulation.ToString();
-                View.getValuePeriode().Text = periodeSimulation.ToString()+"Months";
+                View.getValuePeriode().Text = periodeSimulation.ToString()+" Months";
 
                 View.getLbValueProductSelected().Text = VMMain.Product.Name;
-                View.getLbValueInterestRate().Text = (InterestRateSimulation * 100).ToString()+"%";
+                View.getLbValueInterestRate().Text = (InterestRateSimulation * 100).ToString()+" %";
                 View.GetLbValueSettlementPrice().Text = SettlementPriceSimulation.ToString();
-
-
-
             }
         }
 

@@ -21,7 +21,6 @@ namespace OKInvestir.UI
         {
             InitializeComponent();
             isEditing = false;
-            tbAmout.Text = "Amount of the simulation";
 
         }
 
@@ -39,18 +38,24 @@ namespace OKInvestir.UI
         public decimal getTbAmount()
         {
             decimal amountEntered;
+      
             if (decimal.TryParse(tbAmout.Text.Trim(), out amountEntered))
             {
                 if (amountEntered > 10000000)
                 {
-                    ViewModel.VMMain.UIMainForm.genMsgBox("Your amout entered can't not be greater than 10 millions, please enter it again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ViewModel.VMMain.UIMainForm.genMsgBox("Your amount entered can't not be greater than 10 millions, please enter it again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     amountEntered = 0;
                 }
- 
+                else if (amountEntered <= 0)
+                {
+                    ViewModel.VMMain.UIMainForm.genMsgBox("Your amount entered can't not be equals or less than 0, please enter it again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    amountEntered = 0;
+                }
+                
             }
             else
             {
-                    ViewModel.VMMain.UIMainForm.genMsgBox("Your amout entered is empty or it's not a integer, please enter it again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ViewModel.VMMain.UIMainForm.genMsgBox("Your amount entered is empty or it's not a integer, please enter it again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     amountEntered = 0;
             }
 
@@ -103,17 +108,11 @@ namespace OKInvestir.UI
         }
         private void btSimulate_Click(object sender, EventArgs e)
         {
-            decimal amountEntered = getTbAmount();
-            DateTime StartTime = dtpStartDate.Value;
-            DateTime EndTime = dtpEndDate.Value;
-            int periode = (int)(EndTime - StartTime).TotalDays / 30;
+           
             
             this.ViewModel.resultSimulation();
             
-            /**
-            ViewModel.VMMain.UIMainForm.genMsgBox(ViewModel.FindTimeInterestSection().Time.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            ViewModel.VMMain.UIMainForm.genMsgBox(ViewModel.FindSillInterestSection().Sill.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            **/
+          
         }
         private void dtpStartDate_ValueChanged(object sender, EventArgs e)
         {

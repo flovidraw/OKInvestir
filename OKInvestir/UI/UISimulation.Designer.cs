@@ -122,6 +122,7 @@
             // 
             this.tbAmout.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbAmout.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbAmout.ForeColor = System.Drawing.SystemColors.MenuText;
             this.tbAmout.Location = new System.Drawing.Point(132, 286);
             this.tbAmout.Name = "tbAmout";
             this.tbAmout.Size = new System.Drawing.Size(200, 20);
