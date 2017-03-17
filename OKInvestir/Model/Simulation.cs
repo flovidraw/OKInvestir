@@ -22,5 +22,9 @@ namespace OKInvestir.Model
         [Required]
         [Display(Name = "End Date")]
         public DateTime EndDate { get; set; }
+        [Required]
+        public decimal InterestRate { get; set; }
+        [Required]
+        public decimal SettlementPrice { get; set; }
     }
 }
