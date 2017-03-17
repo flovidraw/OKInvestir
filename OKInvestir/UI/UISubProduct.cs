@@ -96,13 +96,13 @@ namespace OKInvestir.UI
                 tbSill.BorderStyle = BorderStyle.None;
                 tbSill.Font = new Font("Arial", 11F);
                 tbSill.Size = new Size(168, 17);
-                tbSill.Name = "sill" + sillInterestCount.ToString();
+                tbSill.Name = "sill" + timeInterestCount.ToString();
 
                 tbInterest.BackColor = Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(252)))), ((int)(((byte)(255)))));
                 tbInterest.BorderStyle = BorderStyle.None;
                 tbInterest.Font = new Font("Arial", 11F);
                 tbInterest.Size = new Size(168, 17);
-                tbInterest.Name = "interest" + sillInterestCount.ToString();
+                tbInterest.Name = "interest" + timeInterestCount.ToString();
 
                 // set text
                 tbSill.Text = ti.Time.ToString();
@@ -239,7 +239,12 @@ namespace OKInvestir.UI
         {
             if (owner.ViewModel.saveProduct())
             {
-                owner.ViewModel.VMMain.UIMainForm.genMsgBox("OK", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //owner.ViewModel.VMMain.UIMainForm.genMsgBox("OK", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // return to product page
+                owner.ViewModel.VMMain.switchToProduct();
+                // refresh list
+                owner.ViewModel.getDataFromDb();
+                owner.ViewModel.loadProductDetail((Product)owner.getLboxProduct().SelectedValue);
             }
             else
             {

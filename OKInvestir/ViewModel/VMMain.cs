@@ -40,14 +40,8 @@ namespace OKInvestir.ViewModel
         {
             UIMainForm = new UIMainForm();
             UIMainForm.VMMain = this;
-            //switchToLogin(); // App start page
+            switchToLogin(); // App start page
             //switchToMainPage(null, new Model.User(1));
-
-
-
-            UIProduct = new UIProduct();
-            VMProduct = new VMProduct(this, UIProduct);
-            UIMainForm.getPnUserControl().Controls.Add(new UISubProduct(UIProduct));
         }
 
 
@@ -178,11 +172,25 @@ namespace OKInvestir.ViewModel
                         DatabaseAccessException(form, dbUpdateEx.Message, sqlException.Message, sqlException.Number);
                     } else
                     {
-                        DatabaseAccessException(form, dbUpdateEx.Message, dbUpdateEx.InnerException.Message);
+                        form.genMsgBox("Message = " + dbUpdateEx.Message + "\nInnerException = " + dbUpdateEx.InnerException,
+                            "DataBase Access Exception", System.Windows.Forms.MessageBoxButtons.OK, 
+                            System.Windows.Forms.MessageBoxIcon.Error);
                     }
                 }
+                else
+                {
+                    form.genMsgBox("Message = " + dbUpdateEx.Message,
+                            "DataBase Access Exception", System.Windows.Forms.MessageBoxButtons.OK,
+                            System.Windows.Forms.MessageBoxIcon.Error);
+                }
             }
-        }
+            else
+            {
+                form.genMsgBox("Error\n But not DbUpdateException",
+                            "DataBase Access Exception", System.Windows.Forms.MessageBoxButtons.OK,
+                            System.Windows.Forms.MessageBoxIcon.Error);
+            }
+        } 
 
         public void DatabaseAccessException(UIMainForm form, string dbUpdateExMessage, string dbUpdateExInnerException, int sqlExceptionNumber)
         {
@@ -200,12 +208,6 @@ namespace OKInvestir.ViewModel
                     break;
             }
             
-        }
-
-        public void DatabaseAccessException(UIMainForm form, string dbUpdateExMessage, string dbUpdateExInnerException)
-        {
-            form.genMsgBox("Message = " + dbUpdateExMessage + "\nInnerException = " + dbUpdateExInnerException,
-                "DataBase Access Exception", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
         }
     }
 }

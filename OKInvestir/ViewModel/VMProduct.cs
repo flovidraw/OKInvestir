@@ -151,15 +151,12 @@ namespace OKInvestir.ViewModel
             {
                 pdt.Id = View.sub.pdtId;
             }
-            
+
             pdt.Name = View.sub.getTbName().Text;
             pdt.Description = View.sub.getTbDescription().Text;
 
             int sillInterestCount = View.sub.sillInterestCount;
             int timeInterestCount = View.sub.timeInterestCount;
-
-            Dictionary<decimal, decimal> siDict = new Dictionary<decimal, decimal>();
-            Dictionary<int, decimal> tiDict = new Dictionary<int, decimal>();
 
             decimal tempSill = 0;
 
@@ -167,13 +164,15 @@ namespace OKInvestir.ViewModel
             decimal tempInterest = 0;
             bool isTwoTbFilled = true;
 
-            // extract all filled sill-interest
-            for (int i = 1; i <= sillInterestCount; i++)
+            // extract all filled pairs of sill-interest
+            pdt.SillInterests.Clear();
+            int temp = sillInterestCount;
+            for (int i = 1; i <= temp; i++)
             {
                 isTwoTbFilled = true;
 
                 string sill = View.sub.getFlpSI().Controls.Find
-                    ("sill" + sillInterestCount.ToString(), false)[0].Text;
+                    ("sill" + sillInterestCount.ToString(), false).First().Text;
                 if (!string.IsNullOrEmpty(sill))
                 {
                     tempSill = decimal.Parse(sill);
@@ -184,7 +183,7 @@ namespace OKInvestir.ViewModel
                 }
 
                 string interest = View.sub.getFlpSI().Controls.Find
-                    ("interest" + sillInterestCount.ToString(), false)[0].Text;
+                    ("interest" + sillInterestCount.ToString(), false).First().Text;
                 if (!string.IsNullOrEmpty(interest))
                 {
                     tempInterest = decimal.Parse(interest);
@@ -199,12 +198,15 @@ namespace OKInvestir.ViewModel
                     SillInterest si = new SillInterest();
                     si.Sill = tempSill;
                     si.Interest = tempInterest;
-                    si.Product = pdt;
                     pdt.SillInterests.Add(si);
                 }
+                sillInterestCount--;
             }
 
-            // find all filled pair of time-interest textboxes             for (int i = 1; i <= timeInterestCount; i++)
+            // find all filled pairs of time-interest textboxes 
+            pdt.TimeInterests.Clear();
+            temp = timeInterestCount;
+            for (int i = 1; i <= temp; i++)
             {
                 isTwoTbFilled = true;
 
@@ -236,9 +238,11 @@ namespace OKInvestir.ViewModel
                     TimeInterest ti = new TimeInterest();
                     ti.Time = tempTime;
                     ti.Interest = tempInterest;
-                    ti.Product = pdt;
+                    pdt.TimeInterests.Clear();
                     pdt.TimeInterests.Add(ti);
                 }
+
+                timeInterestCount--;
             }
 
             // connect to db
@@ -255,7 +259,9 @@ namespace OKInvestir.ViewModel
                     // modify product
                     pdtOld.First().Name = pdt.Name;
                     pdtOld.First().Description = pdt.Description;
+                    pdtOld.First().SillInterests.Clear();
                     pdtOld.First().SillInterests = new List<SillInterest>(pdt.SillInterests);
+                    pdtOld.First().TimeInterests.Clear();
                     pdtOld.First().TimeInterests = new List<TimeInterest>(pdt.TimeInterests);
                 }
                 else // if add a new product
@@ -265,7 +271,7 @@ namespace OKInvestir.ViewModel
                 }
 
                 // save change
-                try
+                /*try
                 {
                     context.SaveChanges();
                 }
@@ -273,7 +279,8 @@ namespace OKInvestir.ViewModel
                 {
                     VMMain.HandleException(e, VMMain.UIMainForm);
                     isSuccess = false;
-                }
+                }*/
+                context.SaveChanges();
 
                 Cursor.Current = Cursors.Arrow;             // get back to normal cursor
             }
