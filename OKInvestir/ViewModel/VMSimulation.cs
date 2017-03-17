@@ -60,6 +60,36 @@ namespace OKInvestir.ViewModel
             return sill;
         }
 
+        public int MinimumTimeSimulation()
+        {
+            Model.TimeInterest time = new Model.TimeInterest();
+            time.Time = 0;
+            int i = 0;
+            foreach (Model.TimeInterest timeI in VMMain.Product.TimeInterests)
+            {  
+                if(i == 0)
+                {
+                   time.Time = timeI.Time;
+                }
+                else
+                {
+                    if (timeI.Time < time.Time)
+                    {
+                        time.Time = timeI.Time;
+                    }
+                }
+                i++;
+            }
+            return time.Time;
+            }
+
+
+
+
+
+
+
+           
         public void resultSimulation()
         {
 
@@ -71,6 +101,12 @@ namespace OKInvestir.ViewModel
             decimal InterestRateSill = FindSillInterestSection(amountSimulation).Interest;
             decimal InterestRateSimulation = ((InterestRateSill + 1) * (InterestRateTime + 1)) - 1;
             decimal SettlementPriceSimulation = amountSimulation * (1 + InterestRateSimulation);
+
+            if (InterestRateTime == 0)
+            {
+                VMMain.UIMainForm.genMsgBox("For this product selected, the minimum holding periode have to be more than " + MinimumTimeSimulation() + " months.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                amountSimulation = 0;
+            }
 
             if (amountSimulation!= 0)
             {

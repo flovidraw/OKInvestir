@@ -21,6 +21,7 @@ namespace OKInvestir.UI
         {
             InitializeComponent();
             isEditing = false;
+           
 
         }
 
