@@ -35,7 +35,7 @@ namespace OKInvestir.ViewModel
                     time.Interest = timeI.Interest;
                     time.Id = timeI.Id;
                     time.ProductID = timeI.ProductID;
-                    time.Product = timeI.Product;
+                    //time.Product = timeI.Product;
                 }
             }
             return time;
@@ -53,7 +53,7 @@ namespace OKInvestir.ViewModel
                     sill.Sill = sillI.Sill;
                     sill.Id = sillI.Id;
                     sill.Interest = sillI.Interest;
-                    sill.Product = sillI.Product;
+                    //sill.Product = sillI.Product;
                     sill.ProductID = sillI.ProductID;
                 }
             }

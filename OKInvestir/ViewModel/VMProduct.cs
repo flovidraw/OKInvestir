@@ -8,6 +8,8 @@ using OKInvestir.UI;
 using OKInvestir.Model;
 using System.ComponentModel;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 
 namespace OKInvestir.ViewModel
 {
@@ -146,6 +148,10 @@ namespace OKInvestir.ViewModel
          */
         public bool saveProduct()
         {
+            bool isSuccess = true;              // if false, will not save modification
+            bool isAnyFieldNotFilled = false;   // if true, will show a message
+            bool isAnyFieldNotCorrect = false;  // if true, will show a message
+
             Product pdt = new Product();
             if (View.sub.pdtId != 0)
             {
@@ -154,45 +160,64 @@ namespace OKInvestir.ViewModel
 
             pdt.Name = View.sub.getTbName().Text;
             pdt.Description = View.sub.getTbDescription().Text;
+            pdt.ProductStatus = 1;   // set 1 as default
 
             int sillInterestCount = View.sub.sillInterestCount;
             int timeInterestCount = View.sub.timeInterestCount;
+            
 
-            decimal tempSill = 0;
-
-            int tempTime = 0;
-            decimal tempInterest = 0;
-            bool isTwoTbFilled = true;
 
             // extract all filled pairs of sill-interest
-            pdt.SillInterests.Clear();
-            int temp = sillInterestCount;
-            for (int i = 1; i <= temp; i++)
+            for (int i = 1; i <= sillInterestCount; i++)
             {
-                isTwoTbFilled = true;
+                bool isTwoTbFilled = true;
+                decimal tempSill = 0;
+                decimal tempInterest = 0;
 
-                string sill = View.sub.getFlpSI().Controls.Find
-                    ("sill" + sillInterestCount.ToString(), false).First().Text;
-                if (!string.IsNullOrEmpty(sill))
+                // find all tb of sill, validate the text and copy it to tempSill
+                TextBox tbSill = (TextBox)View.sub.getFlpSI().Controls.Find("sill" + i.ToString(), false).First();
+                string sill = tbSill.Text;
+                // if field is not filled, allow but show a message
+                if (string.IsNullOrEmpty(sill))
                 {
-                    tempSill = decimal.Parse(sill);
+                    isTwoTbFilled = false;      // if false, will not save this pair of Sill-Interest
+                    isAnyFieldNotFilled = true; // if true, will show a message
+                }
+                // if is not numeric, not allow, change text color to red and show a message
+                else if(!decimal.TryParse(sill, out tempSill))
+                {
+                    isTwoTbFilled = false;
+                    isAnyFieldNotCorrect = true;    // if true, will show a message
+                    isSuccess = false;              // if false, will not save modification
+                    tbSill.ForeColor = System.Drawing.Color.Red;
+                }
+                // if is numeric, change back to black color
+                else
+                {
+                    tbSill.ForeColor = System.Drawing.Color.Black;
+                }
+
+                // find all tb of interest, validate the text and copy it to tempSill
+                TextBox tbInterest = (TextBox)View.sub.getFlpSI().Controls.Find("interest" + i.ToString(), false).First();
+                string interest = tbInterest.Text;
+                if (string.IsNullOrEmpty(interest))
+                {
+                    isTwoTbFilled = false;
+                    isAnyFieldNotFilled = true;
+                }
+                else if (!decimal.TryParse(interest, out tempInterest))
+                {
+                    isTwoTbFilled = false;
+                    isAnyFieldNotCorrect = true;
+                    isSuccess = false;
+                    tbInterest.ForeColor = System.Drawing.Color.Red;
                 }
                 else
                 {
-                    isTwoTbFilled = false;
+                    tbInterest.ForeColor = System.Drawing.Color.Black;
                 }
 
-                string interest = View.sub.getFlpSI().Controls.Find
-                    ("interest" + sillInterestCount.ToString(), false).First().Text;
-                if (!string.IsNullOrEmpty(interest))
-                {
-                    tempInterest = decimal.Parse(interest);
-                }
-                else
-                {
-                    isTwoTbFilled = false;
-                }
-
+                // if two tb are filled and the text inside is numeric, save them in the list
                 if (isTwoTbFilled)
                 {
                     SillInterest si = new SillInterest();
@@ -200,36 +225,50 @@ namespace OKInvestir.ViewModel
                     si.Interest = tempInterest;
                     pdt.SillInterests.Add(si);
                 }
-                sillInterestCount--;
             }
 
+
             // find all filled pairs of time-interest textboxes 
-            pdt.TimeInterests.Clear();
-            temp = timeInterestCount;
-            for (int i = 1; i <= temp; i++)
+            for (int i = 1; i <= timeInterestCount; i++)
             {
-                isTwoTbFilled = true;
+                bool isTwoTbFilled = true;
+                int tempTime = 0;
+                decimal tempInterest = 0;
 
-                string sill = View.sub.getFlpTI().Controls.Find
-                    ("sill" + timeInterestCount.ToString(), false)[0].Text;
-                if (!string.IsNullOrEmpty(sill))
-                {
-                    tempTime = int.Parse(sill);
-                }
-                else
+                TextBox tbSill = (TextBox)View.sub.getFlpTI().Controls.Find("sill" + i.ToString(), false).First();
+                string sill = tbSill.Text;
+                if (string.IsNullOrEmpty(sill))
                 {
                     isTwoTbFilled = false;
+                    isAnyFieldNotFilled = true;
                 }
-
-                string interest = View.sub.getFlpTI().Controls.Find
-                    ("interest" + timeInterestCount.ToString(), false)[0].Text;
-                if (!string.IsNullOrEmpty(interest))
-                {
-                    tempInterest = decimal.Parse(interest);
-                }
-                else
+                else if (!int.TryParse(sill, out tempTime))
                 {
                     isTwoTbFilled = false;
+                    isAnyFieldNotCorrect = true;
+                    isSuccess = false;
+                    tbSill.ForeColor = System.Drawing.Color.Red;
+                } else
+                {
+                    tbSill.ForeColor = System.Drawing.Color.Black;
+                }
+
+                TextBox tbInterest = (TextBox)View.sub.getFlpTI().Controls.Find("interest" + i.ToString(), false).First();
+                string interest = tbInterest.Text;
+                if (string.IsNullOrEmpty(interest))
+                {
+                    isTwoTbFilled = false;
+                    isAnyFieldNotFilled = true;
+                }
+                else if (!decimal.TryParse(interest, out tempInterest))
+                {
+                    isTwoTbFilled = false;
+                    isAnyFieldNotCorrect = true;
+                    isSuccess = false;
+                    tbInterest.ForeColor = System.Drawing.Color.Red;
+                } else
+                {
+                    tbInterest.ForeColor = System.Drawing.Color.Black;
                 }
 
                 // convert to SillInterest, and add to list
@@ -238,49 +277,88 @@ namespace OKInvestir.ViewModel
                     TimeInterest ti = new TimeInterest();
                     ti.Time = tempTime;
                     ti.Interest = tempInterest;
-                    pdt.TimeInterests.Clear();
                     pdt.TimeInterests.Add(ti);
                 }
-
-                timeInterestCount--;
             }
 
+
+            // sort list by sill/time
+            pdt.SillInterests = pdt.SillInterests.OrderBy(si => si.Sill).ToList();
+            pdt.TimeInterests = pdt.TimeInterests.OrderBy(ti => ti.Time).ToList();
+
+
+            // show messages
+            if (isAnyFieldNotCorrect)
+            {
+                VMMain.UIMainForm.genMsgBox("Input incorrect!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            if (isAnyFieldNotFilled)
+            {
+                VMMain.UIMainForm.genMsgBox("All not filled fields will be ignore", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            
+
             // connect to db
-            bool isSuccess = true;
             using (var context = new Model.Context())
             {
                 Cursor.Current = Cursors.WaitCursor;        // waiting animation cursor
-                context.Database.Initialize(force: false);   // connect to db, it takes time
+                context.Database.Initialize(force: false);   // connect to db
 
                 if (View.sub.pdtId != 0) // if modified a product
                 {
-                    var pdtOld = context.Products.Where(p => p.Id == pdt.Id);
+                    var pdts = context.Products.Where(p => p.Id == pdt.Id);
                     // there should be only one product in the list
+                    Product pdtOld = pdts.First();
                     // modify product
-                    pdtOld.First().Name = pdt.Name;
-                    pdtOld.First().Description = pdt.Description;
-                    pdtOld.First().SillInterests.Clear();
-                    pdtOld.First().SillInterests = new List<SillInterest>(pdt.SillInterests);
-                    pdtOld.First().TimeInterests.Clear();
-                    pdtOld.First().TimeInterests = new List<TimeInterest>(pdt.TimeInterests);
+                    pdtOld.Name = pdt.Name;
+                    pdtOld.Description = pdt.Description;
+                    // clear old SI and TI list, then copy new SI and TI
+                    pdtOld.SillInterests.Clear();
+                    pdtOld.SillInterests = new List<SillInterest>(pdt.SillInterests);
+                    pdtOld.TimeInterests.Clear();
+                    pdtOld.TimeInterests = new List<TimeInterest>(pdt.TimeInterests);
+                    // set productID for SI and TI
+                    foreach (SillInterest si in pdtOld.SillInterests)
+                    {
+                        si.ProductID = pdtOld.Id;
+                    }
+                    foreach (TimeInterest ti in pdtOld.TimeInterests)
+                    {
+                        ti.ProductID = pdtOld.Id;
+                    }
                 }
                 else // if add a new product
                 {
                     // add product
                     context.Products.Add(pdt);
                 }
-
-                // save change
-                /*try
+                try
                 {
                     context.SaveChanges();
+                    // modify product will set product's SI and TI rows's productID to null, 
+                    // and insert new rows of SI and TI, so delete all rows with null productID
+                    context.SillInterests.RemoveRange(context.SillInterests.Where(si => si.ProductID == null));
+                    context.TimeInterests.RemoveRange(context.TimeInterests.Where(ti => ti.ProductID == null));
+                    context.SaveChanges();
                 }
-                catch (Exception e)
+                catch (DbEntityValidationException dbEx)    // catch DbEntityValidationException and print it out
                 {
-                    VMMain.HandleException(e, VMMain.UIMainForm);
+                    foreach (var validationErrors in dbEx.EntityValidationErrors)
+                    {
+                        foreach (var validationError in validationErrors.ValidationErrors)
+                        {
+                            Trace.TraceInformation("Property: {0} Error: {1}",
+                                                    validationError.PropertyName,
+                                                    validationError.ErrorMessage);
+                        }
+                    }
                     isSuccess = false;
-                }*/
-                context.SaveChanges();
+                    
+                }
+                catch (Exception e)     // get other exception
+                {
+                    VMMain.UIMainForm.genMsgBox(e.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
 
                 Cursor.Current = Cursors.Arrow;             // get back to normal cursor
             }

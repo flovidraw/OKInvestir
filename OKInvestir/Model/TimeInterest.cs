@@ -14,9 +14,9 @@ namespace OKInvestir.Model
         public int Time { get; set; }
         [Required]
         public decimal Interest { get; set; }
-        [Required]
-        public int ProductID { get; set; }
-        [Required]
-        public virtual Product Product { get; set; }
+        //[Required]
+        public int? ProductID { get; set; }
+        /*[Required]
+        public virtual Product Product { get; set; }*/
     }
 }

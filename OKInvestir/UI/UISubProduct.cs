@@ -35,20 +35,25 @@ namespace OKInvestir.UI
         public UISubProduct(UIProduct owner, Product pdt)
         {
             InitializeComponent();
+            // auto add scrol bar for 2 flowlayout panels
+            flpSI.AutoScroll = true;
+            flpTI.AutoScroll = true;
 
             pdtId = pdt.Id;
             this.owner = owner;
             sillInterestCount = 0;
             timeInterestCount = 0;
 
-            // auto add scrol bar for 2 flowlayout panels
-            flpSI.AutoScroll = true;
-            flpTI.AutoScroll = true;
-
 
             // load product's data in textboxes
             tbName.Text = pdt.Name.ToString();
             tbDescription.Text = pdt.Description.ToString();
+
+            Console.WriteLine("Load pdt to modify: ");
+            foreach (SillInterest si in pdt.SillInterests)
+            {
+                Console.WriteLine("sill = " + si.Sill.ToString() + "    interest = " + si.Interest.ToString());
+            }
 
             // load product's sill/time interest data in flow layout panels
             foreach (SillInterest si in pdt.SillInterests)
@@ -248,7 +253,7 @@ namespace OKInvestir.UI
             }
             else
             {
-                owner.ViewModel.VMMain.UIMainForm.genMsgBox("Failed", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //owner.ViewModel.VMMain.UIMainForm.genMsgBox("Failed", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

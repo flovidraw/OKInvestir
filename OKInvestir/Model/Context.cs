@@ -8,6 +8,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.Collections.Generic;
     using System.Globalization;
+    using System.Data.Entity.Validation;
 
     [DbConfigurationType(typeof(MySqlEFConfiguration))]
 
@@ -47,9 +48,38 @@
             var connString =
                 ConfigurationManager.ConnectionStrings["mysqlCon"].ConnectionString.ToString();
             connString = String.Format(connString, DbParam.serverUrl, DbParam.dbName, DbParam.user, DbParam.password);
-            
+
             return connString;
         }
+
+
+        /**
+         * Override savechanges method, to show more DbEntityValidationException detail
+         */
+        /*public override int SaveChanges()
+        {
+            try
+            {
+                return base.SaveChanges();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                // Retrieve the error messages as a list of strings.
+                var errorMessages = ex.EntityValidationErrors
+                        .SelectMany(x => x.ValidationErrors)
+                        .Select(x => x.ErrorMessage);
+
+                // Join the list to a single string.
+                var fullErrorMessage = string.Join("; ", errorMessages);
+
+                // Combine the original exception message with the new one.
+                var exceptionMessage = string.Concat(ex.Message, " The validation errors are: ", fullErrorMessage);
+
+                // Throw a new DbEntityValidationException with the improved exception message.
+                throw new DbEntityValidationException(exceptionMessage, ex.EntityValidationErrors);
+            }
+        }*/
+
     }
 
     // Seeding initializer, add seed rows in db each creation of db.
@@ -118,31 +148,31 @@
             };
             var SillInterestList = new List<SillInterest>
             {
-                new SillInterest { Product = PdtList[0], Sill = 100M, Interest = 0.05M },
-                new SillInterest { Product = PdtList[0], Sill = 500M, Interest = 0.07M },
-                new SillInterest { Product = PdtList[0], Sill = 1000M, Interest = 0.095M },
-                new SillInterest { Product = PdtList[0], Sill = 5000M, Interest = 0.130M },
-                new SillInterest { Product = PdtList[1], Sill = 10, Interest = 0.03M },
-                new SillInterest { Product = PdtList[1], Sill = 100M, Interest = 0.05M },
-                new SillInterest { Product = PdtList[1], Sill = 1000M, Interest = 0.08M },
-                new SillInterest { Product = PdtList[1], Sill = 10000M, Interest = 0.14M },
-                new SillInterest { Product = PdtList[2], Sill = 10, Interest = 0.03M },
-                new SillInterest { Product = PdtList[2], Sill = 100M, Interest = 0.05M },
-                new SillInterest { Product = PdtList[3], Sill = 233M, Interest = 0.233M },
+                new SillInterest { ProductID = 1, Sill = 100M, Interest = 5M },
+                new SillInterest { ProductID = 1, Sill = 500M, Interest = 7M },
+                new SillInterest { ProductID = 1, Sill = 1000M, Interest = 9.5M },
+                new SillInterest { ProductID = 1, Sill = 5000M, Interest = 13M },
+                new SillInterest { ProductID = 2, Sill = 10, Interest = 3M },
+                new SillInterest { ProductID = 2, Sill = 100M, Interest = 5M },
+                new SillInterest { ProductID = 2, Sill = 1000M, Interest = 8M },
+                new SillInterest { ProductID = 2, Sill = 10000M, Interest = 14M },
+                new SillInterest { ProductID = 3, Sill = 10, Interest = 3M },
+                new SillInterest { ProductID = 3, Sill = 100M, Interest = 5M },
+                new SillInterest { ProductID = 5, Sill = 233M, Interest = 23.3M },
             };
             var TimeInterestList = new List<TimeInterest>
             {
-                new TimeInterest { Product = PdtList[0], Time = 3, Interest = 0.01M },
-                new TimeInterest { Product = PdtList[0], Time = 6, Interest = 0.023M },
-                new TimeInterest { Product = PdtList[0], Time = 9, Interest = 0.038M },
-                new TimeInterest { Product = PdtList[0], Time = 12, Interest = 0.55M },
-                new TimeInterest { Product = PdtList[1], Time = 12, Interest = 0.5M },
-                new TimeInterest { Product = PdtList[1], Time = 24, Interest = 0.8M },
-                new TimeInterest { Product = PdtList[1], Time = 36, Interest = 0.13M },
-                new TimeInterest { Product = PdtList[1], Time = 48, Interest = 0.19M },
-                new TimeInterest { Product = PdtList[2], Time = 24, Interest = 0.10M },
-                new TimeInterest { Product = PdtList[2], Time = 96, Interest = 0.50M },
-                new TimeInterest { Product = PdtList[3], Time = 233, Interest = 0.233M }
+                new TimeInterest { ProductID = 1, Time = 3, Interest = 1M },
+                new TimeInterest { ProductID = 1, Time = 6, Interest = 2.3M },
+                new TimeInterest { ProductID = 1, Time = 9, Interest = 3.8M },
+                new TimeInterest { ProductID = 1, Time = 12, Interest = 5.5M },
+                new TimeInterest { ProductID = 2, Time = 12, Interest = 5M },
+                new TimeInterest { ProductID = 2, Time = 24, Interest = 8M },
+                new TimeInterest { ProductID = 3, Time = 36, Interest = 13M },
+                new TimeInterest { ProductID = 3, Time = 48, Interest = 19M },
+                new TimeInterest { ProductID = 4, Time = 24, Interest = 10M },
+                new TimeInterest { ProductID = 4, Time = 96, Interest = 50M },
+                new TimeInterest { ProductID = 5, Time = 233, Interest = 23.3M }
             };
             var BoughtPdtList = new List<BoughtProduct>
             {
