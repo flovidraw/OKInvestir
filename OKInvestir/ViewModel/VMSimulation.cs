@@ -18,6 +18,9 @@ namespace OKInvestir.ViewModel
             this.View = View;
             this.View.ViewModel = this;
             this.VMMain = VMMain;
+
+           
+
         }
 
         public Model.TimeInterest FindTimeInterestSection()
@@ -83,7 +86,17 @@ namespace OKInvestir.ViewModel
             return time.Time;
             }
 
-
+        public void printBalance()
+        {
+            if (VMMain.Client.AccountList.Count > 0)
+            {
+                this.View.getLbValueBalance().Text = this.VMMain.Client.AccountList[0].Balance.ToString();
+            }
+            else
+            {
+                this.View.getLbValueBalance().Text = "No account";
+            }
+        }
 
 
 

@@ -149,6 +149,7 @@ namespace OKInvestir.ViewModel
                 Client selectedClt = (Client)View.getLBoxClient().SelectedValue;
                 VMMain.Client = selectedClt;
                 VMMain.UIMainForm.getLbClientName().Text = selectedClt.FullName;
+                VMMain.VMSimulation.printBalance();
             }
             else
             {

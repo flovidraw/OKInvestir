@@ -41,7 +41,9 @@ namespace OKInvestir.ViewModel
             UIMainForm = new UIMainForm();
             UIMainForm.VMMain = this;
             switchToLogin(); // App start page
-            //switchToMainPage(null, new Model.User(1));
+                             //switchToMainPage(null, new Model.User(1));
+            UISimulation = new UISimulation();
+            VMSimulation = new VMSimulation(this, UISimulation);
         }
 
 
@@ -151,6 +153,7 @@ namespace OKInvestir.ViewModel
             }
         }
 
+       
 
 
 

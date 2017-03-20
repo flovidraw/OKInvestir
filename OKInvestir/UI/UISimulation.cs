@@ -19,9 +19,11 @@ namespace OKInvestir.UI
 
         public UISimulation()
         {
+            
             InitializeComponent();
             isEditing = false;
            
+
 
         }
 
@@ -34,7 +36,8 @@ namespace OKInvestir.UI
         {
 
         }
-/** Getters
+/**
+ * Getters
  **/
         public decimal getTbAmount()
         {
@@ -66,6 +69,11 @@ namespace OKInvestir.UI
         public Label getLbValueAmount()
         {
             return lbValueAmount;
+        }
+
+        public Label getLbValueBalance()
+        {
+            return lbValueBalance;
         }
 
         public DateTime getValueStartDate()
@@ -113,7 +121,7 @@ namespace OKInvestir.UI
             
             this.ViewModel.resultSimulation();
             
-          
+
         }
         private void dtpStartDate_ValueChanged(object sender, EventArgs e)
         {
@@ -126,6 +134,7 @@ namespace OKInvestir.UI
         private void dtpEndDate_ValueChanged(object sender, EventArgs e)
         {   
            DateTime EndTime = dtpEndDate.Value.Date;
+           
         }
 
        
