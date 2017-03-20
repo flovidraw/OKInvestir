@@ -10,6 +10,7 @@ using System.ComponentModel;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
+using System.Drawing;
 
 namespace OKInvestir.ViewModel
 {
@@ -139,6 +140,81 @@ namespace OKInvestir.ViewModel
             // resize columns width
             lviewSillInterest.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
             lviewTimeInterest.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }
+
+
+        /**
+         * Load an existed product to modify
+         */
+        public void loadProductToModify(Product pdt)
+        {
+            // load product's data in textboxes
+            View.sub.pdtId = pdt.Id;
+            View.sub.getTbName().Text = pdt.Name.ToString();
+            View.sub.getTbDescription().Text = pdt.Description.ToString();
+
+            // load product's sill/time interest data in flow layout panels
+            foreach (SillInterest si in pdt.SillInterests)
+            {
+                // counter ++
+                View.sub.sillInterestCount++;
+
+                // new text boxes to add in panels dynamically
+                TextBox tbSill = new TextBox();
+                TextBox tbInterest = new TextBox();
+
+                // set name, color, styles ...
+                tbSill.BackColor = Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(252)))), ((int)(((byte)(255)))));
+                tbSill.BorderStyle = BorderStyle.None;
+                tbSill.Font = new Font("Arial", 11F);
+                tbSill.Size = new Size(168, 17);
+                tbSill.Name = "sill" + View.sub.sillInterestCount.ToString();
+
+                tbInterest.BackColor = Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(252)))), ((int)(((byte)(255)))));
+                tbInterest.BorderStyle = BorderStyle.None;
+                tbInterest.Font = new Font("Arial", 11F);
+                tbInterest.Size = new Size(168, 17);
+                tbInterest.Name = "interest" + View.sub.sillInterestCount.ToString();
+
+                // set text
+                tbSill.Text = si.Sill.ToString();
+                tbInterest.Text = si.Interest.ToString();
+
+                // add them in panel
+                View.sub.getFlpSI().Controls.Add(tbSill);
+                View.sub.getFlpSI().Controls.Add(tbInterest);
+            }
+
+            foreach (TimeInterest ti in pdt.TimeInterests)
+            {
+                // counter ++
+                View.sub.timeInterestCount++;
+
+                // new text boxes to add in panels dynamically
+                TextBox tbSill = new TextBox();
+                TextBox tbInterest = new TextBox();
+
+                // set name, color, styles ...
+                tbSill.BackColor = Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(252)))), ((int)(((byte)(255)))));
+                tbSill.BorderStyle = BorderStyle.None;
+                tbSill.Font = new Font("Arial", 11F);
+                tbSill.Size = new Size(168, 17);
+                tbSill.Name = "sill" + View.sub.timeInterestCount.ToString();
+
+                tbInterest.BackColor = Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(252)))), ((int)(((byte)(255)))));
+                tbInterest.BorderStyle = BorderStyle.None;
+                tbInterest.Font = new Font("Arial", 11F);
+                tbInterest.Size = new Size(168, 17);
+                tbInterest.Name = "interest" + View.sub.timeInterestCount.ToString();
+
+                // set text
+                tbSill.Text = ti.Time.ToString();
+                tbInterest.Text = ti.Interest.ToString();
+
+                // add them in panel
+                View.sub.getFlpTI().Controls.Add(tbSill);
+                View.sub.getFlpTI().Controls.Add(tbInterest);
+            }
         }
 
 

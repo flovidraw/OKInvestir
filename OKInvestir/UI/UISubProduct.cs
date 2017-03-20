@@ -14,10 +14,10 @@ namespace OKInvestir.UI
     public partial class UISubProduct : UserControl
     {
         private UIProduct owner;
-        public int pdtId { get; private set; }
 
-        public int sillInterestCount { get; private set; }
-        public int timeInterestCount { get; private set; }
+        public int pdtId { get; set; }
+        public int sillInterestCount { get; set; }
+        public int timeInterestCount { get; set; }
 
         public UISubProduct(UIProduct owner)
         {
@@ -30,93 +30,6 @@ namespace OKInvestir.UI
             this.owner = owner;
             sillInterestCount = 0;
             timeInterestCount = 0;
-        }
-
-        public UISubProduct(UIProduct owner, Product pdt)
-        {
-            InitializeComponent();
-            // auto add scrol bar for 2 flowlayout panels
-            flpSI.AutoScroll = true;
-            flpTI.AutoScroll = true;
-
-            pdtId = pdt.Id;
-            this.owner = owner;
-            sillInterestCount = 0;
-            timeInterestCount = 0;
-
-
-            // load product's data in textboxes
-            tbName.Text = pdt.Name.ToString();
-            tbDescription.Text = pdt.Description.ToString();
-
-            Console.WriteLine("Load pdt to modify: ");
-            foreach (SillInterest si in pdt.SillInterests)
-            {
-                Console.WriteLine("sill = " + si.Sill.ToString() + "    interest = " + si.Interest.ToString());
-            }
-
-            // load product's sill/time interest data in flow layout panels
-            foreach (SillInterest si in pdt.SillInterests)
-            {
-                // counter ++
-                sillInterestCount++;
-
-                // new text boxes to add in panels dynamically
-                TextBox tbSill = new TextBox();
-                TextBox tbInterest = new TextBox();
-
-                // set name, color, styles ...
-                tbSill.BackColor = Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(252)))), ((int)(((byte)(255)))));
-                tbSill.BorderStyle = BorderStyle.None;
-                tbSill.Font = new Font("Arial", 11F);
-                tbSill.Size = new Size(168, 17);
-                tbSill.Name = "sill" + sillInterestCount.ToString();
-
-                tbInterest.BackColor = Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(252)))), ((int)(((byte)(255)))));
-                tbInterest.BorderStyle = BorderStyle.None;
-                tbInterest.Font = new Font("Arial", 11F);
-                tbInterest.Size = new Size(168, 17);
-                tbInterest.Name = "interest" + sillInterestCount.ToString();
-
-                // set text
-                tbSill.Text = si.Sill.ToString();
-                tbInterest.Text = si.Interest.ToString();
-
-                // add them in panel
-                flpSI.Controls.Add(tbSill);
-                flpSI.Controls.Add(tbInterest);
-            }
-
-            foreach (TimeInterest ti in pdt.TimeInterests)
-            {
-                // counter ++
-                timeInterestCount++;
-
-                // new text boxes to add in panels dynamically
-                TextBox tbSill = new TextBox();
-                TextBox tbInterest = new TextBox();
-
-                // set name, color, styles ...
-                tbSill.BackColor = Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(252)))), ((int)(((byte)(255)))));
-                tbSill.BorderStyle = BorderStyle.None;
-                tbSill.Font = new Font("Arial", 11F);
-                tbSill.Size = new Size(168, 17);
-                tbSill.Name = "sill" + timeInterestCount.ToString();
-
-                tbInterest.BackColor = Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(252)))), ((int)(((byte)(255)))));
-                tbInterest.BorderStyle = BorderStyle.None;
-                tbInterest.Font = new Font("Arial", 11F);
-                tbInterest.Size = new Size(168, 17);
-                tbInterest.Name = "interest" + timeInterestCount.ToString();
-
-                // set text
-                tbSill.Text = ti.Time.ToString();
-                tbInterest.Text = ti.Interest.ToString();
-
-                // add them in panel
-                flpTI.Controls.Add(tbSill);
-                flpTI.Controls.Add(tbInterest);
-            }
         }
 
         /**

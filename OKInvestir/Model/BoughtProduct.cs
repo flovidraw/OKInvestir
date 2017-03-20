@@ -23,6 +23,10 @@ namespace OKInvestir.Model
         public DateTime EndDate { get; set; }
         [Required]
         public DateTime BuyingDate { get; set; }
+        [Required]
+        public decimal Price { get; set; }
+        [Required]
+        public decimal SettlementPrice { get; set; }
 
         [Required]
         public Client Client { get; set; }

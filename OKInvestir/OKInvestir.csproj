@@ -74,6 +74,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -289,6 +290,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="src\save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\sell.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\turnover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\product.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\user.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

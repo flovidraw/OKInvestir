@@ -38,7 +38,8 @@ namespace OKInvestir.UI
 
         private void btModify_Click(object sender, EventArgs e)
         {
-            sub = new UISubProduct(this, (Product)lboxProduct.SelectedValue);
+            sub = new UISubProduct(this);
+            ViewModel.loadProductToModify((Product)lboxProduct.SelectedValue);
             ViewModel.VMMain.switchToSubProduct(sub);
             ViewModel.VMMain.UIMainForm.disableButtons();
         }

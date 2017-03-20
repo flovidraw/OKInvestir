@@ -176,25 +176,29 @@
             };
             var BoughtPdtList = new List<BoughtProduct>
             {
-                new BoughtProduct { FinalInterest = 0.05M, BoughtStatus = 1,
+                new BoughtProduct { FinalInterest = 3M, BoughtStatus = 1,
                     StartDate = DateTime.ParseExact("24/01/2013", "dd/MM/yyyy", CultureInfo.InvariantCulture),
                     EndDate = DateTime.ParseExact("24/01/2015", "dd/MM/yyyy", CultureInfo.InvariantCulture),
                     BuyingDate = DateTime.ParseExact("23/01/2013", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                    Price = 12345, SettlementPrice = 22345, 
                     Client = CltList[0], Product = PdtList[0]},
-                new BoughtProduct { FinalInterest = 0.05M, BoughtStatus = 1,
+                new BoughtProduct { FinalInterest = 23M, BoughtStatus = 1,
                     StartDate = DateTime.ParseExact("02/02/2014", "dd/MM/yyyy", CultureInfo.InvariantCulture),
                     EndDate = DateTime.ParseExact("02/01/2015", "dd/MM/yyyy", CultureInfo.InvariantCulture),
                     BuyingDate = DateTime.ParseExact("31/12/2013", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                    Price = 233, SettlementPrice = 2333, 
                     Client = CltList[0], Product = PdtList[1]},
-                new BoughtProduct { FinalInterest = 0.05M, BoughtStatus = 1,
+                new BoughtProduct { FinalInterest = 5M, BoughtStatus = 1,
                     StartDate = DateTime.ParseExact("03/11/2016", "dd/MM/yyyy", CultureInfo.InvariantCulture),
                     EndDate = DateTime.ParseExact("03/11/2018", "dd/MM/yyyy", CultureInfo.InvariantCulture),
                     BuyingDate = DateTime.ParseExact("02/11/2016", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                    Price = 10000, SettlementPrice = 10500, 
                     Client = CltList[1], Product = PdtList[2]},
-                new BoughtProduct { FinalInterest = 0.05M, BoughtStatus = 1,
+                new BoughtProduct { FinalInterest = 0.5M, BoughtStatus = 1,
                     StartDate = DateTime.ParseExact("10/07/2010", "dd/MM/yyyy", CultureInfo.InvariantCulture),
                     EndDate = DateTime.ParseExact("10/07/2020", "dd/MM/yyyy", CultureInfo.InvariantCulture),
                     BuyingDate = DateTime.ParseExact("10/07/2010", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                    Price = 334466, SettlementPrice = 334488, 
                     Client = CltList[1], Product = PdtList[3]}
             };
 

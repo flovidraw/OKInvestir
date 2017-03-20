@@ -26,14 +26,17 @@ namespace OKInvestir.UI
          */
 
 
-
+        
 
 
 
         /**
          * Getters
          */
-
+        public Label getLbNbClient() { return lbNbClient; }
+        public Label getLbNbPdt() { return lbNbPdt; }
+        public Label getLbNbPdtSold() { return lbNbPdtSold; }
+        public Label getLbTurnover() { return lbTurnover; }
 
 
 
