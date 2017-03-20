@@ -37,9 +37,7 @@ namespace OKInvestir.UI
         public Label getLbNbPdt() { return lbNbPdt; }
         public Label getLbNbPdtSold() { return lbNbPdtSold; }
         public Label getLbTurnover() { return lbTurnover; }
-
-
-
-
+        public System.Windows.Forms.DataVisualization.Charting.Chart getChartTA() { return chartTA; }
+        
     }
 }
