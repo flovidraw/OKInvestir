@@ -152,8 +152,8 @@ namespace OKInvestir.ViewModel
                 VMMain.VMSimulation.printBalance();
                 VMMain.UISimulation.getDTPS().Value = DateTime.Today;
                 VMMain.UISimulation.getDTPE().Value = DateTime.Today;
-                VMMain.UISimulation.getTextBAmount() = 
-                
+                VMMain.UISimulation.getTextBAmount().Text = "";
+             
             }
             else
             {

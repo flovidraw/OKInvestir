@@ -51,7 +51,8 @@ namespace OKInvestir.ViewModel
                 VMMain.UIMainForm.getBtSimulation().PerformClick();
                 VMMain.UISimulation.getDTPS().Value = DateTime.Today;
                 VMMain.UISimulation.getDTPE().Value = DateTime.Today;
-                VMMain.UISimulation.getLbValueAmount().Text = "";
+                VMMain.UISimulation.getTextBAmount().Text = "";
+               
             }
             else
             {
