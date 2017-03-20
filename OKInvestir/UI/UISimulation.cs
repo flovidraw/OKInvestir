@@ -15,15 +15,15 @@ namespace OKInvestir.UI
     {
         public VMSimulation ViewModel { get; set; }
         public bool isEditing { get; set; }
-        
+        bool isSimulate;
 
         public UISimulation()
         {
             
             InitializeComponent();
             isEditing = false;
-           
-
+            dtpStartDate.MinDate = DateTime.Today;
+            isSimulate = false;
 
         }
 
@@ -66,6 +66,13 @@ namespace OKInvestir.UI
             return amountEntered;
         }
 
+        public TextBox getTextBAmount()
+        {
+            return tbAmout;
+        }
+
+
+
         public Label getLbValueAmount()
         {
             return lbValueAmount;
@@ -101,8 +108,17 @@ namespace OKInvestir.UI
         {
             return lbValueSettlementPrice;
         }
-        
-       
+
+        public DateTimePicker getDTPS()
+        {
+            return dtpStartDate;
+        }
+
+        public DateTimePicker getDTPE()
+        {
+            return dtpEndDate;
+        }
+
 
 
 
@@ -115,30 +131,56 @@ namespace OKInvestir.UI
         {
            
         }
+
         private void btSimulate_Click(object sender, EventArgs e)
         {
-           
-            
-            this.ViewModel.resultSimulation();
             
 
+            if (this.ViewModel.VMMain.Product != null)
+            {
+               this.ViewModel.resultSimulation();
+                isSimulate = true;
+
+            }
+            else
+            {
+                this.ViewModel.VMMain.UIMainForm.genMsgBox("You haven't chose a product.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+       
+
         }
+
         private void dtpStartDate_ValueChanged(object sender, EventArgs e)
         {
-            dtpStartDate.MinDate = DateTime.Now;
             DateTime StartDate = dtpStartDate.Value.Date;
             dtpEndDate.MinDate = dtpStartDate.Value.Date;
+            isSimulate = false;
 
         }
 
         private void dtpEndDate_ValueChanged(object sender, EventArgs e)
         {   
            DateTime EndTime = dtpEndDate.Value.Date;
+            isSimulate = false;
            
         }
 
-       
-        
+        private void btSave_Click(object sender, EventArgs e)
+        {
+            if (isSimulate == true)
+            {
+                this.ViewModel.saveSimulation(this.ViewModel.resultSimulation());
+            }
+            else
+            {
+                this.ViewModel.VMMain.UIMainForm.genMsgBox("You haven't simulated yet!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void tbAmout_TextChanged(object sender, EventArgs e)
+        {
+            isSimulate = false;
+        }
 
         /**
          * Getters

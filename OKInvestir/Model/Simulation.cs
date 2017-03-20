@@ -11,9 +11,11 @@ namespace OKInvestir.Model
     {
         public int Id { get; set; }
         [Required]
-        public Client Client { get; set; }
+        public int ClientId { get; set; }
+        public virtual Client Client { get; set; }
         [Required]
-        public Product Product { get; set; }
+        public int ProductId { get; set; }
+        public virtual Product Product { get; set; }
         [Required]
         public decimal Price { get; set; }
         [Required]

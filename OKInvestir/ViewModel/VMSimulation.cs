@@ -103,34 +103,61 @@ namespace OKInvestir.ViewModel
 
 
            
-        public void resultSimulation()
+        public Model.Simulation resultSimulation()
         {
+            Model.Simulation simulation = new Model.Simulation();
 
-            decimal amountSimulation = View.getTbAmount();
-            DateTime StartDateSimulation = View.getValueStartDate();
-            DateTime EndDateSimulation = View.getValueEndDate();
-            int periodeSimulation = (int)(EndDateSimulation - StartDateSimulation).TotalDays / 30;
+            simulation.ClientId = VMMain.Client.Id;
+            simulation.ProductId = VMMain.Product.Id;
+            simulation.Price = View.getTbAmount();
+            simulation.StartDate = View.getValueStartDate();
+            simulation.EndDate = View.getValueEndDate();
+            int periodeSimulation = (int)(simulation.EndDate - simulation.StartDate).TotalDays / 30;
             decimal InterestRateTime = FindTimeInterestSection().Interest;
-            decimal InterestRateSill = FindSillInterestSection(amountSimulation).Interest;
-            decimal InterestRateSimulation = ((InterestRateSill + 1) * (InterestRateTime + 1)) - 1;
-            decimal SettlementPriceSimulation = amountSimulation * (1 + InterestRateSimulation);
+            decimal InterestRateSill = FindSillInterestSection(simulation.Price).Interest;
+            simulation.InterestRate = ((InterestRateSill + 100) * (InterestRateTime + 100))/100 - 100;
+            simulation.SettlementPrice = simulation.Price * (100 + simulation.InterestRate)/100;
 
             if (InterestRateTime == 0)
             {
                 VMMain.UIMainForm.genMsgBox("For this product selected, the minimum holding periode have to be more than " + MinimumTimeSimulation() + " months.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                amountSimulation = 0;
+                simulation.Price= 0;
             }
 
-            if (amountSimulation!= 0)
+            if (simulation.Price!= 0)
             {
-                View.getLbValueAmount().Text = amountSimulation.ToString();
+                View.getLbValueAmount().Text = simulation.Price.ToString();
                 View.getValuePeriode().Text = periodeSimulation.ToString()+" Months";
 
                 View.getLbValueProductSelected().Text = VMMain.Product.Name;
-                View.getLbValueInterestRate().Text = (InterestRateSimulation * 100).ToString()+" %";
-                View.GetLbValueSettlementPrice().Text = SettlementPriceSimulation.ToString();
+                View.getLbValueInterestRate().Text = (simulation.InterestRate).ToString()+" %";
+                View.GetLbValueSettlementPrice().Text = simulation.SettlementPrice.ToString();
             }
+            return simulation;
         }
 
+        public void saveSimulation(Model.Simulation simulation)
+        {
+            using (var context = new Model.Context())
+            {
+                Cursor.Current = Cursors.WaitCursor;        // waiting animation cursor
+                context.Database.Initialize(force: false);  // connect to db
+                context.Simulations.Add(simulation);
+                try
+                {
+                    context.SaveChanges();  // save change
+                    VMMain.UIMainForm.genMsgBox("Simulation saved!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information); 
+
+                }
+                catch (Exception e)
+                {
+                    VMMain.HandleException(e, this.VMMain.UIMainForm);
+                    VMMain.UIMainForm.genMsgBox("Fail to save the simulation", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Cursor.Current = Cursors.Arrow;             // get back to normal cursor
+                }
+            }
+        }
+        
+        
 }
 }

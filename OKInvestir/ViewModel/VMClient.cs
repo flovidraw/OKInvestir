@@ -150,6 +150,10 @@ namespace OKInvestir.ViewModel
                 VMMain.Client = selectedClt;
                 VMMain.UIMainForm.getLbClientName().Text = selectedClt.FullName;
                 VMMain.VMSimulation.printBalance();
+                VMMain.UISimulation.getDTPS().Value = DateTime.Today;
+                VMMain.UISimulation.getDTPE().Value = DateTime.Today;
+                VMMain.UISimulation.getTextBAmount() = 
+                
             }
             else
             {

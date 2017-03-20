@@ -138,14 +138,17 @@ namespace OKInvestir.ViewModel
         {
             if (User != null)
             {
-                if (UISimulation == null)
+               if(Client != null)
                 {
-                    UISimulation = new UISimulation();
-                    VMSimulation = new VMSimulation(this, UISimulation);
-
+                    UIMainForm.getPnUserControl().Controls.Clear();
+                    UIMainForm.getPnUserControl().Controls.Add(UISimulation);
+                    this.VMSimulation.printBalance();
                 }
-                UIMainForm.getPnUserControl().Controls.Clear();
-                UIMainForm.getPnUserControl().Controls.Add(UISimulation);
+                else
+                {
+                    UIMainForm.genMsgBox("You haven't chose a client.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                
             }
             else
             {
@@ -200,7 +203,7 @@ namespace OKInvestir.ViewModel
             switch (sqlExceptionNumber)
             {
                 case 1062:
-                    form.genMsgBox("The number of ID card is already exist.", "DataBase Access Exception",
+                    form.genMsgBox("Unique constraint failed.", "DataBase Access Exception",
                         System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
                     break;
 

@@ -127,6 +127,7 @@
             this.tbAmout.Name = "tbAmout";
             this.tbAmout.Size = new System.Drawing.Size(200, 20);
             this.tbAmout.TabIndex = 32;
+            this.tbAmout.TextChanged += new System.EventHandler(this.tbAmout_TextChanged);
             // 
             // btSimulate
             // 
@@ -238,6 +239,7 @@
             this.btSave.TabStop = false;
             this.btSave.Text = "Save";
             this.btSave.UseVisualStyleBackColor = false;
+            this.btSave.Click += new System.EventHandler(this.btSave_Click);
             // 
             // btExecute
             // 
