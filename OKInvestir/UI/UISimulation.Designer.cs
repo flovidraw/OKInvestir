@@ -49,6 +49,8 @@
             this.btExecute = new System.Windows.Forms.Button();
             this.lbValuePeriode = new System.Windows.Forms.Label();
             this.lbPeriode = new System.Windows.Forms.Label();
+            this.lboxSimulation = new System.Windows.Forms.ListBox();
+            this.btSimulationChosen = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbBalance
@@ -138,7 +140,7 @@
             this.btSimulate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btSimulate.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btSimulate.ForeColor = System.Drawing.Color.Black;
-            this.btSimulate.Location = new System.Drawing.Point(88, 344);
+            this.btSimulate.Location = new System.Drawing.Point(36, 335);
             this.btSimulate.Name = "btSimulate";
             this.btSimulate.Size = new System.Drawing.Size(193, 30);
             this.btSimulate.TabIndex = 33;
@@ -277,12 +279,45 @@
             this.lbPeriode.TabIndex = 48;
             this.lbPeriode.Text = "Periode :";
             // 
+            // lboxSimulation
+            // 
+            this.lboxSimulation.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lboxSimulation.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.lboxSimulation.FormattingEnabled = true;
+            this.lboxSimulation.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.lboxSimulation.ItemHeight = 12;
+            this.lboxSimulation.Location = new System.Drawing.Point(36, 383);
+            this.lboxSimulation.Name = "lboxSimulation";
+            this.lboxSimulation.Size = new System.Drawing.Size(295, 60);
+            this.lboxSimulation.TabIndex = 50;
+            this.lboxSimulation.SelectedIndexChanged += new System.EventHandler(this.lboxBoughtProduct_SelectedIndexChanged);
+            // 
+            // btSimulationChosen
+            // 
+            this.btSimulationChosen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(202)))), ((int)(((byte)(240)))));
+            this.btSimulationChosen.FlatAppearance.BorderSize = 0;
+            this.btSimulationChosen.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(180)))), ((int)(((byte)(237)))));
+            this.btSimulationChosen.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(216)))), ((int)(((byte)(249)))));
+            this.btSimulationChosen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btSimulationChosen.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btSimulationChosen.ForeColor = System.Drawing.Color.Black;
+            this.btSimulationChosen.Location = new System.Drawing.Point(36, 461);
+            this.btSimulationChosen.Name = "btSimulationChosen";
+            this.btSimulationChosen.Size = new System.Drawing.Size(193, 30);
+            this.btSimulationChosen.TabIndex = 51;
+            this.btSimulationChosen.TabStop = false;
+            this.btSimulationChosen.Text = "Choose";
+            this.btSimulationChosen.UseVisualStyleBackColor = false;
+            this.btSimulationChosen.Click += new System.EventHandler(this.btSimulationChosen_Click);
+            // 
             // UISimulation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(232)))), ((int)(((byte)(250)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.Controls.Add(this.btSimulationChosen);
+            this.Controls.Add(this.lboxSimulation);
             this.Controls.Add(this.lbValuePeriode);
             this.Controls.Add(this.lbPeriode);
             this.Controls.Add(this.btExecute);
@@ -305,7 +340,7 @@
             this.Controls.Add(this.lbValueBalance);
             this.Controls.Add(this.lbBalance);
             this.Name = "UISimulation";
-            this.Size = new System.Drawing.Size(824, 500);
+            this.Size = new System.Drawing.Size(824, 524);
             this.Load += new System.EventHandler(this.UISimulation_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -334,5 +369,7 @@
         private System.Windows.Forms.Button btExecute;
         private System.Windows.Forms.Label lbValuePeriode;
         private System.Windows.Forms.Label lbPeriode;
+        private System.Windows.Forms.ListBox lboxSimulation;
+        private System.Windows.Forms.Button btSimulationChosen;
     }
 }

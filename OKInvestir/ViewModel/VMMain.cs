@@ -143,6 +143,7 @@ namespace OKInvestir.ViewModel
                     UIMainForm.getPnUserControl().Controls.Clear();
                     UIMainForm.getPnUserControl().Controls.Add(UISimulation);
                     this.VMSimulation.printBalance();
+                    this.VMSimulation.getSimulation();
                 }
                 else
                 {

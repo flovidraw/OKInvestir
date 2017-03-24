@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OKInvestir.UI;
+using OKInvestir.Model;
+using System.ComponentModel;
 
 namespace OKInvestir.ViewModel
 {
@@ -12,6 +14,10 @@ namespace OKInvestir.ViewModel
     {
         private UISimulation View;
         public VMMain VMMain { get; set; }
+        public List<Simulation> Simulations { get; set; }
+        public List<Simulation> SimulationForBinding { get; set; }
+        public BindingList<Simulation> blSimulation { get; set; }
+
 
         public VMSimulation(VMMain VMMain, UISimulation View)
         {
@@ -117,7 +123,6 @@ namespace OKInvestir.ViewModel
             decimal InterestRateSill = FindSillInterestSection(simulation.Price).Interest;
             simulation.InterestRate = ((InterestRateSill + 100) * (InterestRateTime + 100))/100 - 100;
             simulation.SettlementPrice = simulation.Price * (100 + simulation.InterestRate)/100;
-
             if (InterestRateTime == 0)
             {
                 VMMain.UIMainForm.genMsgBox("For this product selected, the minimum holding periode have to be more than " + MinimumTimeSimulation() + " months.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -157,7 +162,42 @@ namespace OKInvestir.ViewModel
                 }
             }
         }
-        
-        
-}
+
+        public void getSimulation()
+        {
+
+            if (!VMMain.Client.Equals(null))
+            {
+                
+                using (var context = new Model.Context())
+                {
+                    int ClientId = VMMain.Client.Id;
+                    bool isSimulationFound = false;
+                    Cursor.Current = Cursors.WaitCursor;        // waiting animation cursor
+                                                                //context.Database.Initialize(force: true);   // connect to db, it takes time
+                    context.Database.Initialize(force: true);   // connect to db, it takes time
+                    Simulations = context.Simulations.Where(u => u.ClientId == ClientId).ToList();
+                    Cursor.Current = Cursors.Arrow;             // get back to normal cursor
+     
+                    SimulationForBinding = new List<Simulation>(Simulations);
+                    blSimulation = new BindingList<Simulation>(SimulationForBinding);
+                    this.View.getLboxSim().DataSource = blSimulation;
+                    this.View.getLboxSim().DisplayMember = "LbInformation";
+
+                   
+                }
+            }
+        }
+
+        public void chooseSimulation(Simulation sim)
+        {
+            this.View.getValuePeriode().Text = ((int)(sim.EndDate - sim.StartDate).TotalDays / 30).ToString();
+            this.View.getLbValueProductSelected().Text = sim.Product.Name;
+            this.View.getLbValueAmount().Text = (sim.SettlementPrice / (1 + sim.InterestRate / 100)).ToString();
+            this.View.getLbValueInterestRate().Text = sim.InterestRate.ToString();
+            this.View.GetLbValueSettlementPrice().Text = sim.SettlementPrice.ToString();
+
+        }
+
+    }
 }

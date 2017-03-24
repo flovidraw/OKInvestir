@@ -24,6 +24,7 @@ namespace OKInvestir.UI
             isEditing = false;
             dtpStartDate.MinDate = DateTime.Today;
             isSimulate = false;
+           
 
         }
 
@@ -118,7 +119,10 @@ namespace OKInvestir.UI
         {
             return dtpEndDate;
         }
-
+        public ListBox getLboxSim()
+        {
+            return lboxSimulation;
+        }
 
 
 
@@ -170,6 +174,7 @@ namespace OKInvestir.UI
             if (isSimulate == true)
             {
                 this.ViewModel.saveSimulation(this.ViewModel.resultSimulation());
+                this.ViewModel.getSimulation();
             }
             else
             {
@@ -182,13 +187,21 @@ namespace OKInvestir.UI
             isSimulate = false;
         }
 
-        /**
-         * Getters
-         */
+        private void hScrollBar1_Scroll(object sender, ScrollEventArgs e)
+        {
+
+        }
+
+        private void lboxBoughtProduct_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
 
+        }
 
-
-
+        private void btSimulationChosen_Click(object sender, EventArgs e)
+        {
+            Model.Simulation sim = (Model.Simulation)lboxSimulation.SelectedItem;
+            this.ViewModel.chooseSimulation(sim);
+        }
     }
 }

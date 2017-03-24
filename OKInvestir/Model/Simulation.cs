@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OKInvestir.Model
 {
@@ -28,5 +29,17 @@ namespace OKInvestir.Model
         public decimal InterestRate { get; set; }
         [Required]
         public decimal SettlementPrice { get; set; }
+
+        [NotMapped]
+        public string LbInformation
+        {
+            get
+            {
+                return this.Product.Name + " - " + SettlementPrice/(1+InterestRate/100) + " - "+ ((int)(this.EndDate - this.StartDate).TotalDays / 30 )+" "+"months";
+            }
+            private set { }
+        }
+
+
     }
 }
