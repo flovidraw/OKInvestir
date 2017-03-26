@@ -203,5 +203,12 @@ namespace OKInvestir.UI
             Model.Simulation sim = (Model.Simulation)lboxSimulation.SelectedItem;
             this.ViewModel.chooseSimulation(sim);
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Model.Simulation Sim = (Model.Simulation)lboxSimulation.SelectedItem;
+            this.ViewModel.delectSimulaion(Sim);
+            this.ViewModel.getSimulation();
+        }
     }
 }

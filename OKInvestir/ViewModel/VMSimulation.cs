@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using OKInvestir.UI;
 using OKInvestir.Model;
 using System.ComponentModel;
+using System.Data.Entity;
 
 namespace OKInvestir.ViewModel
 {
@@ -197,6 +198,36 @@ namespace OKInvestir.ViewModel
             this.View.getLbValueInterestRate().Text = sim.InterestRate.ToString();
             this.View.GetLbValueSettlementPrice().Text = sim.SettlementPrice.ToString();
 
+        }
+
+        public void delectSimulaion(Simulation Sim)
+        {
+            using (var context = new Model.Context())
+            {
+                int SimId = Sim.Id;
+               
+
+                Cursor.Current = Cursors.WaitCursor;        // waiting animation cursor
+                                                            //context.Database.Initialize(force: true);   // connect to db, it takes time
+                context.Database.Initialize(force: true);   // connect to db, it takes time
+                Model.Simulation SimToRemove = context.Simulations.Where(u => u.Id == SimId).First();
+                if (SimToRemove != null)
+                {
+                    context.Simulations.Attach(SimToRemove);
+                    context.Simulations.Remove(SimToRemove);
+                    context.SaveChanges();
+                    VMMain.UIMainForm.genMsgBox("Simulation deleted.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+                Cursor.Current = Cursors.Arrow;             // get back to normal cursor
+
+                SimulationForBinding = new List<Simulation>(Simulations);
+                blSimulation = new BindingList<Simulation>(SimulationForBinding);
+                this.View.getLboxSim().DataSource = blSimulation;
+                this.View.getLboxSim().DisplayMember = "LbInformation";
+
+
+            }
         }
 
     }

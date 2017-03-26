@@ -51,6 +51,7 @@
             this.lbPeriode = new System.Windows.Forms.Label();
             this.lboxSimulation = new System.Windows.Forms.ListBox();
             this.btSimulationChosen = new System.Windows.Forms.Button();
+            this.btDelete = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbBalance
@@ -303,12 +304,30 @@
             this.btSimulationChosen.ForeColor = System.Drawing.Color.Black;
             this.btSimulationChosen.Location = new System.Drawing.Point(36, 461);
             this.btSimulationChosen.Name = "btSimulationChosen";
-            this.btSimulationChosen.Size = new System.Drawing.Size(193, 30);
+            this.btSimulationChosen.Size = new System.Drawing.Size(135, 30);
             this.btSimulationChosen.TabIndex = 51;
             this.btSimulationChosen.TabStop = false;
-            this.btSimulationChosen.Text = "Choose";
+            this.btSimulationChosen.Text = "Select";
             this.btSimulationChosen.UseVisualStyleBackColor = false;
             this.btSimulationChosen.Click += new System.EventHandler(this.btSimulationChosen_Click);
+            // 
+            // btDelete
+            // 
+            this.btDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(202)))), ((int)(((byte)(240)))));
+            this.btDelete.FlatAppearance.BorderSize = 0;
+            this.btDelete.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(180)))), ((int)(((byte)(237)))));
+            this.btDelete.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(216)))), ((int)(((byte)(249)))));
+            this.btDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btDelete.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btDelete.ForeColor = System.Drawing.Color.Black;
+            this.btDelete.Location = new System.Drawing.Point(196, 461);
+            this.btDelete.Name = "btDelete";
+            this.btDelete.Size = new System.Drawing.Size(135, 30);
+            this.btDelete.TabIndex = 52;
+            this.btDelete.TabStop = false;
+            this.btDelete.Text = "Delete";
+            this.btDelete.UseVisualStyleBackColor = false;
+            this.btDelete.Click += new System.EventHandler(this.button1_Click);
             // 
             // UISimulation
             // 
@@ -316,6 +335,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(232)))), ((int)(((byte)(250)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.Controls.Add(this.btDelete);
             this.Controls.Add(this.btSimulationChosen);
             this.Controls.Add(this.lboxSimulation);
             this.Controls.Add(this.lbValuePeriode);
@@ -371,5 +391,6 @@
         private System.Windows.Forms.Label lbPeriode;
         private System.Windows.Forms.ListBox lboxSimulation;
         private System.Windows.Forms.Button btSimulationChosen;
+        private System.Windows.Forms.Button btDelete;
     }
 }
