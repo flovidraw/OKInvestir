@@ -117,9 +117,9 @@
             var AccountList = new List<Account>
             {
                 new Account { Number = "111111", Balance = 1M, status = 1, Client = CltList[0] },
-                new Account { Number = "222221", Balance = 1M, status = 1, Client = CltList[1] },
+                new Account { Number = "222221", Balance = 100M, status = 1, Client = CltList[1] },
                 new Account { Number = "222222", Balance = 1M, status = 2, Client = CltList[1] },
-                new Account { Number = "333331", Balance = 1M, status = 1, Client = CltList[2] },
+                new Account { Number = "333331", Balance = 100M, status = 1, Client = CltList[2] },
                 new Account { Number = "333332", Balance = 1M, status = 2, Client = CltList[2] },
                 new Account { Number = "333333", Balance = 1M, status = 3, Client = CltList[2] },
                 new Account { Number = "444441", Balance = 1M, status = 1, Client = CltList[3] },

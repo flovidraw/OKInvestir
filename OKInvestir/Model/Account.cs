@@ -9,6 +9,7 @@ namespace OKInvestir.Model
 {
     public class Account
     {
+        public int INT { get; set; }
         public int Id { get; set; }
         [Required]
         [StringLength(15)]

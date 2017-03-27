@@ -35,7 +35,7 @@ namespace OKInvestir.Model
         {
             get
             {
-                return this.Product.Name + " - " + SettlementPrice/(1+InterestRate/100) + " - "+ ((int)(this.EndDate - this.StartDate).TotalDays / 30 )+" "+"months";
+                return this.Product.Name + " - " + Price + " - "+ ((int)(this.EndDate - this.StartDate).TotalDays / 30 )+" "+"months";
             }
             private set { }
         }

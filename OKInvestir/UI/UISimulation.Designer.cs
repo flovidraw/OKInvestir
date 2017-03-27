@@ -58,7 +58,7 @@
             // 
             this.lbBalance.AutoSize = true;
             this.lbBalance.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbBalance.Location = new System.Drawing.Point(33, 104);
+            this.lbBalance.Location = new System.Drawing.Point(32, 59);
             this.lbBalance.Name = "lbBalance";
             this.lbBalance.Size = new System.Drawing.Size(78, 19);
             this.lbBalance.TabIndex = 19;
@@ -68,7 +68,7 @@
             // 
             this.lbValueBalance.AutoSize = true;
             this.lbValueBalance.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbValueBalance.Location = new System.Drawing.Point(120, 104);
+            this.lbValueBalance.Location = new System.Drawing.Point(120, 59);
             this.lbValueBalance.Name = "lbValueBalance";
             this.lbValueBalance.Size = new System.Drawing.Size(0, 19);
             this.lbValueBalance.TabIndex = 20;
@@ -77,7 +77,7 @@
             // 
             this.lbStartDate.AutoSize = true;
             this.lbStartDate.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbStartDate.Location = new System.Drawing.Point(32, 181);
+            this.lbStartDate.Location = new System.Drawing.Point(31, 104);
             this.lbStartDate.Name = "lbStartDate";
             this.lbStartDate.Size = new System.Drawing.Size(89, 19);
             this.lbStartDate.TabIndex = 27;
@@ -86,7 +86,7 @@
             // dtpStartDate
             // 
             this.dtpStartDate.CalendarTrailingForeColor = System.Drawing.Color.Gray;
-            this.dtpStartDate.Location = new System.Drawing.Point(132, 179);
+            this.dtpStartDate.Location = new System.Drawing.Point(131, 104);
             this.dtpStartDate.Name = "dtpStartDate";
             this.dtpStartDate.Size = new System.Drawing.Size(200, 21);
             this.dtpStartDate.TabIndex = 28;
@@ -96,7 +96,7 @@
             // 
             this.lbEndDate.AutoSize = true;
             this.lbEndDate.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbEndDate.Location = new System.Drawing.Point(33, 232);
+            this.lbEndDate.Location = new System.Drawing.Point(31, 152);
             this.lbEndDate.Name = "lbEndDate";
             this.lbEndDate.Size = new System.Drawing.Size(84, 19);
             this.lbEndDate.TabIndex = 29;
@@ -104,7 +104,7 @@
             // 
             // dtpEndDate
             // 
-            this.dtpEndDate.Location = new System.Drawing.Point(132, 230);
+            this.dtpEndDate.Location = new System.Drawing.Point(131, 152);
             this.dtpEndDate.Name = "dtpEndDate";
             this.dtpEndDate.Size = new System.Drawing.Size(200, 21);
             this.dtpEndDate.TabIndex = 30;
@@ -114,7 +114,7 @@
             // 
             this.lbAmout.AutoSize = true;
             this.lbAmout.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbAmout.Location = new System.Drawing.Point(33, 286);
+            this.lbAmout.Location = new System.Drawing.Point(31, 197);
             this.lbAmout.Name = "lbAmout";
             this.lbAmout.Size = new System.Drawing.Size(74, 19);
             this.lbAmout.TabIndex = 31;
@@ -126,7 +126,7 @@
             this.tbAmout.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbAmout.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbAmout.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.tbAmout.Location = new System.Drawing.Point(132, 286);
+            this.tbAmout.Location = new System.Drawing.Point(130, 196);
             this.tbAmout.Name = "tbAmout";
             this.tbAmout.Size = new System.Drawing.Size(200, 20);
             this.tbAmout.TabIndex = 32;
@@ -141,9 +141,9 @@
             this.btSimulate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btSimulate.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btSimulate.ForeColor = System.Drawing.Color.Black;
-            this.btSimulate.Location = new System.Drawing.Point(36, 335);
+            this.btSimulate.Location = new System.Drawing.Point(36, 238);
             this.btSimulate.Name = "btSimulate";
-            this.btSimulate.Size = new System.Drawing.Size(193, 30);
+            this.btSimulate.Size = new System.Drawing.Size(294, 30);
             this.btSimulate.TabIndex = 33;
             this.btSimulate.TabStop = false;
             this.btSimulate.Text = "Simulate";
@@ -235,9 +235,9 @@
             this.btSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btSave.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btSave.ForeColor = System.Drawing.Color.Black;
-            this.btSave.Location = new System.Drawing.Point(392, 417);
+            this.btSave.Location = new System.Drawing.Point(421, 347);
             this.btSave.Name = "btSave";
-            this.btSave.Size = new System.Drawing.Size(193, 30);
+            this.btSave.Size = new System.Drawing.Size(318, 30);
             this.btSave.TabIndex = 46;
             this.btSave.TabStop = false;
             this.btSave.Text = "Save";
@@ -253,13 +253,14 @@
             this.btExecute.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btExecute.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btExecute.ForeColor = System.Drawing.Color.Black;
-            this.btExecute.Location = new System.Drawing.Point(601, 417);
+            this.btExecute.Location = new System.Drawing.Point(198, 428);
             this.btExecute.Name = "btExecute";
-            this.btExecute.Size = new System.Drawing.Size(193, 30);
+            this.btExecute.Size = new System.Drawing.Size(133, 30);
             this.btExecute.TabIndex = 47;
             this.btExecute.TabStop = false;
             this.btExecute.Text = "Execute";
             this.btExecute.UseVisualStyleBackColor = false;
+            this.btExecute.Click += new System.EventHandler(this.btExecute_Click);
             // 
             // lbValuePeriode
             // 
@@ -287,7 +288,7 @@
             this.lboxSimulation.FormattingEnabled = true;
             this.lboxSimulation.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.lboxSimulation.ItemHeight = 12;
-            this.lboxSimulation.Location = new System.Drawing.Point(36, 383);
+            this.lboxSimulation.Location = new System.Drawing.Point(36, 347);
             this.lboxSimulation.Name = "lboxSimulation";
             this.lboxSimulation.Size = new System.Drawing.Size(295, 60);
             this.lboxSimulation.TabIndex = 50;
@@ -302,9 +303,9 @@
             this.btSimulationChosen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btSimulationChosen.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btSimulationChosen.ForeColor = System.Drawing.Color.Black;
-            this.btSimulationChosen.Location = new System.Drawing.Point(36, 461);
+            this.btSimulationChosen.Location = new System.Drawing.Point(197, 300);
             this.btSimulationChosen.Name = "btSimulationChosen";
-            this.btSimulationChosen.Size = new System.Drawing.Size(135, 30);
+            this.btSimulationChosen.Size = new System.Drawing.Size(133, 32);
             this.btSimulationChosen.TabIndex = 51;
             this.btSimulationChosen.TabStop = false;
             this.btSimulationChosen.Text = "Select";
@@ -320,9 +321,9 @@
             this.btDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btDelete.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btDelete.ForeColor = System.Drawing.Color.Black;
-            this.btDelete.Location = new System.Drawing.Point(196, 461);
+            this.btDelete.Location = new System.Drawing.Point(36, 428);
             this.btDelete.Name = "btDelete";
-            this.btDelete.Size = new System.Drawing.Size(135, 30);
+            this.btDelete.Size = new System.Drawing.Size(131, 30);
             this.btDelete.TabIndex = 52;
             this.btDelete.TabStop = false;
             this.btDelete.Text = "Delete";
@@ -360,7 +361,7 @@
             this.Controls.Add(this.lbValueBalance);
             this.Controls.Add(this.lbBalance);
             this.Name = "UISimulation";
-            this.Size = new System.Drawing.Size(824, 524);
+            this.Size = new System.Drawing.Size(824, 553);
             this.Load += new System.EventHandler(this.UISimulation_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

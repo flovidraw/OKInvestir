@@ -194,7 +194,7 @@ namespace OKInvestir.ViewModel
         {
             this.View.getValuePeriode().Text = ((int)(sim.EndDate - sim.StartDate).TotalDays / 30).ToString();
             this.View.getLbValueProductSelected().Text = sim.Product.Name;
-            this.View.getLbValueAmount().Text = (sim.SettlementPrice / (1 + sim.InterestRate / 100)).ToString();
+            this.View.getLbValueAmount().Text = sim.Price.ToString();
             this.View.getLbValueInterestRate().Text = sim.InterestRate.ToString();
             this.View.GetLbValueSettlementPrice().Text = sim.SettlementPrice.ToString();
 
@@ -218,6 +218,7 @@ namespace OKInvestir.ViewModel
                     context.SaveChanges();
                     VMMain.UIMainForm.genMsgBox("Simulation deleted.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+               
 
                 Cursor.Current = Cursors.Arrow;             // get back to normal cursor
 
@@ -227,6 +228,57 @@ namespace OKInvestir.ViewModel
                 this.View.getLboxSim().DisplayMember = "LbInformation";
 
 
+            }
+        }
+
+        public void ExecuteSimulation(Model.Simulation Sim)
+        {
+            if(this.VMMain.Client.AccountList[0].Balance>Sim.Price)
+            {
+               
+                Model.BoughtProduct boughtP = new Model.BoughtProduct();
+                //Enter infomations of simulation
+                boughtP.BoughtStatus = 1;
+                boughtP.Price = Sim.Price;
+
+                boughtP.Product = Sim.Product;
+                boughtP.ProductId = Sim.ProductId;
+
+                boughtP.SettlementPrice = Sim.SettlementPrice;
+
+                boughtP.StartDate = Sim.StartDate;
+                boughtP.EndDate = Sim.EndDate;
+                boughtP.BuyingDate = DateTime.Today.Date;
+
+                boughtP.Client = this.VMMain.Client;
+                boughtP.ClientId = this.VMMain.Client.Id;
+
+                boughtP.FinalInterest = Sim.SettlementPrice - Sim.Price;
+
+                //Save bought product
+                using (var context = new Model.Context())
+                {
+                    Cursor.Current = Cursors.WaitCursor;        // waiting animation cursor
+                    context.Database.Initialize(force: false);  // connect to db
+                    context.BoughtProducts.Add(boughtP);
+                    try
+                    {
+                        context.SaveChanges();  // save change
+                        VMMain.UIMainForm.genMsgBox("Simulation executed!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.VMMain.Client.AccountList[0].Balance = this.VMMain.Client.AccountList[0].Balance - Sim.Price;
+                    }
+                    catch (Exception e)
+                    {
+                        VMMain.HandleException(e, this.VMMain.UIMainForm);
+                        VMMain.UIMainForm.genMsgBox("Fail to execute the simulation", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Cursor.Current = Cursors.Arrow;             // get back to normal cursor
+                    }
+                }
+               
+            }
+            else
+            {
+                VMMain.UIMainForm.genMsgBox("Balance not enough!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

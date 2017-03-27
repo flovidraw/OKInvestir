@@ -210,5 +210,11 @@ namespace OKInvestir.UI
             this.ViewModel.delectSimulaion(Sim);
             this.ViewModel.getSimulation();
         }
+
+        private void btExecute_Click(object sender, EventArgs e)
+        {
+            Model.Simulation sim = (Model.Simulation)lboxSimulation.SelectedItem;
+            this.ViewModel.ExecuteSimulation(sim);
+        }
     }
 }
