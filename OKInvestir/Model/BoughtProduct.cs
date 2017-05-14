@@ -28,12 +28,12 @@ namespace OKInvestir.Model
         [Required]
         public decimal SettlementPrice { get; set; }
 
-        [Required]
+        //[Required]
         public Client Client { get; set; }
         [Required]
         public int ClientId { get; set; }
 
-        [Required]
+        //[Required]
         public Product Product { get; set; }
         [Required]
         public int ProductId { get; set; }

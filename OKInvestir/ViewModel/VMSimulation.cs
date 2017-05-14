@@ -233,7 +233,7 @@ namespace OKInvestir.ViewModel
 
         public void ExecuteSimulation(Model.Simulation Sim)
         {
-            if(this.VMMain.Client.AccountList[0].Balance>Sim.Price)
+            if(this.VMMain.Client.AccountList[0].Balance>=Sim.Price)
             {
                
                 Model.BoughtProduct boughtP = new Model.BoughtProduct();
@@ -241,7 +241,7 @@ namespace OKInvestir.ViewModel
                 boughtP.BoughtStatus = 1;
                 boughtP.Price = Sim.Price;
 
-                boughtP.Product = Sim.Product;
+                //boughtP.Product = Sim.Product;
                 boughtP.ProductId = Sim.ProductId;
 
                 boughtP.SettlementPrice = Sim.SettlementPrice;
@@ -250,7 +250,7 @@ namespace OKInvestir.ViewModel
                 boughtP.EndDate = Sim.EndDate;
                 boughtP.BuyingDate = DateTime.Today.Date;
 
-                boughtP.Client = this.VMMain.Client;
+                //boughtP.Client = this.VMMain.Client;
                 boughtP.ClientId = this.VMMain.Client.Id;
 
                 boughtP.FinalInterest = Sim.SettlementPrice - Sim.Price;
@@ -261,11 +261,18 @@ namespace OKInvestir.ViewModel
                     Cursor.Current = Cursors.WaitCursor;        // waiting animation cursor
                     context.Database.Initialize(force: false);  // connect to db
                     context.BoughtProducts.Add(boughtP);
+                    Client clientSim = context.Clients.Find(VMMain.Client.Id);
+                    clientSim.BoughtProductList.Add(boughtP);
+                    //Console.Write(context.Clients.Find(VMMain.Client.Id).AccountList[0].Balance);
+                    //clientSim.AccountList[0].Balance = clientSim.AccountList[0].Balance - Sim.Price;
+                    VMMain.Client.BoughtProductList.Add(boughtP);
+                    
                     try
                     {
                         context.SaveChanges();  // save change
                         VMMain.UIMainForm.genMsgBox("Simulation executed!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.VMMain.Client.AccountList[0].Balance = this.VMMain.Client.AccountList[0].Balance - Sim.Price;
+
                     }
                     catch (Exception e)
                     {
@@ -273,6 +280,7 @@ namespace OKInvestir.ViewModel
                         VMMain.UIMainForm.genMsgBox("Fail to execute the simulation", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         Cursor.Current = Cursors.Arrow;             // get back to normal cursor
                     }
+                    //context.SaveChanges();
                 }
                
             }
