@@ -216,5 +216,11 @@ namespace OKInvestir.UI
             Model.Simulation sim = (Model.Simulation)lboxSimulation.SelectedItem;
             this.ViewModel.ExecuteSimulation(sim);
         }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            this.ViewModel.CreatPDFTable();
+            this.ViewModel.PDFTable1();
+        }
     }
 }

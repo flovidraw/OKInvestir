@@ -52,6 +52,7 @@
             this.lboxSimulation = new System.Windows.Forms.ListBox();
             this.btSimulationChosen = new System.Windows.Forms.Button();
             this.btDelete = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbBalance
@@ -173,7 +174,7 @@
             // 
             this.lbResultAmount.AutoSize = true;
             this.lbResultAmount.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbResultAmount.Location = new System.Drawing.Point(416, 152);
+            this.lbResultAmount.Location = new System.Drawing.Point(417, 152);
             this.lbResultAmount.Name = "lbResultAmount";
             this.lbResultAmount.Size = new System.Drawing.Size(74, 19);
             this.lbResultAmount.TabIndex = 36;
@@ -235,7 +236,7 @@
             this.btSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btSave.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btSave.ForeColor = System.Drawing.Color.Black;
-            this.btSave.Location = new System.Drawing.Point(421, 347);
+            this.btSave.Location = new System.Drawing.Point(420, 333);
             this.btSave.Name = "btSave";
             this.btSave.Size = new System.Drawing.Size(318, 30);
             this.btSave.TabIndex = 46;
@@ -330,12 +331,31 @@
             this.btDelete.UseVisualStyleBackColor = false;
             this.btDelete.Click += new System.EventHandler(this.button1_Click);
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(202)))), ((int)(((byte)(240)))));
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(180)))), ((int)(((byte)(237)))));
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(216)))), ((int)(((byte)(249)))));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.Black;
+            this.button1.Location = new System.Drawing.Point(421, 393);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(317, 30);
+            this.button1.TabIndex = 53;
+            this.button1.TabStop = false;
+            this.button1.Text = "Export all simulation in format .pdf";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // UISimulation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(232)))), ((int)(((byte)(250)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btDelete);
             this.Controls.Add(this.btSimulationChosen);
             this.Controls.Add(this.lboxSimulation);
@@ -361,7 +381,7 @@
             this.Controls.Add(this.lbValueBalance);
             this.Controls.Add(this.lbBalance);
             this.Name = "UISimulation";
-            this.Size = new System.Drawing.Size(824, 553);
+            this.Size = new System.Drawing.Size(824, 588);
             this.Load += new System.EventHandler(this.UISimulation_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -393,5 +413,6 @@
         private System.Windows.Forms.ListBox lboxSimulation;
         private System.Windows.Forms.Button btSimulationChosen;
         private System.Windows.Forms.Button btDelete;
+        private System.Windows.Forms.Button button1;
     }
 }

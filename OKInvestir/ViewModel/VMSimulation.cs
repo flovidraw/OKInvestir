@@ -8,6 +8,10 @@ using OKInvestir.UI;
 using OKInvestir.Model;
 using System.ComponentModel;
 using System.Data.Entity;
+using System.IO;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.Data;
 
 namespace OKInvestir.ViewModel
 {
@@ -26,7 +30,7 @@ namespace OKInvestir.ViewModel
             this.View.ViewModel = this;
             this.VMMain = VMMain;
 
-           
+
 
         }
 
@@ -54,11 +58,11 @@ namespace OKInvestir.ViewModel
         public Model.SillInterest FindSillInterestSection(decimal Amount)
         {
             decimal amount = Amount;
-            Model.SillInterest sill = new Model.SillInterest ();
+            Model.SillInterest sill = new Model.SillInterest();
             sill.Sill = 0;
-            foreach(Model.SillInterest sillI in VMMain.Product.SillInterests)
+            foreach (Model.SillInterest sillI in VMMain.Product.SillInterests)
             {
-                if((sillI.Sill <= amount) && (sillI.Sill >= sill.Sill))
+                if ((sillI.Sill <= amount) && (sillI.Sill >= sill.Sill))
                 {
                     sill.Sill = sillI.Sill;
                     sill.Id = sillI.Id;
@@ -76,10 +80,10 @@ namespace OKInvestir.ViewModel
             time.Time = 0;
             int i = 0;
             foreach (Model.TimeInterest timeI in VMMain.Product.TimeInterests)
-            {  
-                if(i == 0)
+            {
+                if (i == 0)
                 {
-                   time.Time = timeI.Time;
+                    time.Time = timeI.Time;
                 }
                 else
                 {
@@ -91,7 +95,7 @@ namespace OKInvestir.ViewModel
                 i++;
             }
             return time.Time;
-            }
+        }
 
         public void printBalance()
         {
@@ -109,7 +113,7 @@ namespace OKInvestir.ViewModel
 
 
 
-           
+
         public Model.Simulation resultSimulation()
         {
             Model.Simulation simulation = new Model.Simulation();
@@ -122,21 +126,21 @@ namespace OKInvestir.ViewModel
             int periodeSimulation = (int)(simulation.EndDate - simulation.StartDate).TotalDays / 30;
             decimal InterestRateTime = FindTimeInterestSection().Interest;
             decimal InterestRateSill = FindSillInterestSection(simulation.Price).Interest;
-            simulation.InterestRate = ((InterestRateSill + 100) * (InterestRateTime + 100))/100 - 100;
-            simulation.SettlementPrice = simulation.Price * (100 + simulation.InterestRate)/100;
+            simulation.InterestRate = ((InterestRateSill + 100) * (InterestRateTime + 100)) / 100 - 100;
+            simulation.SettlementPrice = simulation.Price * (100 + simulation.InterestRate) / 100;
             if (InterestRateTime == 0)
             {
                 VMMain.UIMainForm.genMsgBox("For this product selected, the minimum holding periode have to be more than " + MinimumTimeSimulation() + " months.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                simulation.Price= 0;
+                simulation.Price = 0;
             }
 
-            if (simulation.Price!= 0)
+            if (simulation.Price != 0)
             {
                 View.getLbValueAmount().Text = simulation.Price.ToString();
-                View.getValuePeriode().Text = periodeSimulation.ToString()+" Months";
+                View.getValuePeriode().Text = periodeSimulation.ToString() + " Months";
 
                 View.getLbValueProductSelected().Text = VMMain.Product.Name;
-                View.getLbValueInterestRate().Text = (simulation.InterestRate).ToString()+" %";
+                View.getLbValueInterestRate().Text = (simulation.InterestRate).ToString() + " %";
                 View.GetLbValueSettlementPrice().Text = simulation.SettlementPrice.ToString();
             }
             return simulation;
@@ -152,7 +156,7 @@ namespace OKInvestir.ViewModel
                 try
                 {
                     context.SaveChanges();  // save change
-                    VMMain.UIMainForm.genMsgBox("Simulation saved!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information); 
+                    VMMain.UIMainForm.genMsgBox("Simulation saved!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 }
                 catch (Exception e)
@@ -169,7 +173,7 @@ namespace OKInvestir.ViewModel
 
             if (!VMMain.Client.Equals(null))
             {
-                
+
                 using (var context = new Model.Context())
                 {
                     int ClientId = VMMain.Client.Id;
@@ -179,13 +183,13 @@ namespace OKInvestir.ViewModel
                     context.Database.Initialize(force: true);   // connect to db, it takes time
                     Simulations = context.Simulations.Where(u => u.ClientId == ClientId).ToList();
                     Cursor.Current = Cursors.Arrow;             // get back to normal cursor
-     
+
                     SimulationForBinding = new List<Simulation>(Simulations);
                     blSimulation = new BindingList<Simulation>(SimulationForBinding);
                     this.View.getLboxSim().DataSource = blSimulation;
                     this.View.getLboxSim().DisplayMember = "LbInformation";
 
-                   
+
                 }
             }
         }
@@ -205,7 +209,7 @@ namespace OKInvestir.ViewModel
             using (var context = new Model.Context())
             {
                 int SimId = Sim.Id;
-               
+
 
                 Cursor.Current = Cursors.WaitCursor;        // waiting animation cursor
                                                             //context.Database.Initialize(force: true);   // connect to db, it takes time
@@ -218,7 +222,7 @@ namespace OKInvestir.ViewModel
                     context.SaveChanges();
                     VMMain.UIMainForm.genMsgBox("Simulation deleted.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-               
+
 
                 Cursor.Current = Cursors.Arrow;             // get back to normal cursor
 
@@ -233,9 +237,9 @@ namespace OKInvestir.ViewModel
 
         public void ExecuteSimulation(Model.Simulation Sim)
         {
-            if(this.VMMain.Client.AccountList[0].Balance>=Sim.Price)
+            if (this.VMMain.Client.AccountList[0].Balance >= Sim.Price)
             {
-               
+
                 Model.BoughtProduct boughtP = new Model.BoughtProduct();
                 //Enter infomations of simulation
                 boughtP.BoughtStatus = 1;
@@ -263,10 +267,11 @@ namespace OKInvestir.ViewModel
                     context.BoughtProducts.Add(boughtP);
                     Client clientSim = context.Clients.Find(VMMain.Client.Id);
                     clientSim.BoughtProductList.Add(boughtP);
-                    //Console.Write(context.Clients.Find(VMMain.Client.Id).AccountList[0].Balance);
                     //clientSim.AccountList[0].Balance = clientSim.AccountList[0].Balance - Sim.Price;
+                    //Console.Write(context.Clients.Find(VMMain.Client.Id).FirstName);
+
                     VMMain.Client.BoughtProductList.Add(boughtP);
-                    
+
                     try
                     {
                         context.SaveChanges();  // save change
@@ -282,13 +287,71 @@ namespace OKInvestir.ViewModel
                     }
                     //context.SaveChanges();
                 }
-               
+
             }
             else
             {
                 VMMain.UIMainForm.genMsgBox("Balance not enough!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        //======================================================= PDF ==============================================================================
+
+        public void CreatPDFTable()
+        {
+            //打印PDF表格
+            string pdfname = string.Empty;
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.FileName = "PDF table";
+            dlg.DefaultExt = ".pdf";
+            dlg.Filter = "Text documents (.pdf)|*.pdf";
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                pdfname = dlg.FileName;
+                FileStream fs = new FileStream(pdfname, FileMode.Create);   //创建文件流
+                Document document = new Document(PageSize.A4);     //创建文件 PageSize.A7.Rotate()表示A7纸横向输出  
+                PdfWriter pdfWriter = PdfWriter.GetInstance(document, fs);  //实例化
+                document.Open();                         //打开文件 
+                document.Add(new Paragraph("1"));
+                document.Add(PDFTable1());               //添加表格
+
+                document.SetPageSize(PageSize.A4);       //A4纸纵向输出
+                document.NewPage();                      //新起一页
+                document.Close();                        //关闭文件
+                fs.Close();
+            }
+        }
+
+        public PdfPTable PDFTable1()
+        {
+            List<Simulation> listSim = new List<Simulation>();
+            
+            var table1 = new PdfPTable(9);     //创建表格实例4列
+            //int[] a = { 1, 3, 3, 3, 3, 3, 3, 3, 3 };
+            table1.NormalizeHeadersFooters();//设置列宽比例
+            table1.SetWidths(a);
+            table1.AddCell(" ");
+            table1.AddCell("Simulation name");
+            table1.AddCell("Product name");
+            table1.AddCell("Price");
+            table1.AddCell("Start date");
+            table1.AddCell("End date");
+            table1.AddCell("Interest rate");
+            table1.AddCell("Settlement price");
+            table1.AddCell("Tatal days");
+
+            for (int i = 0; i <20; i++)
+            {
+                table1.AddCell((i + 1).ToString());     //添加单元格
+            }
+            return table1;
+            
+           }
+
+
+           
+
+        
 
     }
 }
