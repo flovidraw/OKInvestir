@@ -10,6 +10,8 @@ namespace OKInvestir.Model
 {
     public class Client
     {
+        //[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //public int CltId { get; set; }
         public int Id { get; set; }
         [Required]
         [StringLength(20)]

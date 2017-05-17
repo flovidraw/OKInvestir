@@ -22,6 +22,7 @@ namespace OKInvestir.ViewModel
         public List<Simulation> Simulations { get; set; }
         public List<Simulation> SimulationForBinding { get; set; }
         public BindingList<Simulation> blSimulation { get; set; }
+        public List<Simulation> SimulationList { get; set; }
 
 
         public VMSimulation(VMMain VMMain, UISimulation View)
@@ -188,7 +189,7 @@ namespace OKInvestir.ViewModel
                     blSimulation = new BindingList<Simulation>(SimulationForBinding);
                     this.View.getLboxSim().DataSource = blSimulation;
                     this.View.getLboxSim().DisplayMember = "LbInformation";
-
+                    
 
                 }
             }
@@ -264,10 +265,17 @@ namespace OKInvestir.ViewModel
                 {
                     Cursor.Current = Cursors.WaitCursor;        // waiting animation cursor
                     context.Database.Initialize(force: false);  // connect to db
+                    Client clientSim = context.Clients
+                    .Include(c => c.AccountList)            // get related entities
+                    .Include(bpl => bpl.BoughtProductList)
+                    .Include("BoughtProductList.Product")
+                    .Include("BoughtProductList.Product.TimeInterests")
+                    .Include("BoughtProductList.Product.SillInterests")
+                    .Where(c => c.Id == 1)
+                    .First();
                     context.BoughtProducts.Add(boughtP);
-                    Client clientSim = context.Clients.Find(VMMain.Client.Id);
                     clientSim.BoughtProductList.Add(boughtP);
-                    //clientSim.AccountList[0].Balance = clientSim.AccountList[0].Balance - Sim.Price;
+                    clientSim.AccountList[0].Balance = clientSim.AccountList[0].Balance - Sim.Price;
                     //Console.Write(context.Clients.Find(VMMain.Client.Id).FirstName);
 
                     VMMain.Client.BoughtProductList.Add(boughtP);
@@ -309,7 +317,7 @@ namespace OKInvestir.ViewModel
             {
                 pdfname = dlg.FileName;
                 FileStream fs = new FileStream(pdfname, FileMode.Create);   //创建文件流
-                Document document = new Document(PageSize.A4);     //创建文件 PageSize.A7.Rotate()表示A7纸横向输出  
+                Document document = new Document(PageSize.A4.Rotate());     //创建文件 PageSize.A7.Rotate()表示A7纸横向输出  
                 PdfWriter pdfWriter = PdfWriter.GetInstance(document, fs);  //实例化
                 document.Open();                         //打开文件 
                 document.Add(new Paragraph("1"));
@@ -325,13 +333,13 @@ namespace OKInvestir.ViewModel
         public PdfPTable PDFTable1()
         {
             List<Simulation> listSim = new List<Simulation>();
-            
+
             var table1 = new PdfPTable(9);     //创建表格实例4列
-            //int[] a = { 1, 3, 3, 3, 3, 3, 3, 3, 3 };
+            int[] a = { 1, 3, 3, 3, 3, 3, 3, 3, 3 };
             table1.NormalizeHeadersFooters();//设置列宽比例
             table1.SetWidths(a);
             table1.AddCell(" ");
-            table1.AddCell("Simulation name");
+            table1.AddCell("Simulation Id");
             table1.AddCell("Product name");
             table1.AddCell("Price");
             table1.AddCell("Start date");
@@ -340,15 +348,55 @@ namespace OKInvestir.ViewModel
             table1.AddCell("Settlement price");
             table1.AddCell("Tatal days");
 
-            for (int i = 0; i <20; i++)
+            if (!VMMain.Client.Equals(null))
             {
-                table1.AddCell((i + 1).ToString());     //添加单元格
+
+                using (var context = new Model.Context())
+                {
+                    int ClientId = VMMain.Client.Id;
+                    //bool isSimulationFound = false;
+                    Cursor.Current = Cursors.WaitCursor;        // waiting animation cursor
+                                                                //context.Database.Initialize(force: true);   // connect to db, it takes time
+                    context.Database.Initialize(force: true);   // connect to db, it takes time
+                    SimulationList = context.Simulations.Where(u => u.ClientId == ClientId)
+                        .Include(c => c.Product)
+                        .Include(c => c.Client)
+                        .ToList();
+                    Cursor.Current = Cursors.Arrow;             // get back to normal cursor
+
+                }
+            }
+
+
+
+
+
+            if (SimulationList.Count != 0)
+            {
+                /* for (int i = 0; i < SimulationList.Count; i++)
+                 {
+                     table1.AddCell((i + 1).ToString());     //添加单元格
+                     table1.AddCell(SimulationList.Find(Index);
+                 }
+                 return table1;
+                 */
+                int i = 0;
+                foreach (Simulation Sim in SimulationList)
+                {
+                    table1.AddCell((i + 1).ToString());
+                    table1.AddCell(Sim.Id.ToString());
+                    table1.AddCell(Sim.Product.Name.ToString());
+                    table1.AddCell(Sim.Price.ToString());
+                    table1.AddCell(Sim.StartDate.Day.ToString()+"-"+ Sim.StartDate.Month + "-" +Sim.StartDate.Year.ToString());
+                    table1.AddCell(Sim.EndDate.Day.ToString() + "-" + Sim.EndDate.Month.ToString() + "-" + Sim.EndDate.Year.ToString());
+                    table1.AddCell(Sim.InterestRate.ToString());
+                    table1.AddCell(Sim.SettlementPrice.ToString());
+                    table1.AddCell((Sim.EndDate - Sim.StartDate).TotalDays.ToString());
+                    i++;
+                }
             }
             return table1;
-            
-           }
-
-
+        }
            
 
         
