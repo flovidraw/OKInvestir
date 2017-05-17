@@ -321,6 +321,7 @@ namespace OKInvestir.ViewModel
                 PdfWriter pdfWriter = PdfWriter.GetInstance(document, fs);  //实例化
                 document.Open();                         //打开文件 
                 document.Add(new Paragraph("1"));
+                
                 document.Add(PDFTable1());               //添加表格
 
                 document.SetPageSize(PageSize.A4);       //A4纸纵向输出
@@ -335,18 +336,28 @@ namespace OKInvestir.ViewModel
             List<Simulation> listSim = new List<Simulation>();
 
             var table1 = new PdfPTable(9);     //创建表格实例4列
+            table1.DefaultCell.Border = Rectangle.NO_BORDER;
+
+            var Calibri1 = FontFactory.GetFont("TimesNewRoman", 14, Font.BOLD);
+            PdfPCell cell = new PdfPCell(new Phrase("Simulation list of "+ VMMain.Client.FullName,Calibri1));
+            cell.Colspan = 9;
+            cell.HorizontalAlignment = 1; //0=Left, 1=Centre, 2=Right
+            cell.Border = Rectangle.NO_BORDER;
+            table1.AddCell(cell);
+            table1.DefaultCell.BackgroundColor = BaseColor.LIGHT_GRAY;
+            var Calibri9 = FontFactory.GetFont("TimesNewRoman", 12, Font.BOLD);
             int[] a = { 1, 3, 3, 3, 3, 3, 3, 3, 3 };
             table1.NormalizeHeadersFooters();//设置列宽比例
             table1.SetWidths(a);
             table1.AddCell(" ");
-            table1.AddCell("Simulation Id");
-            table1.AddCell("Product name");
-            table1.AddCell("Price");
-            table1.AddCell("Start date");
-            table1.AddCell("End date");
-            table1.AddCell("Interest rate");
-            table1.AddCell("Settlement price");
-            table1.AddCell("Tatal days");
+            table1.AddCell(new Paragraph("Simulation Id", Calibri9));
+            table1.AddCell(new Paragraph("Product name", Calibri9));
+            table1.AddCell(new Paragraph("Price", Calibri9));
+            table1.AddCell(new Paragraph("Start date", Calibri9));
+            table1.AddCell(new Paragraph("End date", Calibri9));
+            table1.AddCell(new Paragraph("Interest rate", Calibri9));
+            table1.AddCell(new Paragraph("Settlement price", Calibri9));
+            table1.AddCell(new Paragraph("Tatal months", Calibri9));
 
             if (!VMMain.Client.Equals(null))
             {
@@ -381,19 +392,31 @@ namespace OKInvestir.ViewModel
                  return table1;
                  */
                 int i = 0;
+                var FontColour = new BaseColor(35, 31, 32);
+                var Calibri8 = FontFactory.GetFont("TimesNewRoman", 11, FontColour);
                 foreach (Simulation Sim in SimulationList)
                 {
-                    table1.AddCell((i + 1).ToString());
-                    table1.AddCell(Sim.Id.ToString());
-                    table1.AddCell(Sim.Product.Name.ToString());
-                    table1.AddCell(Sim.Price.ToString());
-                    table1.AddCell(Sim.StartDate.Day.ToString()+"-"+ Sim.StartDate.Month + "-" +Sim.StartDate.Year.ToString());
-                    table1.AddCell(Sim.EndDate.Day.ToString() + "-" + Sim.EndDate.Month.ToString() + "-" + Sim.EndDate.Year.ToString());
-                    table1.AddCell(Sim.InterestRate.ToString());
-                    table1.AddCell(Sim.SettlementPrice.ToString());
-                    table1.AddCell((Sim.EndDate - Sim.StartDate).TotalDays.ToString());
+                    if(i%2==0)
+                    {
+                        table1.DefaultCell.BackgroundColor = BaseColor.WHITE;
+                    }
+                    else
+                    {
+                        table1.DefaultCell.BackgroundColor = BaseColor.LIGHT_GRAY;
+                    }
+                    table1.AddCell(new Paragraph((i + 1).ToString(), Calibri8));      
+                    table1.AddCell(new Paragraph(Sim.Id.ToString(), Calibri8));
+                    table1.AddCell(new Paragraph(Sim.Product.Name.ToString(), Calibri8));
+                    table1.AddCell(new Paragraph(Sim.Price.ToString(), Calibri8));
+                    table1.AddCell(new Paragraph(Sim.StartDate.Day.ToString()+"-"+ Sim.StartDate.Month + "-" +Sim.StartDate.Year.ToString(), Calibri8));
+                    table1.AddCell(new Paragraph(Sim.EndDate.Day.ToString() + "-" + Sim.EndDate.Month.ToString() + "-" + Sim.EndDate.Year.ToString(), Calibri8));
+                    table1.AddCell(new Paragraph(Sim.InterestRate.ToString(), Calibri8));
+                    table1.AddCell(new Paragraph(Sim.SettlementPrice.ToString(), Calibri8));
+                    table1.AddCell(new Paragraph(((int)((Sim.EndDate - Sim.StartDate).TotalDays)/30).ToString(), Calibri8));
                     i++;
                 }
+
+                
             }
             return table1;
         }
