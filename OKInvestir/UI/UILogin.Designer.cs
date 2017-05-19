@@ -56,7 +56,7 @@
             this.tbId.Name = "tbId";
             this.tbId.Size = new System.Drawing.Size(200, 22);
             this.tbId.TabIndex = 1;
-            this.tbId.Click += new System.EventHandler(this.tbId_Click);
+            this.tbId.GotFocus += new System.EventHandler(this.tbId_Click);
             this.tbId.TextChanged += new System.EventHandler(this.tbId_TextChanged);
             this.tbId.LostFocus += new System.EventHandler(this.tbId_LostFocus);
             // 
@@ -68,7 +68,7 @@
             this.tbPw.Name = "tbPw";
             this.tbPw.Size = new System.Drawing.Size(200, 22);
             this.tbPw.TabIndex = 2;
-            this.tbPw.Click += new System.EventHandler(this.tbPw_Click);
+            this.tbPw.GotFocus += new System.EventHandler(this.tbPw_Click);
             this.tbPw.TextChanged += new System.EventHandler(this.tbPw_TextChanged);
             this.tbPw.LostFocus += new System.EventHandler(this.tbPw_LostFocus);
             // 

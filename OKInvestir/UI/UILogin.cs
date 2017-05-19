@@ -122,9 +122,10 @@ namespace OKInvestir.UI
         {
             if (!hasTbPwTextBeenTyped)
             {
+                tbPw.Text = "                   ";
                 tbPw.UseSystemPasswordChar = true;
-                tbPw.ForeColor = Color.Black;
                 tbPw.Text = "";
+                tbPw.ForeColor = Color.Black;
             }
         }
     }

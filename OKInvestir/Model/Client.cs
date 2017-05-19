@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Windows.Forms;
+using System.Data.Entity;
 
 namespace OKInvestir.Model
 {
@@ -43,6 +45,22 @@ namespace OKInvestir.Model
             FirstName = firstName;
             LastName = lastName;
             IdCardNumber = idCardNumber;
+        }
+
+        public List<Simulation> getSimulationList()
+        {
+            List<Simulation> SimulationList = null;
+            using (var context = new Context())
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                context.Database.Initialize(force: true);
+                SimulationList = context.Simulations.Where(u => u.ClientId == this.Id)
+                    .Include(c => c.Product)
+                    .Include(c => c.Client)
+                    .ToList();
+                Cursor.Current = Cursors.Arrow;
+            }
+            return SimulationList;
         }
     }
 }

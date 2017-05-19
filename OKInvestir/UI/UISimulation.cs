@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OKInvestir.ViewModel;
+using OKInvestir.Util;
 
 namespace OKInvestir.UI
 {
@@ -221,6 +222,11 @@ namespace OKInvestir.UI
         {
             this.ViewModel.CreatPDFTable();
             this.ViewModel.PDFTable1();
+        }
+
+        private void exportCsv_Click(object sender, EventArgs e)
+        {
+            ExportCsv.writeCsv(this.ViewModel.VMMain.Client, this.ViewModel.VMMain.UIMainForm);
         }
     }
 }

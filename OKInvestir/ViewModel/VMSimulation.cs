@@ -265,14 +265,14 @@ namespace OKInvestir.ViewModel
                 {
                     Cursor.Current = Cursors.WaitCursor;        // waiting animation cursor
                     context.Database.Initialize(force: false);  // connect to db
-                    Client clientSim = context.Clients
+                    List<Client> clients = context.Clients
                     .Include(c => c.AccountList)            // get related entities
                     .Include(bpl => bpl.BoughtProductList)
                     .Include("BoughtProductList.Product")
                     .Include("BoughtProductList.Product.TimeInterests")
                     .Include("BoughtProductList.Product.SillInterests")
-                    .Where(c => c.Id == 1)
-                    .First();
+                    .ToList();
+                    Client clientSim = clients.Where(c => c.Id == VMMain.Client.Id).SingleOrDefault();
                     context.BoughtProducts.Add(boughtP);
                     clientSim.BoughtProductList.Add(boughtP);
                     clientSim.AccountList[0].Balance = clientSim.AccountList[0].Balance - Sim.Price;
