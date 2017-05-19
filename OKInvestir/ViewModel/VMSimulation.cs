@@ -305,23 +305,41 @@ namespace OKInvestir.ViewModel
 
         //======================================================= PDF ==============================================================================
 
+
+
+        
+
         public void CreatPDFTable()
         {
+           
             //打印PDF表格
             string pdfname = string.Empty;
             SaveFileDialog dlg = new SaveFileDialog();
-            dlg.FileName = "PDF table";
+            dlg.FileName = "Okinvestir Simulation liste";
             dlg.DefaultExt = ".pdf";
             dlg.Filter = "Text documents (.pdf)|*.pdf";
+            Image imageHeader = Image.GetInstance("business_banking.jpg");
+           
+
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 pdfname = dlg.FileName;
                 FileStream fs = new FileStream(pdfname, FileMode.Create);   //创建文件流
                 Document document = new Document(PageSize.A4.Rotate());     //创建文件 PageSize.A7.Rotate()表示A7纸横向输出  
                 PdfWriter pdfWriter = PdfWriter.GetInstance(document, fs);  //实例化
-                document.Open();                         //打开文件 
+
+                MyPageEventHandler e = new MyPageEventHandler()
+                {
+                    ImageHeader = imageHeader
+                    
+                };
+                pdfWriter.PageEvent = e;
+
+                document.Open();   //打开文件
+ 
+
                 document.Add(new Paragraph("1"));
-                
+                //document.Add(header1);
                 document.Add(PDFTable1());               //添加表格
 
                 document.SetPageSize(PageSize.A4);       //A4纸纵向输出
@@ -330,6 +348,8 @@ namespace OKInvestir.ViewModel
                 fs.Close();
             }
         }
+
+       
 
         public PdfPTable PDFTable1()
         {
@@ -420,9 +440,96 @@ namespace OKInvestir.ViewModel
             }
             return table1;
         }
-           
 
-        
+        private class MyPageEventHandler : PdfPageEventHelper
+        {
+            /*
+             * We use a __single__ Image instance that's assigned __once__;
+             * the image bytes added **ONCE** to the PDF file. If you create 
+             * separate Image instances in OnEndPage()/OnEndPage(), for example,
+             * you'll end up with a much bigger file size.
+             */
+            public Image ImageHeader { get; set; }
+            public Image ImageFooter { get; set; }
+
+            public override void OnEndPage(PdfWriter writer, Document document)
+            {
+                // cell height 
+                float cellHeight = document.TopMargin;
+                // PDF document size      
+                Rectangle page = document.PageSize;
+
+                // create two column table
+                PdfPTable head = new PdfPTable(2);
+                head.TotalWidth = page.Width;
+                
+
+                // add image; PdfPCell() overload sizes image to fit cell
+                PdfPCell c = new PdfPCell(ImageHeader, true);
+                c.HorizontalAlignment = Element.ALIGN_CENTER;
+                c.FixedHeight = cellHeight;
+                c.Border = PdfPCell.NO_BORDER;
+                head.AddCell(c);
+
+                //add the header text
+                PdfPCell e = new PdfPCell(new Phrase("OkInvestir - Bank application", new Font(Font.FontFamily.TIMES_ROMAN, 20, Font.BOLD)));
+                e.HorizontalAlignment = Element.ALIGN_LEFT;
+                e.FixedHeight = cellHeight;
+                e.Border = PdfPCell.NO_BORDER;
+                head.AddCell(e);
+
+                
+
+               
+
+               
+                // since the table header is implemented using a PdfPTable, we call
+                // WriteSelectedRows(), which requires absolute positions!
+                head.WriteSelectedRows(
+                  0, -1,  // first/last row; -1 flags all write all rows
+                  0,      // left offset
+                          // ** bottom** yPos of the table
+                  page.Height - cellHeight + head.TotalHeight,
+                  writer.DirectContent
+                );
+
+
+                
+                PdfPTable foot = new PdfPTable(2);
+                foot.TotalWidth = page.Width;
+                PdfPCell d = new PdfPCell(new Phrase("PDF exported at " +
+               DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss") + " GMT",
+               new Font(Font.FontFamily.COURIER, 8)
+             ));
+                d.Border = PdfPCell.NO_BORDER;
+                d.VerticalAlignment = Element.ALIGN_CENTER;
+                d.FixedHeight = cellHeight;
+                foot.AddCell(d);
+
+                PdfPCell a = new PdfPCell(new Phrase( "Page " + writer.CurrentPageNumber));
+                a.Border = PdfPCell.NO_BORDER;
+                a.HorizontalAlignment = Element.ALIGN_LEFT;
+                foot.AddCell(a);
+
+                foot.WriteSelectedRows(
+               0, -1,
+               300,
+
+               30,
+               writer.DirectContent
+               );
+
+
+            }
+
+            
+
+
+
+        }
+
+
+
 
     }
 }
