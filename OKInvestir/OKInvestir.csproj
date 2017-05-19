@@ -130,6 +130,7 @@
       <DependentUpon>UISubProduct.cs</DependentUpon>
     </Compile>
     <Compile Include="Util\ExportCsv.cs" />
+    <Compile Include="Util\ExportXlsx.cs" />
     <Compile Include="ViewModel\VMClient.cs" />
     <Compile Include="ViewModel\VMDashboard.cs" />
     <Compile Include="ViewModel\VMLogin.cs" />

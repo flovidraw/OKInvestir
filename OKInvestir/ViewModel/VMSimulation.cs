@@ -189,7 +189,7 @@ namespace OKInvestir.ViewModel
                     blSimulation = new BindingList<Simulation>(SimulationForBinding);
                     this.View.getLboxSim().DataSource = blSimulation;
                     this.View.getLboxSim().DisplayMember = "LbInformation";
-                    
+
 
                 }
             }
@@ -307,11 +307,11 @@ namespace OKInvestir.ViewModel
 
 
 
-        
+
 
         public void CreatPDFTable()
         {
-           
+
             //打印PDF表格
             string pdfname = string.Empty;
             SaveFileDialog dlg = new SaveFileDialog();
@@ -319,7 +319,7 @@ namespace OKInvestir.ViewModel
             dlg.DefaultExt = ".pdf";
             dlg.Filter = "Text documents (.pdf)|*.pdf";
             Image imageHeader = Image.GetInstance("business_banking.jpg");
-           
+
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {
@@ -331,12 +331,12 @@ namespace OKInvestir.ViewModel
                 MyPageEventHandler e = new MyPageEventHandler()
                 {
                     ImageHeader = imageHeader
-                    
+
                 };
                 pdfWriter.PageEvent = e;
 
                 document.Open();   //打开文件
- 
+
 
                 document.Add(new Paragraph("1"));
                 //document.Add(header1);
@@ -349,7 +349,7 @@ namespace OKInvestir.ViewModel
             }
         }
 
-       
+
 
         public PdfPTable PDFTable1()
         {
@@ -359,7 +359,7 @@ namespace OKInvestir.ViewModel
             table1.DefaultCell.Border = Rectangle.NO_BORDER;
 
             var Calibri1 = FontFactory.GetFont("TimesNewRoman", 14, Font.BOLD);
-            PdfPCell cell = new PdfPCell(new Phrase("Simulation list of "+ VMMain.Client.FullName,Calibri1));
+            PdfPCell cell = new PdfPCell(new Phrase("Simulation list of " + VMMain.Client.FullName, Calibri1));
             cell.Colspan = 9;
             cell.HorizontalAlignment = 1; //0=Left, 1=Centre, 2=Right
             cell.Border = Rectangle.NO_BORDER;
@@ -379,28 +379,8 @@ namespace OKInvestir.ViewModel
             table1.AddCell(new Paragraph("Settlement price", Calibri9));
             table1.AddCell(new Paragraph("Tatal months", Calibri9));
 
-            if (!VMMain.Client.Equals(null))
-            {
 
-                using (var context = new Model.Context())
-                {
-                    int ClientId = VMMain.Client.Id;
-                    //bool isSimulationFound = false;
-                    Cursor.Current = Cursors.WaitCursor;        // waiting animation cursor
-                                                                //context.Database.Initialize(force: true);   // connect to db, it takes time
-                    context.Database.Initialize(force: true);   // connect to db, it takes time
-                    SimulationList = context.Simulations.Where(u => u.ClientId == ClientId)
-                        .Include(c => c.Product)
-                        .Include(c => c.Client)
-                        .ToList();
-                    Cursor.Current = Cursors.Arrow;             // get back to normal cursor
-
-                }
-            }
-
-
-
-
+            SimulationList = VMMain.Client.getSimulationList();
 
             if (SimulationList.Count != 0)
             {
@@ -416,7 +396,7 @@ namespace OKInvestir.ViewModel
                 var Calibri8 = FontFactory.GetFont("TimesNewRoman", 11, FontColour);
                 foreach (Simulation Sim in SimulationList)
                 {
-                    if(i%2==0)
+                    if (i % 2 == 0)
                     {
                         table1.DefaultCell.BackgroundColor = BaseColor.WHITE;
                     }
@@ -424,19 +404,19 @@ namespace OKInvestir.ViewModel
                     {
                         table1.DefaultCell.BackgroundColor = BaseColor.LIGHT_GRAY;
                     }
-                    table1.AddCell(new Paragraph((i + 1).ToString(), Calibri8));      
+                    table1.AddCell(new Paragraph((i + 1).ToString(), Calibri8));
                     table1.AddCell(new Paragraph(Sim.Id.ToString(), Calibri8));
                     table1.AddCell(new Paragraph(Sim.Product.Name.ToString(), Calibri8));
                     table1.AddCell(new Paragraph(Sim.Price.ToString(), Calibri8));
-                    table1.AddCell(new Paragraph(Sim.StartDate.Day.ToString()+"-"+ Sim.StartDate.Month + "-" +Sim.StartDate.Year.ToString(), Calibri8));
+                    table1.AddCell(new Paragraph(Sim.StartDate.Day.ToString() + "-" + Sim.StartDate.Month + "-" + Sim.StartDate.Year.ToString(), Calibri8));
                     table1.AddCell(new Paragraph(Sim.EndDate.Day.ToString() + "-" + Sim.EndDate.Month.ToString() + "-" + Sim.EndDate.Year.ToString(), Calibri8));
                     table1.AddCell(new Paragraph(Sim.InterestRate.ToString(), Calibri8));
                     table1.AddCell(new Paragraph(Sim.SettlementPrice.ToString(), Calibri8));
-                    table1.AddCell(new Paragraph(((int)((Sim.EndDate - Sim.StartDate).TotalDays)/30).ToString(), Calibri8));
+                    table1.AddCell(new Paragraph(((int)((Sim.EndDate - Sim.StartDate).TotalDays) / 30).ToString(), Calibri8));
                     i++;
                 }
 
-                
+
             }
             return table1;
         }
@@ -462,7 +442,7 @@ namespace OKInvestir.ViewModel
                 // create two column table
                 PdfPTable head = new PdfPTable(2);
                 head.TotalWidth = page.Width;
-                
+
 
                 // add image; PdfPCell() overload sizes image to fit cell
                 PdfPCell c = new PdfPCell(ImageHeader, true);
@@ -478,11 +458,11 @@ namespace OKInvestir.ViewModel
                 e.Border = PdfPCell.NO_BORDER;
                 head.AddCell(e);
 
-                
 
-               
 
-               
+
+
+
                 // since the table header is implemented using a PdfPTable, we call
                 // WriteSelectedRows(), which requires absolute positions!
                 head.WriteSelectedRows(
@@ -494,7 +474,7 @@ namespace OKInvestir.ViewModel
                 );
 
 
-                
+
                 PdfPTable foot = new PdfPTable(2);
                 foot.TotalWidth = page.Width;
                 PdfPCell d = new PdfPCell(new Phrase("PDF exported at " +
@@ -506,7 +486,7 @@ namespace OKInvestir.ViewModel
                 d.FixedHeight = cellHeight;
                 foot.AddCell(d);
 
-                PdfPCell a = new PdfPCell(new Phrase( "Page " + writer.CurrentPageNumber));
+                PdfPCell a = new PdfPCell(new Phrase("Page " + writer.CurrentPageNumber));
                 a.Border = PdfPCell.NO_BORDER;
                 a.HorizontalAlignment = Element.ALIGN_LEFT;
                 foot.AddCell(a);
@@ -522,7 +502,7 @@ namespace OKInvestir.ViewModel
 
             }
 
-            
+
 
 
 

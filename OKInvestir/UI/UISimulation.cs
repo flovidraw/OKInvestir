@@ -228,5 +228,10 @@ namespace OKInvestir.UI
         {
             ExportCsv.writeCsv(this.ViewModel.VMMain.Client, this.ViewModel.VMMain.UIMainForm);
         }
+
+        private void exportXlsx_Click(object sender, EventArgs e)
+        {
+            ExportXlsx.exportXlsx(ViewModel.VMMain.Client, ViewModel.VMMain.UIMainForm);
+        }
     }
 }
