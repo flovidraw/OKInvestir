@@ -129,6 +129,7 @@
     <Compile Include="UI\UISubProduct.Designer.cs">
       <DependentUpon>UISubProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="Util\ExportPDF.cs" />
     <Compile Include="Util\ExportCsv.cs" />
     <Compile Include="Util\ExportXlsx.cs" />
     <Compile Include="ViewModel\VMClient.cs" />

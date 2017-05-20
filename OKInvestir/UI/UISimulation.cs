@@ -220,8 +220,9 @@ namespace OKInvestir.UI
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            this.ViewModel.CreatPDFTable();
-            this.ViewModel.PDFTable1();
+            //this.ViewModel.CreatPDFTable();
+            //this.ViewModel.PDFTable1();
+            ExportPDF.writePdf(ViewModel.VMMain.Client, ViewModel.VMMain.UIMainForm);
         }
 
         private void exportCsv_Click(object sender, EventArgs e)
