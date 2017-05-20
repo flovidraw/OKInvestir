@@ -51,14 +51,11 @@ namespace OKInvestir.Util
                     document.Close();                        //关闭文件
                     fs.Close();
                 }
-                catch (IOException e1)
+                catch (IOException ee)
                 {
-                    form.genMsgBox("Fail to export pdf file.", "error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+                    form.genMsgBox("Fail to export pdf file, maybe de file is already openned", "error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
                 }
-                catch (Exception e2)
-                {
-                    form.genMsgBox("Fail to export pdf file, may be the file is already openned", "error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
-                }             
+                           
             }    
         }
 
