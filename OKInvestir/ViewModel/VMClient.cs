@@ -9,6 +9,7 @@ using OKInvestir.UI;
 using System.ComponentModel;
 using System.Data.Entity;
 using System.Drawing;
+using OKInvestir.Util;
 
 namespace OKInvestir.ViewModel
 {
@@ -16,7 +17,7 @@ namespace OKInvestir.ViewModel
     {
         private UIClient View { get; set; }
         public VMMain VMMain { get; set; }
-        
+
         public List<Client> Clients { get; set; }
         public List<Client> ClientsForBinding { get; set; }
         public List<BoughtProduct> ProductsForBinding { get; set; }
@@ -153,7 +154,7 @@ namespace OKInvestir.ViewModel
                 VMMain.UISimulation.getDTPS().Value = DateTime.Today;
                 VMMain.UISimulation.getDTPE().Value = DateTime.Today;
                 VMMain.UISimulation.getTextBAmount().Text = "";
-             
+
             }
             else
             {
@@ -178,7 +179,7 @@ namespace OKInvestir.ViewModel
                 if (clt.FullName.Contains(text))
                     blClients.Add(clt);
             }
-            
+
             // select automatically the first item after searching
             if (blClients.Count > 0)
                 //View.getLBoxClient().SelectedIndex = 0;
@@ -230,17 +231,18 @@ namespace OKInvestir.ViewModel
             View.getTbFirstName().Text = clt.FirstName;
             View.getTbLastName().Text = clt.LastName;
             View.getTbIdCardNumber().Text = clt.IdCardNumber;
-            if(clt.AccountList.Count > 0)
+            if (clt.AccountList.Count > 0)
             {
                 View.getTbBalance().Text = clt.AccountList[0].Balance.ToString();
-            } else
+            }
+            else
             {
                 View.getTbBalance().Text = "No Account";
             }
-            
+
 
             // load bought product
-            if(clt.BoughtProductList != null)
+            if (clt.BoughtProductList != null)
             {
                 ProductsForBinding.Clear();
                 foreach (BoughtProduct bp in clt.BoughtProductList)
@@ -250,7 +252,8 @@ namespace OKInvestir.ViewModel
 
                 // load first bought product detail
                 loadProductDetail(blProducts[0]);
-            } else
+            }
+            else
             {
                 blProducts.Clear();
             }
@@ -274,6 +277,7 @@ namespace OKInvestir.ViewModel
                 // add data in listView
                 listView.Items.Add(new ListViewItem(new string[] { "Name", pdt.Product.Name }));
                 listView.Items.Add(new ListViewItem(new string[] { "Description", pdt.Product.Description }));
+                listView.Items.Add(new ListViewItem(new string[] { "Price", pdt.Price.ToString() }));
                 listView.Items.Add(new ListViewItem(new string[] { "Final interest", pdt.FinalInterest.ToString() }));
                 listView.Items.Add(new ListViewItem(new string[] { "Start date", pdt.StartDate.ToString("dd/MM/yyyy") }));
                 listView.Items.Add(new ListViewItem(new string[] { "End date", pdt.EndDate.ToString("dd/MM/yyyy") }));
@@ -404,7 +408,7 @@ namespace OKInvestir.ViewModel
                     View.getListViewProductDetail().Enabled = true;
 
                     // change back the text
-                    View.getBtAddClient().Text = "Add client"; 
+                    View.getBtAddClient().Text = "Add client";
 
                     // change back to origin color
                     View.getTbFirstName().BackColor = System.Drawing.Color.FromArgb(196, 232, 250);
@@ -440,7 +444,7 @@ namespace OKInvestir.ViewModel
                 View.getListViewProductDetail().Enabled = false;
 
                 // change button to confirm button
-                View.getBtAddClient().Text = "Confirm"; 
+                View.getBtAddClient().Text = "Confirm";
 
                 // change textboxes color to show which textbox can modify
                 View.getTbFirstName().BackColor = System.Drawing.Color.FromArgb(252, 138, 197);
@@ -482,14 +486,15 @@ namespace OKInvestir.ViewModel
             View.getListViewProductDetail().Enabled = true;
 
             // change back the text
-            if(View.getBtAddClient().Text == "Confirm")
+            if (View.getBtAddClient().Text == "Confirm")
             {
                 View.getBtAddClient().Text = "Add client";
-            } else
+            }
+            else
             {
                 View.getBtModify().Text = "Modify";
             }
-            
+
 
             // change back to origin color
             View.getTbFirstName().BackColor = System.Drawing.Color.FromArgb(196, 232, 250);
@@ -510,6 +515,68 @@ namespace OKInvestir.ViewModel
             getDataFromDb();
         }
 
-        
+        public void SellProduct()
+        {
+
+            if (!View.getLBoxClient().SelectedValue.Equals(null))
+            {
+                if (!View.getLBoxProduct().SelectedValue.Equals(null))
+                {
+                    Client selectedClt = (Client)View.getLBoxClient().SelectedValue;
+                    BoughtProduct selectedPdt = (BoughtProduct)View.getLBoxProduct().SelectedValue;
+                    List<TimeInterest> TimeInterest = selectedPdt.Product.TimeInterests;
+                    int periode = (int)(DateTime.Today.Date - selectedPdt.StartDate).TotalDays / 30;
+                    Decimal TimeInterestPdt = Utils.FindTimeInterestSection(selectedPdt.StartDate,DateTime.Today,selectedPdt.Product.TimeInterests).Interest;
+                    Decimal SillInterestPdt = Utils.FindSillInterestSection(selectedPdt.Price, selectedPdt.Product.SillInterests).Interest;
+                    Decimal InterestRate = 0;
+                    Decimal InterestPdt = 0;
+                    if (TimeInterestPdt != 0)
+                    {
+                        InterestRate = (TimeInterestPdt + 100) * (SillInterestPdt + 100) / 100 - 100;
+                        InterestPdt = InterestRate / 100 * selectedPdt.Price;
+                        
+                    }
+                   
+                    DialogResult d = MessageBox.Show("You will have an interest rate : "+InterestRate.ToString("0.##")+" % and amount : " + InterestPdt.ToString("0.##") + ", are you sure to sell them now?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (d == DialogResult.Yes)
+                    {
+                        selectedClt.BoughtProductList.Remove(selectedPdt);
+                        selectedClt.AccountList[0].Balance = selectedClt.AccountList[0].Balance + InterestPdt;
+                        //MessageBox.Show(selectedClt.AccountList[0].Balance.ToString("0.##"), "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        using (var context = new Model.Context())
+                        {
+                            Cursor.Current = Cursors.WaitCursor;        // waiting animation cursor
+                            context.Database.Initialize(force: false);  // connect to db
+                            List<Client> clients = context.Clients
+                            .Include(c => c.AccountList)            // get related entities
+                            .Include(bpl => bpl.BoughtProductList)
+                            .Include("BoughtProductList.Product")
+                            .ToList();
+                            Client clientInDb = clients.Where(c => c.Id == selectedClt.Id).SingleOrDefault();
+
+                            BoughtProduct productS = context.BoughtProducts.Where(c => c.Id == selectedPdt.Id).SingleOrDefault();
+                            context.BoughtProducts.Remove(productS);
+                            clientInDb.BoughtProductList.Remove(selectedPdt);
+                            clientInDb.AccountList[0].Balance = clientInDb.AccountList[0].Balance + InterestPdt;
+                            //Console.Write(context.Clients.Find(VMMain.Client.Id).FirstName);
+                            context.SaveChanges();
+
+                        }
+                        this.loadClientDetail(selectedClt);
+                      
+                    }
+
+                }
+                else
+                {
+                    this.VMMain.UIMainForm.genMsgBox("You haven't chosen a product yet.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                this.VMMain.UIMainForm.genMsgBox("You haven't chosen a client yet.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
+

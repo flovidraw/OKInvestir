@@ -12,6 +12,7 @@ using System.IO;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.Data;
+using OKInvestir.Util;
 
 namespace OKInvestir.ViewModel
 {
@@ -35,68 +36,10 @@ namespace OKInvestir.ViewModel
 
         }
 
-        public Model.TimeInterest FindTimeInterestSection()
-        {
-            DateTime StartDate = View.getValueStartDate();
-            DateTime EndDate = View.getValueEndDate();
-            int periode = (int)(EndDate - StartDate).TotalDays / 30;
-            Model.TimeInterest time = new Model.TimeInterest();
-            time.Time = 0;
-            foreach (Model.TimeInterest timeI in VMMain.Product.TimeInterests)
-            {
-                if ((timeI.Time <= periode) && (timeI.Time >= time.Time))
-                {
-                    time.Time = timeI.Time;
-                    time.Interest = timeI.Interest;
-                    time.Id = timeI.Id;
-                    time.ProductID = timeI.ProductID;
-                    //time.Product = timeI.Product;
-                }
-            }
-            return time;
-        }
+      
 
-        public Model.SillInterest FindSillInterestSection(decimal Amount)
-        {
-            decimal amount = Amount;
-            Model.SillInterest sill = new Model.SillInterest();
-            sill.Sill = 0;
-            foreach (Model.SillInterest sillI in VMMain.Product.SillInterests)
-            {
-                if ((sillI.Sill <= amount) && (sillI.Sill >= sill.Sill))
-                {
-                    sill.Sill = sillI.Sill;
-                    sill.Id = sillI.Id;
-                    sill.Interest = sillI.Interest;
-                    //sill.Product = sillI.Product;
-                    sill.ProductID = sillI.ProductID;
-                }
-            }
-            return sill;
-        }
-
-        public int MinimumTimeSimulation()
-        {
-            Model.TimeInterest time = new Model.TimeInterest();
-            time.Time = 0;
-            int i = 0;
-            foreach (Model.TimeInterest timeI in VMMain.Product.TimeInterests)
-            {
-                if (i == 0)
-                {
-                    time.Time = timeI.Time;
-                }
-                else
-                {
-                    if (timeI.Time < time.Time)
-                    {
-                        time.Time = timeI.Time;
-                    }
-                }
-                i++;
-            }
-            return time.Time;
-        }
+       
+        
 
         public void printBalance()
         {
@@ -125,13 +68,13 @@ namespace OKInvestir.ViewModel
             simulation.StartDate = View.getValueStartDate();
             simulation.EndDate = View.getValueEndDate();
             int periodeSimulation = (int)(simulation.EndDate - simulation.StartDate).TotalDays / 30;
-            decimal InterestRateTime = FindTimeInterestSection().Interest;
-            decimal InterestRateSill = FindSillInterestSection(simulation.Price).Interest;
+            decimal InterestRateTime = Utils.FindTimeInterestSection(View.getValueStartDate(), View.getValueEndDate(),VMMain.Product.TimeInterests).Interest;
+            decimal InterestRateSill = Utils.FindSillInterestSection(simulation.Price,VMMain.Product.SillInterests).Interest;
             simulation.InterestRate = ((InterestRateSill + 100) * (InterestRateTime + 100)) / 100 - 100;
             simulation.SettlementPrice = simulation.Price * (100 + simulation.InterestRate) / 100;
             if (InterestRateTime == 0)
             {
-                VMMain.UIMainForm.genMsgBox("For this product selected, the minimum holding periode have to be more than " + MinimumTimeSimulation() + " months.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                VMMain.UIMainForm.genMsgBox("For this product selected, the minimum holding periode have to be more than " + Utils.MinimumTimeSimulation(VMMain.Product.TimeInterests) + " months.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 simulation.Price = 0;
             }
 
@@ -273,7 +216,7 @@ namespace OKInvestir.ViewModel
                     .Include("BoughtProductList.Product.SillInterests")
                     .ToList();
                     Client clientSim = clients.Where(c => c.Id == VMMain.Client.Id).SingleOrDefault();
-                    context.BoughtProducts.Add(boughtP);
+                    //context.BoughtProducts.Add(boughtP);
                     clientSim.BoughtProductList.Add(boughtP);
                     clientSim.AccountList[0].Balance = clientSim.AccountList[0].Balance - Sim.Price;
                     //Console.Write(context.Clients.Find(VMMain.Client.Id).FirstName);
@@ -285,7 +228,7 @@ namespace OKInvestir.ViewModel
                         context.SaveChanges();  // save change
                         VMMain.UIMainForm.genMsgBox("Simulation executed!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.VMMain.Client.AccountList[0].Balance = this.VMMain.Client.AccountList[0].Balance - Sim.Price;
-
+                        this.VMMain.VMClient.loadClientDetail(VMMain.Client);
                     }
                     catch (Exception e)
                     {

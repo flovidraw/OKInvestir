@@ -54,6 +54,7 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.lbEscIndicator = new System.Windows.Forms.Label();
             this.lboxListClient = new System.Windows.Forms.ListBox();
+            this.btDelect = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -265,7 +266,7 @@
             this.lviewProductDetail.Font = new System.Drawing.Font("Arial", 11F);
             this.lviewProductDetail.Location = new System.Drawing.Point(527, 53);
             this.lviewProductDetail.Name = "lviewProductDetail";
-            this.lviewProductDetail.Size = new System.Drawing.Size(267, 286);
+            this.lviewProductDetail.Size = new System.Drawing.Size(267, 238);
             this.lviewProductDetail.TabIndex = 36;
             this.lviewProductDetail.UseCompatibleStateImageBehavior = false;
             // 
@@ -365,11 +366,30 @@
             this.lboxListClient.TabIndex = 22;
             this.lboxListClient.SelectedIndexChanged += new System.EventHandler(this.lboxListClient_SelectedIndexChanged);
             // 
+            // btDelect
+            // 
+            this.btDelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(202)))), ((int)(((byte)(240)))));
+            this.btDelect.FlatAppearance.BorderSize = 0;
+            this.btDelect.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(180)))), ((int)(((byte)(237)))));
+            this.btDelect.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(216)))), ((int)(((byte)(249)))));
+            this.btDelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btDelect.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btDelect.ForeColor = System.Drawing.Color.Black;
+            this.btDelect.Location = new System.Drawing.Point(527, 312);
+            this.btDelect.Name = "btDelect";
+            this.btDelect.Size = new System.Drawing.Size(267, 30);
+            this.btDelect.TabIndex = 43;
+            this.btDelect.TabStop = false;
+            this.btDelect.Text = "Sell this product";
+            this.btDelect.UseVisualStyleBackColor = false;
+            this.btDelect.Click += new System.EventHandler(this.btDelect_Click);
+            // 
             // UIClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(232)))), ((int)(((byte)(250)))));
+            this.Controls.Add(this.btDelect);
             this.Controls.Add(this.lbEscIndicator);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel2);
@@ -430,5 +450,6 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label lbEscIndicator;
         private System.Windows.Forms.ListBox lboxListClient;
+        private System.Windows.Forms.Button btDelect;
     }
 }

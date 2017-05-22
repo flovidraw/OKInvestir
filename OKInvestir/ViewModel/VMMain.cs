@@ -102,6 +102,7 @@ namespace OKInvestir.ViewModel
                 }
                 UIMainForm.getPnUserControl().Controls.Clear();
                 UIMainForm.getPnUserControl().Controls.Add(UIClient);
+                
             }
             else
             {

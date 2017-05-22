@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OKInvestir.ViewModel;
+using OKInvestir.Model;
 
 namespace OKInvestir.UI
 {
@@ -79,7 +80,16 @@ namespace OKInvestir.UI
 
         private void lboxListClient_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ViewModel.loadClientDetail((Model.Client)lboxListClient.SelectedValue);
+
+            if (!this.getLBoxClient().SelectedValue.Equals(null))
+            {
+                ViewModel.loadClientDetail((Model.Client)lboxListClient.SelectedValue);
+            }
+            else
+            {
+                ViewModel.VMMain.UIMainForm.genMsgBox("You haven't chosen a client yet.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         private void lboxProductBought_SelectedIndexChanged(object sender, EventArgs e)
@@ -94,19 +104,22 @@ namespace OKInvestir.UI
                 Size size = TextRenderer.MeasureText(tbFirstName.Text, tbFirstName.Font);
                 if (size.Width < 140)
                 {
-                    if(size.Width > 30)
+                    if (size.Width > 30)
                     {
                         tbFirstName.Width = size.Width;
-                    } else
+                    }
+                    else
                     {
                         tbFirstName.Width = 30;
                     }
-                    
-                } else
+
+                }
+                else
                 {
                     tbFirstName.Width = 140;
                 }
-            } else
+            }
+            else
             {
                 if (tbFirstName.Width < 260)
                 {
@@ -114,12 +127,12 @@ namespace OKInvestir.UI
                     tbFirstName.Width = size.Width;
                 }
             }
-            
+
         }
 
         private void tbLastName_TextChanged(object sender, EventArgs e)
         {
-            if(isEditing)
+            if (isEditing)
             {
                 Size size = TextRenderer.MeasureText(tbLastName.Text, tbLastName.Font);
                 if (size.Width < 140)
@@ -132,11 +145,13 @@ namespace OKInvestir.UI
                     {
                         tbLastName.Width = 30;
                     }
-                } else
+                }
+                else
                 {
                     tbLastName.Width = 140;
                 }
-            } else
+            }
+            else
             {
                 if (tbLastName.Width < 260)
                 {
@@ -144,13 +159,18 @@ namespace OKInvestir.UI
                     tbLastName.Width = size.Width;
                 }
             }
-            
-            
+
+
         }
 
         private void UIClient_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btDelect_Click(object sender, EventArgs e)
+        {
+            this.ViewModel.SellProduct();
         }
     }
 }
