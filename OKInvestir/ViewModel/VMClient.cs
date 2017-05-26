@@ -1,15 +1,17 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OKInvestir.Model;
 using System.Windows.Forms;
+
 using OKInvestir.UI;
 using System.ComponentModel;
 using System.Data.Entity;
 using System.Drawing;
 using OKInvestir.Util;
+
 
 namespace OKInvestir.ViewModel
 {
@@ -17,6 +19,7 @@ namespace OKInvestir.ViewModel
     {
         private UIClient View { get; set; }
         public VMMain VMMain { get; set; }
+
 
         public List<Client> Clients { get; set; }
         public List<Client> ClientsForBinding { get; set; }
@@ -576,6 +579,33 @@ namespace OKInvestir.ViewModel
             {
                 this.VMMain.UIMainForm.genMsgBox("You haven't chosen a client yet.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        public bool modifyClient(Client clt, string firstName, string lastName, string idCardNumber)
+        {
+            bool isSuccess = true;
+
+            using (var context = new Model.Context())
+            {
+                Cursor.Current = Cursors.WaitCursor;        // waiting animation cursor
+                context.Database.Initialize(force: false);  // connect to db
+                Client oldClt = context.Clients.Find(clt.Id);
+                oldClt.FirstName = firstName;
+                oldClt.LastName = lastName;
+                oldClt.IdCardNumber = idCardNumber;
+                try
+                {
+                    context.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    VMMain.HandleException(e, this.View);
+                    isSuccess = false;
+                }
+                Cursor.Current = Cursors.Arrow;             // get back to normal cursor
+            }
+
+            return isSuccess;
         }
     }
 }
