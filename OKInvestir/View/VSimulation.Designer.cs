@@ -60,7 +60,7 @@
             this.tsmiHelp});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(790, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(790, 25);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -71,31 +71,31 @@
             this.tsmiGoToPageClient,
             this.tsmiQuit});
             this.tsniMenu.Name = "tsniMenu";
-            this.tsniMenu.Size = new System.Drawing.Size(52, 20);
+            this.tsniMenu.Size = new System.Drawing.Size(53, 21);
             this.tsniMenu.Text = "Menu";
             // 
             // tsmiGoToMainPage
             // 
             this.tsmiGoToMainPage.Name = "tsmiGoToMainPage";
-            this.tsmiGoToMainPage.Size = new System.Drawing.Size(175, 22);
+            this.tsmiGoToMainPage.Size = new System.Drawing.Size(177, 22);
             this.tsmiGoToMainPage.Text = "Go To MainPage";
             // 
             // tsmiGoToPageClient
             // 
             this.tsmiGoToPageClient.Name = "tsmiGoToPageClient";
-            this.tsmiGoToPageClient.Size = new System.Drawing.Size(175, 22);
+            this.tsmiGoToPageClient.Size = new System.Drawing.Size(177, 22);
             this.tsmiGoToPageClient.Text = "Go To PageClient";
             // 
             // tsmiQuit
             // 
             this.tsmiQuit.Name = "tsmiQuit";
-            this.tsmiQuit.Size = new System.Drawing.Size(175, 22);
+            this.tsmiQuit.Size = new System.Drawing.Size(177, 22);
             this.tsmiQuit.Text = "Quit";
             // 
             // tsmiHelp
             // 
             this.tsmiHelp.Name = "tsmiHelp";
-            this.tsmiHelp.Size = new System.Drawing.Size(46, 20);
+            this.tsmiHelp.Size = new System.Drawing.Size(47, 21);
             this.tsmiHelp.Text = "Help";
             // 
             // lbClientID
@@ -257,6 +257,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "VSimulation";
             this.Text = "Simulation";
+            this.Load += new System.EventHandler(this.VSimulation_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

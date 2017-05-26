@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OKInvestir.Model
 {
@@ -11,9 +12,11 @@ namespace OKInvestir.Model
     {
         public int Id { get; set; }
         [Required]
-        public Client Client { get; set; }
+        public int ClientId { get; set; }
+        public virtual Client Client { get; set; }
         [Required]
-        public Product Product { get; set; }
+        public int ProductId { get; set; }
+        public virtual Product Product { get; set; }
         [Required]
         public decimal Price { get; set; }
         [Required]
@@ -22,5 +25,21 @@ namespace OKInvestir.Model
         [Required]
         [Display(Name = "End Date")]
         public DateTime EndDate { get; set; }
+        [Required]
+        public decimal InterestRate { get; set; }
+        [Required]
+        public decimal SettlementPrice { get; set; }
+
+        [NotMapped]
+        public string LbInformation
+        {
+            get
+            {
+                return this.Product.Name + " - " + Price + " - "+ ((int)(this.EndDate - this.StartDate).TotalDays / 30 )+" "+"months";
+            }
+            private set { }
+        }
+
+
     }
 }

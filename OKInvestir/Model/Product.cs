@@ -12,7 +12,7 @@ namespace OKInvestir.Model
     {
         public int Id { get; set; }
         [Required]
-        [StringLength(50, ErrorMessage = "Product name cannot be longer than 50 characters.")]
+        [StringLength(20, ErrorMessage = "Product name cannot be longer than 20 characters.")]
         public string Name { get; set; }
         public string Description { get; set; }
         [Required]
@@ -20,5 +20,11 @@ namespace OKInvestir.Model
 
         public virtual List<TimeInterest> TimeInterests { get; set; }
         public virtual List<SillInterest> SillInterests { get; set; }
+
+        public Product()
+        {
+            TimeInterests = new List<TimeInterest>();
+            SillInterests = new List<SillInterest>();
+        }
     }
 }

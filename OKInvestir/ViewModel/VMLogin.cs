@@ -5,18 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OKInvestir.Model;
+using OKInvestir.UI;
 
 namespace OKInvestir.ViewModel
 {
     public class VMLogin: IViewModel
     {
-        private View.VLogin View;
+        private UILogin View;
         private VMMain VMMain;
 
-        public VMLogin(VMMain VMMain, View.VLogin View)
+        public VMLogin(VMMain VMMain, UILogin View)
         {
             this.View = View;
-            this.View.setViewModel(this);
+            this.View.ViewModel = this;
             this.VMMain = VMMain;
         }
 
@@ -25,37 +26,41 @@ namespace OKInvestir.ViewModel
             string Id = View.getTbIdText();
             string Pw = View.getTbPwText();
 
-            if (Id == "")           // username void
+            if (Id == "User name                   ")           // username void
             {
-                View.genMsgBox("Please enter your ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            } else if (Pw == "")    // password void
+                VMMain.UIMainForm.genMsgBox("Please enter your ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            } else if (Pw == "Password                   ")    // password void
             {
-                View.genMsgBox("Please enter your password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                VMMain.UIMainForm.genMsgBox("Please enter your password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             } else
             {
-                Boolean isUsrFound = false;
+                bool isUsrFound = false;
                 User UsrFound = null;
+
                 using (var context = new Model.Context())
                 {
                     Cursor.Current = Cursors.WaitCursor;        // waiting animation cursor
                     //context.Database.Initialize(force: true);   // connect to db, it takes time
-                    context.Database.Initialize(force: false);   // connect to db, it takes time
-                    Cursor.Current = Cursors.Arrow;             // get back to normal cursor
+                    context.Database.Initialize(force: true);   // connect to db, it takes time
                     var Usr = context.Users.Where(u => u.Username == Id && u.Password == Pw);
                     if (Usr.Any())
                     {
                         isUsrFound = true;
                         UsrFound = Usr.First();
                     }
-                    
+                    Cursor.Current = Cursors.Arrow;             // get back to normal cursor
                 }
+
                 if (isUsrFound)   // login successful
-                    {
-                        VMMain.switchToMainPage(this.View , UsrFound);
+                {
+                    VMMain.User = UsrFound;
+                    VMMain.switchToDashboard();
+                    VMMain.UIMainForm.getLbUserName().Text = UsrFound.Username;
+                    VMMain.UIMainForm.getBtDashboard().PerformClick();
                         //View.genMsgBox("Login succeed.", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     } else {        // login failed
-                        View.genMsgBox("ID or password incorrect.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    VMMain.UIMainForm.genMsgBox("ID or password incorrect.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 
             }
 

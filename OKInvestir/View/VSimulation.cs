@@ -24,5 +24,10 @@ namespace OKInvestir.View
         {
             this.ViewModel = (VMSimulation)IViewModel;
         }
+
+        private void VSimulation_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

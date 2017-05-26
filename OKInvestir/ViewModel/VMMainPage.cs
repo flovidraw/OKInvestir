@@ -165,7 +165,7 @@ namespace OKInvestir.ViewModel
                     getDataFromDb();        // refresh the list
                 } catch (Exception e)
                 {
-                    VMMain.HandleException(e, this.View);
+                    //VMMain.HandleException(e, this.View);
                     isSuccess = false;
                 }
                 Cursor.Current = Cursors.Arrow;             // get back to normal cursor
@@ -180,7 +180,7 @@ namespace OKInvestir.ViewModel
             if (View.getListBoxClient().SelectedValue != null)
             {
                 Client selectedClt = (Client)View.getListBoxClient().SelectedValue;
-                VMMain.switchToClient(View, User, selectedClt);
+                ///VMMain.switchToClient(View, User, selectedClt);
             }
             else
             {

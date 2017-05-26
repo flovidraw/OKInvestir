@@ -22,7 +22,7 @@ namespace OKInvestir
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             VMMain VMMain = new VMMain();
-            Application.Run();
+            Application.Run(VMMain.UIMainForm);
         }
     }
 }

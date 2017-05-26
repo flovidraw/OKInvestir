@@ -29,6 +29,7 @@ namespace OKInvestir.View
         public TextBox getTbIdCardNumber() { return tbIdCardNumber; }
         public TextBox getTbBalance() { return tbBalance; }
 
+
         private void btReturn_Click(object sender, EventArgs e)
         {
             ViewModel.VMMain.switchToMainPage(this, ViewModel.User);
@@ -38,6 +39,7 @@ namespace OKInvestir.View
         {
             VDClientDetail dialogClientDetail = new VDClientDetail(ViewModel.Client);
             dialogClientDetail.ShowDialog(this);
+
         }
     }
 }

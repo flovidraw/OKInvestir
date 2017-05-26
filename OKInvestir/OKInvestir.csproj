@@ -60,6 +60,13 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EPPlus, Version=4.1.0.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.1.0\lib\net40\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.10.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
       <Private>True</Private>
@@ -74,6 +81,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -85,7 +93,48 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UI\UIClient.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UIClient.Designer.cs">
+      <DependentUpon>UIClient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UIDashboard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UIDashboard.Designer.cs">
+      <DependentUpon>UIDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UILogin.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UILogin.Designer.cs">
+      <DependentUpon>UILogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UIProduct.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UIProduct.Designer.cs">
+      <DependentUpon>UIProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UISimulation.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UISimulation.Designer.cs">
+      <DependentUpon>UISimulation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UISubProduct.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UISubProduct.Designer.cs">
+      <DependentUpon>UISubProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Util\Utils.cs" />
+    <Compile Include="Util\ExportPDF.cs" />
+    <Compile Include="Util\ExportCsv.cs" />
+    <Compile Include="Util\ExportXlsx.cs" />
     <Compile Include="ViewModel\VMClient.cs" />
+    <Compile Include="ViewModel\VMDashboard.cs" />
     <Compile Include="ViewModel\VMLogin.cs" />
     <Compile Include="ViewModel\IViewModel.cs" />
     <Compile Include="Model\Account.cs" />
@@ -102,6 +151,7 @@
     <Compile Include="Model\User.cs" />
     <Compile Include="ViewModel\VMMain.cs" />
     <Compile Include="ViewModel\VMMainPage.cs" />
+    <Compile Include="ViewModel\VMProduct.cs" />
     <Compile Include="ViewModel\VMSimulation.cs" />
     <Compile Include="ViewModel\VMSimulationResult.cs" />
     <Compile Include="View\DialogForm.cs">
@@ -115,6 +165,12 @@
     </Compile>
     <Compile Include="View\VDClientDetail.Designer.cs">
       <DependentUpon>VDClientDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UIMainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\UIMainForm.Designer.cs">
+      <DependentUpon>UIMainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\VSimulationResult.cs">
       <SubType>Form</SubType>
@@ -162,6 +218,24 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UI\UIClient.resx">
+      <DependentUpon>UIClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UIDashboard.resx">
+      <DependentUpon>UIDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UILogin.resx">
+      <DependentUpon>UILogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UIProduct.resx">
+      <DependentUpon>UIProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UISimulation.resx">
+      <DependentUpon>UISimulation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UISubProduct.resx">
+      <DependentUpon>UISubProduct.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\VDClientDetail.resx">
       <DependentUpon>VDClientDetail.cs</DependentUpon>
     </EmbeddedResource>
@@ -170,6 +244,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\VLogin.resx">
       <DependentUpon>VLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UIMainForm.resx">
+      <DependentUpon>UIMainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\VMainPage.resx">
       <DependentUpon>VMainPage.cs</DependentUpon>
@@ -210,7 +287,36 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="src\cancel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\return.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\sell.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\turnover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\product.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
