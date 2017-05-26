@@ -313,85 +313,96 @@ namespace OKInvestir.ViewModel
          */
         public void modifyOnClick()
         {
-            if (View.isEditing)
+            if (View.getLBoxClient().SelectedValue != null)
             {
-                if (modifyClient((Model.Client)View.getLBoxClient().SelectedValue,
-                View.getTbFirstName().Text, View.getTbLastName().Text, View.getTbIdCardNumber().Text))
+                if (View.isEditing)
                 {
-                    View.isEditing = false;
+                    if (modifyClient((Model.Client)View.getLBoxClient().SelectedValue,
+                    View.getTbFirstName().Text, View.getTbLastName().Text, View.getTbIdCardNumber().Text))
+                    {
+                        View.isEditing = false;
 
-                    // edit finish, enable all buttons
-                    VMMain.UIMainForm.enableButtons();
-                    View.getBtAddClient().Enabled = true;
-                    View.getBtChoose().Enabled = true;
-                    View.getBtModify().Text = "Modify";
+                        // edit finish, enable all buttons
+                        VMMain.UIMainForm.enableButtons();
+                        View.getBtAddClient().Enabled = true;
+                        View.getBtChoose().Enabled = true;
+                        View.getBtModify().Text = "Modify";
 
-                    // enable lists
-                    View.getLBoxClient().Enabled = true;
-                    View.getLBoxProduct().Enabled = true;
-                    View.getListViewProductDetail().Enabled = true;
+                        // enable lists
+                        View.getLBoxClient().Enabled = true;
+                        View.getLBoxProduct().Enabled = true;
+                        View.getListViewProductDetail().Enabled = true;
 
-                    // change back to origin color
-                    View.getTbFirstName().BackColor = System.Drawing.Color.FromArgb(196, 232, 250);
-                    View.getTbLastName().BackColor = System.Drawing.Color.FromArgb(196, 232, 250);
-                    View.getTbIdCardNumber().BackColor = System.Drawing.Color.FromArgb(166, 202, 240);
+                        // change back to origin color
+                        View.getTbFirstName().BackColor = System.Drawing.Color.FromArgb(196, 232, 250);
+                        View.getTbLastName().BackColor = System.Drawing.Color.FromArgb(196, 232, 250);
+                        View.getTbIdCardNumber().BackColor = System.Drawing.Color.FromArgb(166, 202, 240);
 
-                    // set read only
-                    View.getTbFirstName().ReadOnly = true;
-                    View.getTbLastName().ReadOnly = true;
-                    View.getTbIdCardNumber().ReadOnly = true;
+                        // set read only
+                        View.getTbFirstName().ReadOnly = true;
+                        View.getTbLastName().ReadOnly = true;
+                        View.getTbIdCardNumber().ReadOnly = true;
 
-                    // set indicate labels text to void
-                    View.getLbFirstName().Text = "";
-                    View.getLbLastName().Text = "";
-                    View.getlbEscIndicator().Text = "";
+                        // set indicate labels text to void
+                        View.getLbFirstName().Text = "";
+                        View.getLbLastName().Text = "";
+                        View.getlbEscIndicator().Text = "";
 
-                    // reload data
-                    getDataFromDb();
+                        // reload data
+                        getDataFromDb();
+                    }
+                }
+                else
+                {
+                    View.isEditing = true;
+
+                    // disable all buttons
+                    VMMain.UIMainForm.disableButtons();
+                    View.getBtAddClient().Enabled = false;
+                    View.getBtChoose().Enabled = false;
+                    View.getBtModify().Text = "Confirm";
+
+                    // disable lists
+                    View.getLBoxClient().Enabled = false;
+                    View.getLBoxProduct().Enabled = false;
+                    View.getListViewProductDetail().Enabled = false;
+
+                    // change textboxes color to show which textbox can modify
+                    View.getTbFirstName().BackColor = System.Drawing.Color.FromArgb(252, 138, 197);
+                    View.getTbLastName().BackColor = System.Drawing.Color.FromArgb(252, 138, 197);
+                    View.getTbIdCardNumber().BackColor = System.Drawing.Color.FromArgb(252, 138, 197);
+
+                    // disable read only to let user input data
+                    View.getTbFirstName().ReadOnly = false;
+                    View.getTbLastName().ReadOnly = false;
+                    View.getTbIdCardNumber().ReadOnly = false;
+
+                    // show indicate labels text
+                    View.getLbFirstName().Text = "First name:";
+                    View.getLbLastName().Text = "Last name:";
+                    View.getlbEscIndicator().Text = "Press Esc to exit.";
+
+                    // Limite textbox width because there will be 2 indicate label show up
+                    if (View.getTbLastName().Width > 140)
+                    {
+                        View.getTbLastName().Width = 140;
+                    }
+                    if (View.getTbFirstName().Width > 140)
+                    {
+                        View.getTbFirstName().Width = 140;
+                    }
                 }
             }
             else
             {
-                View.isEditing = true;
-
-                // disable all buttons
-                VMMain.UIMainForm.disableButtons();
-                View.getBtAddClient().Enabled = false;
-                View.getBtChoose().Enabled = false;
-                View.getBtModify().Text = "Confirm";
-
-                // disable lists
-                View.getLBoxClient().Enabled = false;
-                View.getLBoxProduct().Enabled = false;
-                View.getListViewProductDetail().Enabled = false;
-
-                // change textboxes color to show which textbox can modify
-                View.getTbFirstName().BackColor = System.Drawing.Color.FromArgb(252, 138, 197);
-                View.getTbLastName().BackColor = System.Drawing.Color.FromArgb(252, 138, 197);
-                View.getTbIdCardNumber().BackColor = System.Drawing.Color.FromArgb(252, 138, 197);
-
-                // disable read only to let user input data
-                View.getTbFirstName().ReadOnly = false;
-                View.getTbLastName().ReadOnly = false;
-                View.getTbIdCardNumber().ReadOnly = false;
-
-                // show indicate labels text
-                View.getLbFirstName().Text = "First name:";
-                View.getLbLastName().Text = "Last name:";
-                View.getlbEscIndicator().Text = "Press Esc to exit.";
-
-                // Limite textbox width because there will be 2 indicate label show up
-                if (View.getTbLastName().Width > 140)
-                {
-                    View.getTbLastName().Width = 140;
-                }
-                if (View.getTbFirstName().Width > 140)
-                {
-                    View.getTbFirstName().Width = 140;
-                }
+                VMMain.UIMainForm.genMsgBox("Please choose a client.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
         }
 
+        /**
+         * Add client button onclick
+         */
         public void addClientOnClick()
         {
             if (View.isEditing)
@@ -473,6 +484,9 @@ namespace OKInvestir.ViewModel
             }
         }
 
+        /**
+         * Exit editing mode
+         */
         public void escEdit()
         {
             View.isEditing = false;
@@ -518,18 +532,21 @@ namespace OKInvestir.ViewModel
             getDataFromDb();
         }
 
+        /**
+         * Sell the selected product
+         */
         public void SellProduct()
         {
 
             if (!View.getLBoxClient().SelectedValue.Equals(null))
             {
-                if (!View.getLBoxProduct().SelectedValue.Equals(null))
+                if (View.getLBoxProduct().SelectedValue != null)
                 {
                     Client selectedClt = (Client)View.getLBoxClient().SelectedValue;
                     BoughtProduct selectedPdt = (BoughtProduct)View.getLBoxProduct().SelectedValue;
                     List<TimeInterest> TimeInterest = selectedPdt.Product.TimeInterests;
                     int periode = (int)(DateTime.Today.Date - selectedPdt.StartDate).TotalDays / 30;
-                    Decimal TimeInterestPdt = Utils.FindTimeInterestSection(selectedPdt.StartDate,DateTime.Today,selectedPdt.Product.TimeInterests).Interest;
+                    Decimal TimeInterestPdt = Utils.FindTimeInterestSection(selectedPdt.StartDate, DateTime.Today, selectedPdt.Product.TimeInterests).Interest;
                     Decimal SillInterestPdt = Utils.FindSillInterestSection(selectedPdt.Price, selectedPdt.Product.SillInterests).Interest;
                     Decimal InterestRate = 0;
                     Decimal InterestPdt = 0;
@@ -537,15 +554,13 @@ namespace OKInvestir.ViewModel
                     {
                         InterestRate = (TimeInterestPdt + 100) * (SillInterestPdt + 100) / 100 - 100;
                         InterestPdt = InterestRate / 100 * selectedPdt.Price;
-                        
                     }
-                   
-                    DialogResult d = MessageBox.Show("You will have an interest rate : "+InterestRate.ToString("0.##")+" % and amount : " + InterestPdt.ToString("0.##") + ", are you sure to sell them now?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                    DialogResult d = MessageBox.Show("You will have an interest rate : " + InterestRate.ToString("0.##") + " % and amount : " + InterestPdt.ToString("0.##") + ", are you sure to sell them now?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                     if (d == DialogResult.Yes)
                     {
                         selectedClt.BoughtProductList.Remove(selectedPdt);
                         selectedClt.AccountList[0].Balance = selectedClt.AccountList[0].Balance + InterestPdt;
-                        //MessageBox.Show(selectedClt.AccountList[0].Balance.ToString("0.##"), "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         using (var context = new Model.Context())
                         {
                             Cursor.Current = Cursors.WaitCursor;        // waiting animation cursor
@@ -566,7 +581,7 @@ namespace OKInvestir.ViewModel
 
                         }
                         this.loadClientDetail(selectedClt);
-                      
+
                     }
 
                 }
@@ -579,33 +594,6 @@ namespace OKInvestir.ViewModel
             {
                 this.VMMain.UIMainForm.genMsgBox("You haven't chosen a client yet.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        public bool modifyClient(Client clt, string firstName, string lastName, string idCardNumber)
-        {
-            bool isSuccess = true;
-
-            using (var context = new Model.Context())
-            {
-                Cursor.Current = Cursors.WaitCursor;        // waiting animation cursor
-                context.Database.Initialize(force: false);  // connect to db
-                Client oldClt = context.Clients.Find(clt.Id);
-                oldClt.FirstName = firstName;
-                oldClt.LastName = lastName;
-                oldClt.IdCardNumber = idCardNumber;
-                try
-                {
-                    context.SaveChanges();
-                }
-                catch (Exception e)
-                {
-                    VMMain.HandleException(e, this.View);
-                    isSuccess = false;
-                }
-                Cursor.Current = Cursors.Arrow;             // get back to normal cursor
-            }
-
-            return isSuccess;
         }
     }
 }

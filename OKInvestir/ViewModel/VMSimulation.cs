@@ -145,7 +145,6 @@ namespace OKInvestir.ViewModel
             this.View.getLbValueAmount().Text = sim.Price.ToString();
             this.View.getLbValueInterestRate().Text = sim.InterestRate.ToString();
             this.View.GetLbValueSettlementPrice().Text = sim.SettlementPrice.ToString();
-
         }
 
         public void delectSimulaion(Simulation Sim)

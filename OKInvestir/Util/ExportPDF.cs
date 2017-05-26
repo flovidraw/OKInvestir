@@ -22,9 +22,11 @@ namespace OKInvestir.Util
             dlg.FileName = "Okinvestir Simulation liste";
             dlg.DefaultExt = ".pdf";
             dlg.Filter = "Text documents (.pdf)|*.pdf";
-            Image imageHeader = Image.GetInstance("business_banking.jpg");
-           
-                if (dlg.ShowDialog() == DialogResult.OK)
+            
+            var logo = System.Drawing.Image.FromHbitmap(Properties.Resources.logo.GetHbitmap());
+            Image imageHeader = Image.GetInstance(logo, System.Drawing.Imaging.ImageFormat.Png);
+
+            if (dlg.ShowDialog() == DialogResult.OK)
                 {
                     pdfname = dlg.FileName;
                     List<Simulation> simus = clt.getSimulationList();
@@ -51,7 +53,7 @@ namespace OKInvestir.Util
                     document.Close();                        //关闭文件
                     fs.Close();
                 }
-                catch (IOException ee)
+                catch
                 {
                     form.genMsgBox("Fail to export pdf file, maybe de file is already openned", "error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
                 }

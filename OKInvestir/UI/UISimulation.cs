@@ -20,12 +20,12 @@ namespace OKInvestir.UI
 
         public UISimulation()
         {
-            
+
             InitializeComponent();
             isEditing = false;
             dtpStartDate.MinDate = DateTime.Today;
             isSimulate = false;
-           
+
 
         }
 
@@ -38,13 +38,13 @@ namespace OKInvestir.UI
         {
 
         }
-/**
- * Getters
- **/
+        /**
+         * Getters
+         **/
         public decimal getTbAmount()
         {
             decimal amountEntered;
-      
+
             if (decimal.TryParse(tbAmout.Text.Trim(), out amountEntered))
             {
                 if (amountEntered > 10000000)
@@ -57,12 +57,12 @@ namespace OKInvestir.UI
                     ViewModel.VMMain.UIMainForm.genMsgBox("Your amount entered can't not be equals or less than 0, please enter it again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     amountEntered = 0;
                 }
-                
+
             }
             else
             {
-                    ViewModel.VMMain.UIMainForm.genMsgBox("Your amount entered is empty or it's not a integer, please enter it again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    amountEntered = 0;
+                ViewModel.VMMain.UIMainForm.genMsgBox("Your amount entered is empty or it's not a integer, please enter it again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                amountEntered = 0;
             }
 
             return amountEntered;
@@ -134,16 +134,16 @@ namespace OKInvestir.UI
          */
         private void lbAmout_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void btSimulate_Click(object sender, EventArgs e)
         {
-            
+
 
             if (this.ViewModel.VMMain.Product != null)
             {
-               this.ViewModel.resultSimulation();
+                this.ViewModel.resultSimulation();
                 isSimulate = true;
 
             }
@@ -151,7 +151,7 @@ namespace OKInvestir.UI
             {
                 this.ViewModel.VMMain.UIMainForm.genMsgBox("You haven't chose a product.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-       
+
 
         }
 
@@ -164,10 +164,10 @@ namespace OKInvestir.UI
         }
 
         private void dtpEndDate_ValueChanged(object sender, EventArgs e)
-        {   
-           DateTime EndTime = dtpEndDate.Value.Date;
+        {
+            DateTime EndTime = dtpEndDate.Value.Date;
             isSimulate = false;
-           
+
         }
 
         private void btSave_Click(object sender, EventArgs e)
@@ -202,7 +202,14 @@ namespace OKInvestir.UI
         private void btSimulationChosen_Click(object sender, EventArgs e)
         {
             Model.Simulation sim = (Model.Simulation)lboxSimulation.SelectedItem;
-            this.ViewModel.chooseSimulation(sim);
+            if (sim != null)
+            {
+                this.ViewModel.chooseSimulation(sim);
+            }
+            else
+            {
+                ViewModel.VMMain.UIMainForm.genMsgBox("Please choose a simulation first.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

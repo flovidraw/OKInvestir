@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.Entity.Infrastructure;
-using System.Data.SqlClient;
 using MySql.Data.MySqlClient;
 using System.Windows.Forms;
-using OKInvestir.View;
 using OKInvestir.UI;
 using OKInvestir.Model;
 
@@ -149,6 +143,17 @@ namespace OKInvestir.ViewModel
                 else
                 {
                     UIMainForm.genMsgBox("You haven't chose a client.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if(UIMainForm.getPnUserControl().Controls.Contains(this.UIClient))
+                    {
+                        UIMainForm.getBtClient().PerformClick();
+                    } else if (UIMainForm.getPnUserControl().Controls.Contains(this.UIDashboard))
+                    {
+                        UIMainForm.getBtDashboard().PerformClick();
+                    }
+                    else if (UIMainForm.getPnUserControl().Controls.Contains(this.UIProduct))
+                    {
+                        UIMainForm.getBtProduct().PerformClick();
+                    }
                 }
                 
             }

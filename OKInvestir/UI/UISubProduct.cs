@@ -160,6 +160,7 @@ namespace OKInvestir.UI
                 //owner.ViewModel.VMMain.UIMainForm.genMsgBox("OK", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 // return to product page
                 owner.ViewModel.VMMain.switchToProduct();
+                owner.ViewModel.VMMain.UIMainForm.enableButtons();
                 // refresh list
                 owner.ViewModel.getDataFromDb();
                 owner.ViewModel.loadProductDetail((Product)owner.getLboxProduct().SelectedValue);
