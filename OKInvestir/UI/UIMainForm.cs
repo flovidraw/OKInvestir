@@ -333,6 +333,13 @@ namespace OKInvestir.UI
         {
             VMMain.Client = null;
             lbClientName.Text = "";
+
+
+            if (this.getPnUserControl().Controls.Contains(this.VMMain.UISimulation))
+            {
+                this.getBtClient().PerformClick();
+            }
+
         }
 
 
@@ -356,6 +363,11 @@ namespace OKInvestir.UI
                 }
             }
             return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void lbClient_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

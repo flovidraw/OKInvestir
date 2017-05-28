@@ -72,13 +72,14 @@ namespace OKInvestir.ViewModel
             decimal InterestRateSill = Utils.FindSillInterestSection(simulation.Price,VMMain.Product.SillInterests).Interest;
             simulation.InterestRate = ((InterestRateSill + 100) * (InterestRateTime + 100)) / 100 - 100;
             simulation.SettlementPrice = simulation.Price * (100 + simulation.InterestRate) / 100;
+
             if (InterestRateTime == 0)
             {
-                VMMain.UIMainForm.genMsgBox("For this product selected, the minimum holding periode have to be more than " + Utils.MinimumTimeSimulation(VMMain.Product.TimeInterests) + " months.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                simulation.Price = 0;
+                    VMMain.UIMainForm.genMsgBox("For this product selected, the minimum holding periode have to be more than " + Utils.MinimumTimeSimulation(VMMain.Product.TimeInterests) + " months.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    simulation.Price = 0;
+                    this.View.isSimulate = false;
             }
-
-            if (simulation.Price != 0)
+            else if (simulation.Price != 0)
             {
                 View.getLbValueAmount().Text = simulation.Price.ToString();
                 View.getValuePeriode().Text = periodeSimulation.ToString() + " Months";
@@ -86,29 +87,36 @@ namespace OKInvestir.ViewModel
                 View.getLbValueProductSelected().Text = VMMain.Product.Name;
                 View.getLbValueInterestRate().Text = (simulation.InterestRate).ToString() + " %";
                 View.GetLbValueSettlementPrice().Text = simulation.SettlementPrice.ToString();
+                this.View.isSimulate = true;
             }
             return simulation;
         }
 
         public void saveSimulation(Model.Simulation simulation)
         {
-            using (var context = new Model.Context())
+            if (this.View.isSimulate == true)
             {
-                Cursor.Current = Cursors.WaitCursor;        // waiting animation cursor
-                context.Database.Initialize(force: false);  // connect to db
-                context.Simulations.Add(simulation);
-                try
+                using (var context = new Model.Context())
                 {
-                    context.SaveChanges();  // save change
-                    VMMain.UIMainForm.genMsgBox("Simulation saved!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Cursor.Current = Cursors.WaitCursor;        // waiting animation cursor
+                    context.Database.Initialize(force: false);  // connect to db
+                    context.Simulations.Add(simulation);
+                    try
+                    {
+                        context.SaveChanges();  // save change
+                        VMMain.UIMainForm.genMsgBox("Simulation saved!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                    }
+                    catch (Exception e)
+                    {
+                        VMMain.HandleException(e, this.VMMain.UIMainForm);
+                        VMMain.UIMainForm.genMsgBox("Fail to save the simulation", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Cursor.Current = Cursors.Arrow;             // get back to normal cursor
+                    }
                 }
-                catch (Exception e)
-                {
-                    VMMain.HandleException(e, this.VMMain.UIMainForm);
-                    VMMain.UIMainForm.genMsgBox("Fail to save the simulation", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    Cursor.Current = Cursors.Arrow;             // get back to normal cursor
-                }
+            }
+            else{
+                VMMain.UIMainForm.genMsgBox("You haven't simulated yet.", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -228,6 +236,7 @@ namespace OKInvestir.ViewModel
                         VMMain.UIMainForm.genMsgBox("Simulation executed!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.VMMain.Client.AccountList[0].Balance = this.VMMain.Client.AccountList[0].Balance - Sim.Price;
                         this.VMMain.VMClient.loadClientDetail(VMMain.Client);
+                        printBalance();
                     }
                     catch (Exception e)
                     {

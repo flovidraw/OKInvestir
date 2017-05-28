@@ -88,7 +88,7 @@ namespace OKInvestir.UI
             this.pnLogo.Controls.Add(this.lbLogo);
             this.pnLogo.Location = new System.Drawing.Point(0, 0);
             this.pnLogo.Name = "pnLogo";
-            this.pnLogo.Size = new System.Drawing.Size(200, 82);
+            this.pnLogo.Size = new System.Drawing.Size(200, 76);
             this.pnLogo.TabIndex = 2;
             // 
             // lbLogo
@@ -96,7 +96,7 @@ namespace OKInvestir.UI
             this.lbLogo.AutoSize = true;
             this.lbLogo.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold);
             this.lbLogo.ForeColor = System.Drawing.Color.White;
-            this.lbLogo.Location = new System.Drawing.Point(30, 25);
+            this.lbLogo.Location = new System.Drawing.Point(30, 23);
             this.lbLogo.Name = "lbLogo";
             this.lbLogo.Size = new System.Drawing.Size(152, 31);
             this.lbLogo.TabIndex = 0;
@@ -109,9 +109,9 @@ namespace OKInvestir.UI
             this.pnMenu.Controls.Add(this.btProduct);
             this.pnMenu.Controls.Add(this.btClient);
             this.pnMenu.Controls.Add(this.btDashboard);
-            this.pnMenu.Location = new System.Drawing.Point(0, 82);
+            this.pnMenu.Location = new System.Drawing.Point(0, 76);
             this.pnMenu.Name = "pnMenu";
-            this.pnMenu.Size = new System.Drawing.Size(200, 542);
+            this.pnMenu.Size = new System.Drawing.Size(200, 500);
             this.pnMenu.TabIndex = 3;
             // 
             // btSimulation
@@ -123,9 +123,9 @@ namespace OKInvestir.UI
             this.btSimulation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btSimulation.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btSimulation.ForeColor = System.Drawing.Color.White;
-            this.btSimulation.Location = new System.Drawing.Point(0, 234);
+            this.btSimulation.Location = new System.Drawing.Point(0, 216);
             this.btSimulation.Name = "btSimulation";
-            this.btSimulation.Size = new System.Drawing.Size(200, 78);
+            this.btSimulation.Size = new System.Drawing.Size(200, 72);
             this.btSimulation.TabIndex = 3;
             this.btSimulation.TabStop = false;
             this.btSimulation.Text = "Simulation";
@@ -143,9 +143,9 @@ namespace OKInvestir.UI
             this.btProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btProduct.ForeColor = System.Drawing.Color.White;
-            this.btProduct.Location = new System.Drawing.Point(0, 156);
+            this.btProduct.Location = new System.Drawing.Point(0, 144);
             this.btProduct.Name = "btProduct";
-            this.btProduct.Size = new System.Drawing.Size(200, 78);
+            this.btProduct.Size = new System.Drawing.Size(200, 72);
             this.btProduct.TabIndex = 2;
             this.btProduct.TabStop = false;
             this.btProduct.Text = "Product";
@@ -163,9 +163,9 @@ namespace OKInvestir.UI
             this.btClient.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btClient.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btClient.ForeColor = System.Drawing.Color.White;
-            this.btClient.Location = new System.Drawing.Point(0, 78);
+            this.btClient.Location = new System.Drawing.Point(0, 72);
             this.btClient.Name = "btClient";
-            this.btClient.Size = new System.Drawing.Size(200, 78);
+            this.btClient.Size = new System.Drawing.Size(200, 72);
             this.btClient.TabIndex = 1;
             this.btClient.TabStop = false;
             this.btClient.Text = "Client";
@@ -185,7 +185,7 @@ namespace OKInvestir.UI
             this.btDashboard.ForeColor = System.Drawing.Color.White;
             this.btDashboard.Location = new System.Drawing.Point(0, 0);
             this.btDashboard.Name = "btDashboard";
-            this.btDashboard.Size = new System.Drawing.Size(200, 78);
+            this.btDashboard.Size = new System.Drawing.Size(200, 72);
             this.btDashboard.TabIndex = 0;
             this.btDashboard.TabStop = false;
             this.btDashboard.Text = "Dashboard";
@@ -208,7 +208,7 @@ namespace OKInvestir.UI
             this.pnHead.Controls.Add(this.lbMin);
             this.pnHead.Location = new System.Drawing.Point(200, 0);
             this.pnHead.Name = "pnHead";
-            this.pnHead.Size = new System.Drawing.Size(824, 82);
+            this.pnHead.Size = new System.Drawing.Size(824, 76);
             this.pnHead.TabIndex = 4;
             // 
             // pbClearClient
@@ -216,9 +216,9 @@ namespace OKInvestir.UI
             this.pbClearClient.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbClearClient.Image = global::OKInvestir.Properties.Resources.cancel;
             this.pbClearClient.InitialImage = global::OKInvestir.Properties.Resources.cancel;
-            this.pbClearClient.Location = new System.Drawing.Point(331, 44);
+            this.pbClearClient.Location = new System.Drawing.Point(331, 41);
             this.pbClearClient.Name = "pbClearClient";
-            this.pbClearClient.Size = new System.Drawing.Size(18, 20);
+            this.pbClearClient.Size = new System.Drawing.Size(18, 18);
             this.pbClearClient.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbClearClient.TabIndex = 7;
             this.pbClearClient.TabStop = false;
@@ -229,9 +229,9 @@ namespace OKInvestir.UI
             this.pbLogout.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbLogout.Image = global::OKInvestir.Properties.Resources.logout;
             this.pbLogout.InitialImage = global::OKInvestir.Properties.Resources.logout;
-            this.pbLogout.Location = new System.Drawing.Point(330, 14);
+            this.pbLogout.Location = new System.Drawing.Point(330, 13);
             this.pbLogout.Name = "pbLogout";
-            this.pbLogout.Size = new System.Drawing.Size(20, 22);
+            this.pbLogout.Size = new System.Drawing.Size(20, 20);
             this.pbLogout.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbLogout.TabIndex = 6;
             this.pbLogout.TabStop = false;
@@ -242,7 +242,7 @@ namespace OKInvestir.UI
             this.lbClientName.AutoSize = true;
             this.lbClientName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.lbClientName.ForeColor = System.Drawing.Color.White;
-            this.lbClientName.Location = new System.Drawing.Point(424, 44);
+            this.lbClientName.Location = new System.Drawing.Point(424, 41);
             this.lbClientName.Name = "lbClientName";
             this.lbClientName.Size = new System.Drawing.Size(0, 20);
             this.lbClientName.TabIndex = 5;
@@ -252,18 +252,19 @@ namespace OKInvestir.UI
             this.lbClient.AutoSize = true;
             this.lbClient.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.lbClient.ForeColor = System.Drawing.Color.White;
-            this.lbClient.Location = new System.Drawing.Point(356, 44);
+            this.lbClient.Location = new System.Drawing.Point(356, 41);
             this.lbClient.Name = "lbClient";
             this.lbClient.Size = new System.Drawing.Size(60, 20);
             this.lbClient.TabIndex = 4;
             this.lbClient.Text = "Client:";
+            this.lbClient.Click += new System.EventHandler(this.lbClient_Click);
             // 
             // lbUserName
             // 
             this.lbUserName.AutoSize = true;
             this.lbUserName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.lbUserName.ForeColor = System.Drawing.Color.White;
-            this.lbUserName.Location = new System.Drawing.Point(424, 16);
+            this.lbUserName.Location = new System.Drawing.Point(424, 15);
             this.lbUserName.Name = "lbUserName";
             this.lbUserName.Size = new System.Drawing.Size(0, 20);
             this.lbUserName.TabIndex = 3;
@@ -273,7 +274,7 @@ namespace OKInvestir.UI
             this.lbUser.AutoSize = true;
             this.lbUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.lbUser.ForeColor = System.Drawing.Color.White;
-            this.lbUser.Location = new System.Drawing.Point(356, 16);
+            this.lbUser.Location = new System.Drawing.Point(356, 15);
             this.lbUser.Name = "lbUser";
             this.lbUser.Size = new System.Drawing.Size(52, 20);
             this.lbUser.TabIndex = 2;
@@ -284,7 +285,7 @@ namespace OKInvestir.UI
             this.lbTitle.AutoSize = true;
             this.lbTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold);
             this.lbTitle.ForeColor = System.Drawing.Color.White;
-            this.lbTitle.Location = new System.Drawing.Point(94, 25);
+            this.lbTitle.Location = new System.Drawing.Point(94, 23);
             this.lbTitle.Name = "lbTitle";
             this.lbTitle.Size = new System.Drawing.Size(85, 31);
             this.lbTitle.TabIndex = 1;
@@ -292,17 +293,17 @@ namespace OKInvestir.UI
             // 
             // pnUserControl
             // 
-            this.pnUserControl.Location = new System.Drawing.Point(200, 82);
+            this.pnUserControl.Location = new System.Drawing.Point(200, 76);
             this.pnUserControl.Name = "pnUserControl";
-            this.pnUserControl.Size = new System.Drawing.Size(824, 542);
+            this.pnUserControl.Size = new System.Drawing.Size(824, 500);
             this.pnUserControl.TabIndex = 5;
             // 
             // UIMainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            this.ClientSize = new System.Drawing.Size(1024, 624);
+            this.ClientSize = new System.Drawing.Size(1024, 576);
             this.Controls.Add(this.pnUserControl);
             this.Controls.Add(this.pnHead);
             this.Controls.Add(this.pnMenu);

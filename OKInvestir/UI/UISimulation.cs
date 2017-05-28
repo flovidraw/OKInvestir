@@ -16,7 +16,9 @@ namespace OKInvestir.UI
     {
         public VMSimulation ViewModel { get; set; }
         public bool isEditing { get; set; }
-        bool isSimulate;
+        public bool isSimulate;
+        public bool isGoingToSave = false;
+        public Model.Simulation SimulationToSave = new Model.Simulation();
 
         public UISimulation()
         {
@@ -51,11 +53,13 @@ namespace OKInvestir.UI
                 {
                     ViewModel.VMMain.UIMainForm.genMsgBox("Your amount entered can't not be greater than 10 millions, please enter it again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     amountEntered = 0;
+                    isSimulate = false;
                 }
                 else if (amountEntered <= 0)
                 {
                     ViewModel.VMMain.UIMainForm.genMsgBox("Your amount entered can't not be equals or less than 0, please enter it again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     amountEntered = 0;
+                    isSimulate = false;
                 }
 
             }
@@ -63,6 +67,7 @@ namespace OKInvestir.UI
             {
                 ViewModel.VMMain.UIMainForm.genMsgBox("Your amount entered is empty or it's not a integer, please enter it again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 amountEntered = 0;
+                isSimulate = false;
             }
 
             return amountEntered;
@@ -139,16 +144,14 @@ namespace OKInvestir.UI
 
         private void btSimulate_Click(object sender, EventArgs e)
         {
-
-
             if (this.ViewModel.VMMain.Product != null)
             {
-                this.ViewModel.resultSimulation();
-                isSimulate = true;
-
+                this.SimulationToSave = this.ViewModel.resultSimulation();
+               
             }
             else
             {
+                isSimulate = false;
                 this.ViewModel.VMMain.UIMainForm.genMsgBox("You haven't chose a product.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
@@ -159,7 +162,7 @@ namespace OKInvestir.UI
         {
             DateTime StartDate = dtpStartDate.Value.Date;
             dtpEndDate.MinDate = dtpStartDate.Value.Date;
-            isSimulate = false;
+            isSimulate = false;///////////////////////
 
         }
 
@@ -173,8 +176,8 @@ namespace OKInvestir.UI
         private void btSave_Click(object sender, EventArgs e)
         {
             if (isSimulate == true)
-            {
-                this.ViewModel.saveSimulation(this.ViewModel.resultSimulation());
+            { 
+                this.ViewModel.saveSimulation(this.SimulationToSave);
                 this.ViewModel.getSimulation();
             }
             else
@@ -185,7 +188,7 @@ namespace OKInvestir.UI
 
         private void tbAmout_TextChanged(object sender, EventArgs e)
         {
-            isSimulate = false;
+            isSimulate = false;///////////////////
         }
 
         private void hScrollBar1_Scroll(object sender, ScrollEventArgs e)
