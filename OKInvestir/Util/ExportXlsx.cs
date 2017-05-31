@@ -14,22 +14,25 @@ namespace OKInvestir.Util
 {
     public class ExportXlsx
     {
+        // Function to exoprt the given client's simulation list in to format Xlsx
         public static void exportXlsx(Client client, UIMainForm form)
         {
-            string pdfname = string.Empty;
-            SaveFileDialog dlg = new SaveFileDialog();
+            string xlsxname = string.Empty;//  Name of file
+
+            SaveFileDialog dlg = new SaveFileDialog();// Create a save file dialog
             dlg.FileName = "simulations";
             dlg.DefaultExt = ".xlsx";
             dlg.Filter = "Text documents (.xlsx)|*.xlsx";
+
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                List<Simulation> ListSimulation = client.getSimulationList();
+                List<Simulation> ListSimulation = client.getSimulationList();// Get clients' simulation list
 
-                DataTable dt = new DataTable();
+                DataTable dt = new DataTable(); // Create table of simulations
                 DataColumn column;
                 DataRow row;
                 
-                column = new DataColumn();
+                column = new DataColumn(); // Add columns
                 column.DataType = System.Type.GetType("System.Int32");
                 column.ColumnName = "Simulation Id";
                 dt.Columns.Add(column);
@@ -70,9 +73,9 @@ namespace OKInvestir.Util
                 dt.Columns.Add(column);
                 
                 
-                foreach (Simulation sim in ListSimulation)
+                foreach (Simulation sim in ListSimulation) // Add rows
                 {
-                    row = dt.NewRow();
+                    row = dt.NewRow(); // Add cells in each row
                     row["Simulation Id"] = sim.Id;
                     row["Product name"] = sim.Product.Name;
                     row["Price"] = sim.Price;
@@ -85,12 +88,12 @@ namespace OKInvestir.Util
                 }
                 try
                 {
-                    if (File.Exists(dlg.FileName))
+                    if (File.Exists(dlg.FileName)) // Delect file if file already exist
                     {
                         File.Delete(dlg.FileName);
                     }
 
-                    using (ExcelPackage pck = new ExcelPackage(new FileInfo(dlg.FileName)))
+                    using (ExcelPackage pck = new ExcelPackage(new FileInfo(dlg.FileName))) // Open the excel file
                     {
                         ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Simulation list ");
 

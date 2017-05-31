@@ -12,18 +12,20 @@ namespace OKInvestir.Util
 {
     public class ExportCsv
     {
+        // Function to exoprt the given client's simulation list in to format csv
         public static void writeCsv(Client clt, UIMainForm form)
         {
-            string pdfname = string.Empty;
-            SaveFileDialog dlg = new SaveFileDialog();
+            string csvname = string.Empty;//  Name of file
+
+            SaveFileDialog dlg = new SaveFileDialog();// Create a save file dialog
             dlg.FileName = "simulations";
             dlg.DefaultExt = ".csv";
             dlg.Filter = "Text documents (.csv)|*.csv";
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                List<Simulation> simus = clt.getSimulationList();
+                List<Simulation> simus = clt.getSimulationList();// Get clients' simulation list
 
-                // build text
+                // Write headers 
                 StringBuilder str = new StringBuilder();
                 str.Append("\"sep=;\"\n");
                 str.Append("Client: ");
@@ -38,6 +40,7 @@ namespace OKInvestir.Util
                 str.Append("Simulations: ;\n");
                 str.Append("Simulation Id;Product name;Price;Start date;End date;Interest rate;Settlement price;Total months;\n");
 
+                // build text
                 foreach (Simulation simu in simus)
                 {
                     str.Append(simu.Id);

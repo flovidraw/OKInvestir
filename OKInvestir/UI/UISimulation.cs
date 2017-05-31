@@ -14,32 +14,20 @@ namespace OKInvestir.UI
 {
     public partial class UISimulation : UserControl
     {
-        public VMSimulation ViewModel { get; set; }
-        public bool isEditing { get; set; }
-        public bool isSimulate;
-        public bool isGoingToSave = false;
-        public Model.Simulation SimulationToSave = new Model.Simulation();
+        public VMSimulation ViewModel { get; set; }// ViewModel of this view
+        public bool isSimulate;// boolean to check if client has simulated a product
+        public Model.Simulation SimulationToSave = new Model.Simulation();// The result of the latest simulation
 
+        // Constructor
         public UISimulation()
         {
-
             InitializeComponent();
-            isEditing = false;
             dtpStartDate.MinDate = DateTime.Today;
             isSimulate = false;
 
-
         }
 
-        private void UISimulation_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lboxListProducts_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+       
         /**
          * Getters
          **/
@@ -137,11 +125,8 @@ namespace OKInvestir.UI
         /**
          * Functions for button onclick
          */
-        private void lbAmout_Click(object sender, EventArgs e)
-        {
 
-        }
-
+        // Function onclick of the simulate button
         private void btSimulate_Click(object sender, EventArgs e)
         {
             if (this.ViewModel.VMMain.Product != null)
@@ -158,14 +143,16 @@ namespace OKInvestir.UI
 
         }
 
+        // Function while selecting the start date
         private void dtpStartDate_ValueChanged(object sender, EventArgs e)
         {
             DateTime StartDate = dtpStartDate.Value.Date;
             dtpEndDate.MinDate = dtpStartDate.Value.Date;
-            isSimulate = false;///////////////////////
+            isSimulate = false;
 
         }
 
+        // Function while selecting the end date
         private void dtpEndDate_ValueChanged(object sender, EventArgs e)
         {
             DateTime EndTime = dtpEndDate.Value.Date;
@@ -173,6 +160,7 @@ namespace OKInvestir.UI
 
         }
 
+        // Function onclick of the save button
         private void btSave_Click(object sender, EventArgs e)
         {
             if (isSimulate == true)
@@ -186,22 +174,13 @@ namespace OKInvestir.UI
             }
         }
 
+        // Function for when the amount has been changed 
         private void tbAmout_TextChanged(object sender, EventArgs e)
         {
-            isSimulate = false;///////////////////
+            isSimulate = false;
         }
 
-        private void hScrollBar1_Scroll(object sender, ScrollEventArgs e)
-        {
-
-        }
-
-        private void lboxBoughtProduct_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-
-        }
-
+        // Function to select and show a simulation
         private void btSimulationChosen_Click(object sender, EventArgs e)
         {
             Model.Simulation sim = (Model.Simulation)lboxSimulation.SelectedItem;
@@ -215,31 +194,34 @@ namespace OKInvestir.UI
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        // Function to delect a simulation
+        private void btDelete_Click(object sender, EventArgs e)
         {
             Model.Simulation Sim = (Model.Simulation)lboxSimulation.SelectedItem;
             this.ViewModel.delectSimulaion(Sim);
             this.ViewModel.getSimulation();
         }
 
+        //Function to execute a simulation
         private void btExecute_Click(object sender, EventArgs e)
         {
             Model.Simulation sim = (Model.Simulation)lboxSimulation.SelectedItem;
             this.ViewModel.ExecuteSimulation(sim);
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        // Function onclick of button export PDF
+        private void exportPdf_Click(object sender, EventArgs e)
         {
-            //this.ViewModel.CreatPDFTable();
-            //this.ViewModel.PDFTable1();
             ExportPDF.writePdf(ViewModel.VMMain.Client, ViewModel.VMMain.UIMainForm);
         }
 
+        // Function onclick of button export CSV
         private void exportCsv_Click(object sender, EventArgs e)
         {
             ExportCsv.writeCsv(this.ViewModel.VMMain.Client, this.ViewModel.VMMain.UIMainForm);
         }
 
+        // Function onclick of button export XLSX
         private void exportXlsx_Click(object sender, EventArgs e)
         {
             ExportXlsx.exportXlsx(ViewModel.VMMain.Client, ViewModel.VMMain.UIMainForm);

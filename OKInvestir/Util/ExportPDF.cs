@@ -14,9 +14,10 @@ namespace OKInvestir.Util
 {
     class ExportPDF
     {
+        // Function to exoprt the given client's simulation list in to format pdf
         public static void writePdf(Client clt, UIMainForm form)
         {
-            //打印PDF表格
+            // Print PDF table
             string pdfname = string.Empty;
             SaveFileDialog dlg = new SaveFileDialog();
             dlg.FileName = "Okinvestir Simulation liste";
@@ -32,10 +33,10 @@ namespace OKInvestir.Util
                     List<Simulation> simus = clt.getSimulationList();
                 try
                 {
-                FileStream fs = new FileStream(pdfname, FileMode.Create);   //创建文件流
+                FileStream fs = new FileStream(pdfname, FileMode.Create);   // Create file stream
                  
-                Document document = new Document(PageSize.A4.Rotate());     //创建文件 PageSize.A7.Rotate()表示A7纸横向输出  
-                    PdfWriter pdfWriter = PdfWriter.GetInstance(document, fs);  //实例化
+                Document document = new Document(PageSize.A4.Rotate());     // Create file PageSize.A7.Rotate() 
+                    PdfWriter pdfWriter = PdfWriter.GetInstance(document, fs);  // Create objet
                     
                     MyPageEventHandler e = new MyPageEventHandler()
                     {
@@ -44,13 +45,13 @@ namespace OKInvestir.Util
                     };
                     pdfWriter.PageEvent = e;
 
-                    document.Open();   //打开文件
-                    //document.Add(header1);
-                    document.Add(PDFTable1(clt));               //添加表格
+                    document.Open();   // Open file
+                    
+                    document.Add(PDFTable1(clt));               //add table
 
-                    document.SetPageSize(PageSize.A4);       //A4纸纵向输出
-                    document.NewPage();                      //新起一页
-                    document.Close();                        //关闭文件
+                    document.SetPageSize(PageSize.A4);       // A4 print in lanscape orientation
+                    document.NewPage();                      // Open a new page
+                    document.Close();                        // Close file
                     fs.Close();
                 }
                 catch
@@ -65,7 +66,7 @@ namespace OKInvestir.Util
         {
             List<Simulation> listSim = new List<Simulation>();
 
-            var table1 = new PdfPTable(9);     //创建表格实例4列
+            var table1 = new PdfPTable(9);     // Create table for 9 columns
             table1.DefaultCell.Border = Rectangle.NO_BORDER;
 
             var Calibri1 = FontFactory.GetFont("TimesNewRoman", 14, Font.BOLD);
@@ -77,7 +78,7 @@ namespace OKInvestir.Util
             table1.DefaultCell.BackgroundColor = BaseColor.LIGHT_GRAY;
             var Calibri9 = FontFactory.GetFont("TimesNewRoman", 12, Font.BOLD);
             int[] a = { 1, 3, 3, 3, 3, 3, 3, 3, 3 };
-            table1.NormalizeHeadersFooters();//设置列宽比例
+            table1.NormalizeHeadersFooters();// Set columns' width
             table1.SetWidths(a);
             table1.AddCell(" ");
             table1.AddCell(new Paragraph("Simulation Id", Calibri9));
@@ -94,13 +95,7 @@ namespace OKInvestir.Util
 
             if (listSim.Count != 0)
             {
-                /* for (int i = 0; i < SimulationList.Count; i++)
-                 {
-                     table1.AddCell((i + 1).ToString());     //添加单元格
-                     table1.AddCell(SimulationList.Find(Index);
-                 }
-                 return table1;
-                 */
+                
                 int i = 0;
                 var FontColour = new BaseColor(35, 31, 32);
                 var Calibri8 = FontFactory.GetFont("TimesNewRoman", 11, FontColour);
@@ -114,7 +109,7 @@ namespace OKInvestir.Util
                     {
                         table1.DefaultCell.BackgroundColor = BaseColor.LIGHT_GRAY;
                     }
-                    table1.AddCell(new Paragraph((i + 1).ToString(), Calibri8));
+                    table1.AddCell(new Paragraph((i + 1).ToString(), Calibri8)); // Add cell
                     table1.AddCell(new Paragraph(Sim.Id.ToString(), Calibri8));
                     table1.AddCell(new Paragraph(Sim.Product.Name.ToString(), Calibri8));
                     table1.AddCell(new Paragraph(Sim.Price.ToString(), Calibri8));

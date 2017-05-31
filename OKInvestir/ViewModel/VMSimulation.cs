@@ -18,29 +18,25 @@ namespace OKInvestir.ViewModel
 {
     public class VMSimulation
     {
-        private UISimulation View;
-        public VMMain VMMain { get; set; }
-        public List<Simulation> Simulations { get; set; }
-        public List<Simulation> SimulationForBinding { get; set; }
-        public BindingList<Simulation> blSimulation { get; set; }
-        public List<Simulation> SimulationList { get; set; }
+        private UISimulation View; // It's the view of this viewmodel
+        public VMMain VMMain { get; set; } // Parent ViewModel of this ViewModel
+        public List<Simulation> Simulations { get; set; } // List of simulations
+        public List<Simulation> SimulationForBinding { get; set; } // List for data binding
+        public BindingList<Simulation> blSimulation { get; set; } // Binding list
 
-
+        // Constructor
         public VMSimulation(VMMain VMMain, UISimulation View)
         {
             this.View = View;
             this.View.ViewModel = this;
             this.VMMain = VMMain;
-
-
-
         }
 
       
 
        
         
-
+        // Function to show the balance
         public void printBalance()
         {
             if (VMMain.Client.AccountList.Count > 0)
@@ -57,7 +53,7 @@ namespace OKInvestir.ViewModel
 
 
 
-
+        // Function to calculate and show the result of simulation
         public Model.Simulation resultSimulation()
         {
             Model.Simulation simulation = new Model.Simulation();
@@ -92,6 +88,7 @@ namespace OKInvestir.ViewModel
             return simulation;
         }
 
+        // Function to save the result of simulation
         public void saveSimulation(Model.Simulation simulation)
         {
             if (this.View.isSimulate == true)
@@ -120,6 +117,7 @@ namespace OKInvestir.ViewModel
             }
         }
 
+        // Function to get and show a result of simulation
         public void getSimulation()
         {
 
@@ -129,7 +127,7 @@ namespace OKInvestir.ViewModel
                 using (var context = new Model.Context())
                 {
                     int ClientId = VMMain.Client.Id;
-                    bool isSimulationFound = false;
+                   
                     Cursor.Current = Cursors.WaitCursor;        // waiting animation cursor
                                                                 //context.Database.Initialize(force: true);   // connect to db, it takes time
                     context.Database.Initialize(force: true);   // connect to db, it takes time
@@ -146,15 +144,17 @@ namespace OKInvestir.ViewModel
             }
         }
 
+        // Function to select a simulation
         public void chooseSimulation(Simulation sim)
         {
-            this.View.getValuePeriode().Text = ((int)(sim.EndDate - sim.StartDate).TotalDays / 30).ToString();
+            this.View.getValuePeriode().Text = ((int)(sim.EndDate - sim.StartDate).TotalDays / 30).ToString(); 
             this.View.getLbValueProductSelected().Text = sim.Product.Name;
             this.View.getLbValueAmount().Text = sim.Price.ToString();
             this.View.getLbValueInterestRate().Text = sim.InterestRate.ToString();
             this.View.GetLbValueSettlementPrice().Text = sim.SettlementPrice.ToString();
         }
 
+        // Function  to delect a result of simulation
         public void delectSimulaion(Simulation Sim)
         {
             using (var context = new Model.Context())
@@ -186,6 +186,7 @@ namespace OKInvestir.ViewModel
             }
         }
 
+        // Function to execute a simulation and save into the bdd
         public void ExecuteSimulation(Model.Simulation Sim)
         {
             if (this.VMMain.Client.AccountList[0].Balance >= Sim.Price)

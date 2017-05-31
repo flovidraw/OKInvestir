@@ -123,7 +123,7 @@
             this.lbAmout.Size = new System.Drawing.Size(74, 19);
             this.lbAmout.TabIndex = 31;
             this.lbAmout.Text = "Amount :";
-            this.lbAmout.Click += new System.EventHandler(this.lbAmout_Click);
+            
             // 
             // tbAmout
             // 
@@ -297,7 +297,7 @@
             this.lboxSimulation.Name = "lboxSimulation";
             this.lboxSimulation.Size = new System.Drawing.Size(318, 133);
             this.lboxSimulation.TabIndex = 50;
-            this.lboxSimulation.SelectedIndexChanged += new System.EventHandler(this.lboxBoughtProduct_SelectedIndexChanged);
+            
             // 
             // btSimulationChosen
             // 
@@ -333,7 +333,7 @@
             this.btDelete.TabStop = false;
             this.btDelete.Text = "Delete";
             this.btDelete.UseVisualStyleBackColor = false;
-            this.btDelete.Click += new System.EventHandler(this.button1_Click);
+            this.btDelete.Click += new System.EventHandler(this.btDelete_Click);
             // 
             // exportPdf
             // 
@@ -351,7 +351,7 @@
             this.exportPdf.TabStop = false;
             this.exportPdf.Text = "pdf";
             this.exportPdf.UseVisualStyleBackColor = false;
-            this.exportPdf.Click += new System.EventHandler(this.button1_Click_1);
+            this.exportPdf.Click += new System.EventHandler(this.exportPdf_Click);
             // 
             // label1
             // 
@@ -436,7 +436,7 @@
             this.Controls.Add(this.lbBalance);
             this.Name = "UISimulation";
             this.Size = new System.Drawing.Size(824, 588);
-            this.Load += new System.EventHandler(this.UISimulation_Load);
+          
             this.ResumeLayout(false);
             this.PerformLayout();
 
