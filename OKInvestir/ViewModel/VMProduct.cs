@@ -52,7 +52,7 @@ namespace OKInvestir.ViewModel
                 VMMain.UISimulation.getDTPS().Value = DateTime.Today;
                 VMMain.UISimulation.getDTPE().Value = DateTime.Today;
                 VMMain.UISimulation.getTextBAmount().Text = "";
-               
+
             }
             else
             {
@@ -112,38 +112,41 @@ namespace OKInvestir.ViewModel
          */
         public void loadProductDetail(Product pdt)
         {
-            var lviewSillInterest = View.getLviewSillInterest();
-            var lviewTimeInterest = View.getLviewTimeInterest();
-
-            // clear the list and readd headers
-            lviewSillInterest.Clear();
-            lviewTimeInterest.Clear();
-
-            lviewSillInterest.Columns.Add("Sill");
-            lviewSillInterest.Columns.Add("Interest");
-            lviewTimeInterest.Columns.Add("Months");
-            lviewTimeInterest.Columns.Add("Interest");
-
-            // change labels and textbox of product info
-            View.getLbName().Text = pdt.Name;
-            View.getTbDescription().Text = pdt.Description;
-            View.getLbId().Text = "ID: " + pdt.Id.ToString();
-            // TODO: change int to text of status
-            View.getLbStatus().Text = "Status: " + pdt.ProductStatus.ToString();
-
-            // add data in listviews
-            foreach (SillInterest si in pdt.SillInterests)
+            if (pdt != null)
             {
-                lviewSillInterest.Items.Add(new ListViewItem(new string[] { si.Sill.ToString(), si.Interest.ToString() }));
-            }
-            foreach (TimeInterest ti in pdt.TimeInterests)
-            {
-                lviewTimeInterest.Items.Add(new ListViewItem(new string[] { ti.Time.ToString(), ti.Interest.ToString() }));
-            }
+                var lviewSillInterest = View.getLviewSillInterest();
+                var lviewTimeInterest = View.getLviewTimeInterest();
 
-            // resize columns width
-            lviewSillInterest.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-            lviewTimeInterest.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+                // clear the list and readd headers
+                lviewSillInterest.Clear();
+                lviewTimeInterest.Clear();
+
+                lviewSillInterest.Columns.Add("Sill");
+                lviewSillInterest.Columns.Add("Interest");
+                lviewTimeInterest.Columns.Add("Months");
+                lviewTimeInterest.Columns.Add("Interest");
+
+                // change labels and textbox of product info
+                View.getLbName().Text = pdt.Name;
+                View.getTbDescription().Text = pdt.Description;
+                View.getLbId().Text = "ID: " + pdt.Id.ToString();
+                // TODO: change int to text of status
+                View.getLbStatus().Text = "Status: " + pdt.ProductStatus.ToString();
+
+                // add data in listviews
+                foreach (SillInterest si in pdt.SillInterests)
+                {
+                    lviewSillInterest.Items.Add(new ListViewItem(new string[] { si.Sill.ToString(), si.Interest.ToString() }));
+                }
+                foreach (TimeInterest ti in pdt.TimeInterests)
+                {
+                    lviewTimeInterest.Items.Add(new ListViewItem(new string[] { ti.Time.ToString(), ti.Interest.ToString() }));
+                }
+
+                // resize columns width
+                lviewSillInterest.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+                lviewTimeInterest.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+            }
         }
 
 
@@ -244,7 +247,7 @@ namespace OKInvestir.ViewModel
 
             int sillInterestCount = View.sub.sillInterestCount;
             int timeInterestCount = View.sub.timeInterestCount;
-            
+
 
 
             // extract all filled pairs of sill-interest
@@ -264,7 +267,7 @@ namespace OKInvestir.ViewModel
                     isAnyFieldNotFilled = true; // if true, will show a message
                 }
                 // if is not numeric, not allow, change text color to red and show a message
-                else if(!decimal.TryParse(sill, out tempSill))
+                else if (!decimal.TryParse(sill, out tempSill))
                 {
                     isTwoTbFilled = false;
                     isAnyFieldNotCorrect = true;    // if true, will show a message
@@ -328,7 +331,8 @@ namespace OKInvestir.ViewModel
                     isAnyFieldNotCorrect = true;
                     isSuccess = false;
                     tbSill.ForeColor = System.Drawing.Color.Red;
-                } else
+                }
+                else
                 {
                     tbSill.ForeColor = System.Drawing.Color.Black;
                 }
@@ -346,7 +350,8 @@ namespace OKInvestir.ViewModel
                     isAnyFieldNotCorrect = true;
                     isSuccess = false;
                     tbInterest.ForeColor = System.Drawing.Color.Red;
-                } else
+                }
+                else
                 {
                     tbInterest.ForeColor = System.Drawing.Color.Black;
                 }
@@ -376,7 +381,7 @@ namespace OKInvestir.ViewModel
             {
                 VMMain.UIMainForm.genMsgBox("All not filled fields will be ignore", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            
+
 
             // connect to db
             using (var context = new Model.Context())
@@ -433,7 +438,7 @@ namespace OKInvestir.ViewModel
                         }
                     }
                     isSuccess = false;
-                    
+
                 }
                 catch (Exception e)     // get other exception
                 {

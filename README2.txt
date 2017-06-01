@@ -6,6 +6,10 @@ You can choose SeedingDataInitializer in ./OKInvestir/Model/Concext.cs line 47 t
 
 Some data for testing will be inserted in to DB when database is created.
 
+Default user for login:
+	id: a
+	pw: a
+
 Github: https://github.com/NathanKun/OKInvestir/
 
 HE Junyang

@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using OKInvestir.ViewModel;
-using OKInvestir.Model;
 
 namespace OKInvestir.UI
 {
@@ -81,13 +74,13 @@ namespace OKInvestir.UI
         private void lboxListClient_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            if (!this.getLBoxClient().SelectedValue.Equals(null))
+            if (this.getLBoxClient().SelectedValue != null)
             {
                 ViewModel.loadClientDetail((Model.Client)lboxListClient.SelectedValue);
             }
             else
             {
-                ViewModel.VMMain.UIMainForm.genMsgBox("You haven't chosen a client yet.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //ViewModel.VMMain.UIMainForm.genMsgBox("You haven't chosen a client yet.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }

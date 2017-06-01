@@ -229,40 +229,40 @@ namespace OKInvestir.ViewModel
 
         public void loadClientDetail(Client clt)
         {
-            // load client info
-            View.getTbIDClient().Text = clt.Id.ToString();
-            View.getTbFirstName().Text = clt.FirstName;
-            View.getTbLastName().Text = clt.LastName;
-            View.getTbIdCardNumber().Text = clt.IdCardNumber;
-            if (clt.AccountList.Count > 0)
+            if(clt != null)
             {
-                View.getTbBalance().Text = clt.AccountList[0].Balance.ToString();
-            }
-            else
-            {
-                View.getTbBalance().Text = "No Account";
-            }
-
-
-            // load bought product
-            if (clt.BoughtProductList != null)
-            {
-                ProductsForBinding.Clear();
-                foreach (BoughtProduct bp in clt.BoughtProductList)
+                // load client info
+                View.getTbIDClient().Text = clt.Id.ToString();
+                View.getTbFirstName().Text = clt.FirstName;
+                View.getTbLastName().Text = clt.LastName;
+                View.getTbIdCardNumber().Text = clt.IdCardNumber;
+                if (clt.AccountList.Count > 0)
                 {
-                    blProducts.Add(bp);
+                    View.getTbBalance().Text = clt.AccountList[0].Balance.ToString();
+                }
+                else
+                {
+                    View.getTbBalance().Text = "No Account";
                 }
 
-                // load first bought product detail
-                loadProductDetail(blProducts[0]);
+
+                // load bought product
+                if (clt.BoughtProductList != null)
+                {
+                    ProductsForBinding.Clear();
+                    foreach (BoughtProduct bp in clt.BoughtProductList)
+                    {
+                        blProducts.Add(bp);
+                    }
+
+                    // load first bought product detail
+                    loadProductDetail(blProducts[0]);
+                }
+                else
+                {
+                    blProducts.Clear();
+                }
             }
-            else
-            {
-                blProducts.Clear();
-            }
-
-
-
         }
 
         public void loadProductDetail(BoughtProduct pdt)
@@ -538,7 +538,7 @@ namespace OKInvestir.ViewModel
         public void SellProduct()
         {
 
-            if (!View.getLBoxClient().SelectedValue.Equals(null))
+            if (View.getLBoxClient().SelectedValue != null)
             {
                 if (View.getLBoxProduct().SelectedValue != null)
                 {
